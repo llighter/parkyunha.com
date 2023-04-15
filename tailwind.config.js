@@ -6,13 +6,20 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    screens: {
+      tablet: "735px",
+      laptop: "1069px",
+      tablet_inner: "692px",
+      laptop_inner: "980px",
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      width: {
+        87.5: "87.5%"
+      },
+      aspectRatio: {
+        1.77: "1.77"
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/container-queries")],
 }
