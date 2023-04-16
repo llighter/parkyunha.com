@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     screens: {
@@ -14,12 +14,15 @@ module.exports = {
     },
     extend: {
       width: {
-        87.5: "87.5%"
+        87.5: "87.5%",
       },
       aspectRatio: {
-        1.77: "1.77"
+        1.77: "1.77",
       },
     },
   },
-  plugins: [require("@tailwindcss/container-queries")],
-}
+  plugins: [
+    require("@tailwindcss/container-queries"),
+    require("@tailwindcss/typography"),
+  ],
+};
