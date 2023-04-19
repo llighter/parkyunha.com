@@ -23,8 +23,7 @@ export default function Blog({ params }) {
       <section
         className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
       >
-        w{" "}
-        <div id="article">
+        <div id="article" className={`pt-10`}>
           <div id="article-header">
             <div
               id="category"
@@ -82,8 +81,31 @@ export default function Blog({ params }) {
               </div>
             </div>
           </div>
+          <figure className={`my-8 tablet:my-9 laptop:my-11`}>
+            <div
+              className={`mx-auto max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+            >
+              <img
+                src={post.image}
+                className={`aspect-[1.5] rounded-none object-cover phone:rounded-xl`}
+              />
+            </div>
+            <div
+              className={`mx-auto mt-[12px] max-w-[414px] leading-[1.2858] tablet:max-w-screen-tablet_inner tablet:leading-[1.29167] laptop:mt-4 laptop:max-w-screen-laptop_inner laptop:leading-[1.19048]`}
+            >
+              <div
+                className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}
+              >
+                <div className={`break-keep text-xs font-bold text-gray-500`}>
+                  Apple은 추가 기금과 최대 2억 달러에 달하는 Apple의 신규 투자와
+                  함께, 자연 기반 탄소 제거를 위한 혁신적인 복원 기금을 확정할
+                  예정이다.
+                </div>
+              </div>
+            </div>
+          </figure>
           <div
-            className={`mx-auto mt-8 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+            className={`mx-auto mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
           >
             <div className={`mx-auto w-full tablet:w-[576px] laptop:w-[653px]`}>
               <Mdx code={post.body.code} />
