@@ -59,7 +59,7 @@ function Tile({ article }) {
                 {article.category}
               </p>
               <p
-                className={`mt-2 text-[19px] font-semibold @[305px]:leading-6 @[474px]:text-[24px] @[474px]:leading-8 @[692px]:text-[21px] @[980px]:text-[32px] @[980px]:font-bold @[980px]:leading-10`}
+                className={`mt-2 break-keep text-[19px] font-semibold @[305px]:leading-6 @[474px]:text-[24px] @[474px]:leading-8 @[692px]:text-[21px] @[980px]:text-[32px] @[980px]:font-bold @[980px]:leading-10`}
               >
                 {article.title}
               </p>
