@@ -5,6 +5,12 @@ import { Mdx } from "@/components/mdx";
 export default function Blog({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
 
+  // TODO: contentlayer reference 를 사용하는 방식으로 변경 필요
+  const articles = post.articles ? post.articles.map((item) => item.title) : [];
+  const relatedArticles = allBlogs.filter((item) =>
+    articles.includes(item._id)
+  );
+
   if (!post) {
     notFound();
   }
@@ -103,14 +109,64 @@ export default function Blog({ params }) {
             </div>
           </figure>
           <div
-            className={`mx-auto mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+            className={`mx-auto mb-11 mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
           >
             <div className={`mx-auto w-full tablet:w-[576px] laptop:w-[653px]`}>
               <Mdx code={post.body.code} />
             </div>
           </div>
+          {/* TODO: 조건을 처리하는 더 좋은 방법이 있는지 확인 필요 */}
+          {relatedArticles.length > 0 && (
+            <div
+              className={`mx-auto mb-11 mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+            >
+              <div
+                className={`mx-auto w-full tablet:w-[576px] laptop:w-[653px]`}
+              >
+                <h2
+                  className={`mb-4 mt-11 text-[21px] font-bold laptop:text-[24px]`}
+                >
+                  관련 글
+                </h2>
+                {relatedArticles.map((article, i) => (
+                  <Result article={article} key={i} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </section>
+  );
+}
+
+function Result({ article }) {
+  return (
+    // TODO: LINK 태그로 변경하기
+    <a
+      href={article.url}
+      className={`flex justify-start border-t border-t-gray-300 py-6 last:pb-0 laptop:py-8`}
+    >
+      {/*나중에 사진 크기별 이미지를 생성해서 로드하려면 picture 를 사용하는 것을 고려*/}
+      <div className={`shrink-0 pr-4 tablet:pr-6`}>
+        <img
+          src={article.image}
+          className={`aspect-square w-[93px] rounded-xl object-cover tablet:aspect-1.77 tablet:w-[171px]`}
+        />
+      </div>
+      <div className={`flex flex-col`}>
+        <p className={`mb-1 text-[12px] font-bold text-gray-600`}>
+          {article.category}
+        </p>
+        <h3
+          className={`break-keep text-[17px] font-bold leading-[23px] tracking-normal laptop:text-[19px] laptop:leading-[25px] laptop:tracking-[.012em]`}
+        >
+          {article.title}
+        </h3>
+        <p className={`mt-2 text-[14px] font-bold text-gray-500`}>
+          {article.publishedAt}
+        </p>
+      </div>
+    </a>
   );
 }

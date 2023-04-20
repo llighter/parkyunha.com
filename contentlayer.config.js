@@ -1,9 +1,19 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  defineDocumentType,
+  defineNestedType,
+  makeSource,
+} from "contentlayer/source-files";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
+const Article = defineNestedType(() => ({
+  name: "Article",
+  fields: {
+    title: { type: "string", required: true },
+  },
+}));
 export const Blog = defineDocumentType(() => ({
   name: "Blog",
   filePathPattern: `**/*.mdx`,
@@ -32,6 +42,10 @@ export const Blog = defineDocumentType(() => ({
     },
     imageDescription: {
       type: "string",
+    },
+    articles: {
+      type: "list",
+      of: Article,
     },
   },
   computedFields: {
