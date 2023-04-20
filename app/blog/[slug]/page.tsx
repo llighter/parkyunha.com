@@ -97,9 +97,7 @@ export default function Blog({ params }) {
                 className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}
               >
                 <div className={`break-keep text-xs font-bold text-gray-500`}>
-                  Apple은 추가 기금과 최대 2억 달러에 달하는 Apple의 신규 투자와
-                  함께, 자연 기반 탄소 제거를 위한 혁신적인 복원 기금을 확정할
-                  예정이다.
+                  {post.imageDescription}
                 </div>
               </div>
             </div>

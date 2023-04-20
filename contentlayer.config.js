@@ -30,6 +30,9 @@ export const Blog = defineDocumentType(() => ({
     image: {
       type: "string",
     },
+    imageDescription: {
+      type: "string",
+    },
   },
   computedFields: {
     slug: {
