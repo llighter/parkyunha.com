@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import "./globals.css";
 import Sidebar from "@/components/sidebar";
 
@@ -14,8 +15,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`flex flex-col antialiased`}>
-        <Sidebar />
-        <main>{children}</main>
+        <div className="wrapper min-h-full grid grid-rows-[auto_1fr_auto]">
+          <Sidebar />
+          <main>{children}</main>
+          <Footer />  
+        </div>
       </body>
     </html>
   );

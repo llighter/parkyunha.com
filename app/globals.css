@@ -125,3 +125,23 @@ table {
 [data-rehype-pretty-code-title] + pre {
     @apply mt-0 rounded-t-none border-t-0;
 }
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+aside, .my-f {
+  @apply grow-0 shrink-0;
+}
+
+/* footer style start */
+.my-f li {
+  @apply border-b border-solid border-gray-300 leading-10 tablet:mx-14 tablet:border-none;
+}
+.my-f li:first-child {
+  @apply border-t leading-10 tablet:ml-0;
+}
+.my-f li:hover {
+  @apply underline;
+}
