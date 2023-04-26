@@ -1,6 +1,7 @@
 import { allBlogs } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Mdx } from "@/components/mdx";
+import Link from "next/link";
 
 export default function Blog({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
@@ -16,7 +17,7 @@ export default function Blog({ params }) {
   }
 
   return (
-    <section>
+    <>
       {/*<script type={`application/ld+json`}>*/}
       {/*  {JSON.stringify(post.structuredData)}*/}
       {/*</script>*/}
@@ -29,7 +30,7 @@ export default function Blog({ params }) {
       <section
         className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
       >
-        <div id="article" className={`pt-10`}>
+        <article id="article" className={`pt-10`}>
           <div id="article-header">
             <div
               id="category"
@@ -134,9 +135,32 @@ export default function Blog({ params }) {
               </div>
             </div>
           )}
-        </div>
+        </article>
+        <aside className={`mt-20 flex justify-center bg-gray-50`}>
+          <Link href={`/blog`}>
+            <div
+              className={`mx-auto my-[44px] flex w-87.5 flex-col items-center tablet:my-[48px] tablet:w-[576px] laptop:my-[52px] laptop:w-[653px]`}
+            >
+              <figure
+                className={`h-[23px] w-[158px] bg-[url('/images/logo.svg')] bg-cover`}
+              >
+                <figcaption className={`hidden`}>logo</figcaption>
+              </figure>
+              <p
+                className={`mt-3 text-[17px] font-extrabold text-gray-500 laptop:text-[19px]`}
+              >
+                최신 글 및 업데이트
+              </p>
+              <p
+                className={`mt-[14px] rounded-3xl bg-gray-200 px-4 py-2 text-center text-[14px] font-bold laptop:mt-[18px]`}
+              >
+                더보기
+              </p>
+            </div>
+          </Link>
+        </aside>
       </section>
-    </section>
+    </>
   );
 }
 
