@@ -4,7 +4,7 @@ import Link from "next/link";
 export default async function BlogPage() {
   return (
     <section
-      className={`mt-0 overflow-hidden bg-neutral-100 pb-10 tablet:pb-16 laptop:pb-20`}
+      className={`mt-0 h-full overflow-hidden bg-neutral-50 pb-10 tablet:pb-16 laptop:pb-20`}
     >
       <div
         className={`mx-auto mt-8 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
