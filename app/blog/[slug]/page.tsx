@@ -167,8 +167,9 @@ export default function Blog({ params }) {
 function Result({ article }) {
   return (
     // TODO: LINK 태그로 변경하기
+    // FIXME: LINK 를 사용하면 스크롤이 맨 위로 이동을 하지 않음
     <a
-      href={article.url}
+      href={`/blog/${article.slug}`}
       className={`flex justify-start border-t border-t-gray-300 py-6 last:pb-0 laptop:py-8`}
     >
       {/*나중에 사진 크기별 이미지를 생성해서 로드하려면 picture 를 사용하는 것을 고려*/}
