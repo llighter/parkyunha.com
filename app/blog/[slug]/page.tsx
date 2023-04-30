@@ -2,6 +2,8 @@ import { allBlogs } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Mdx } from "@/components/mdx";
 import Link from "next/link";
+import MailButton from "@/components/mailButton";
+import CopyLinkButton from "@/components/copyLinkButton";
 
 export default function Blog({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
@@ -84,7 +86,14 @@ export default function Blog({ params }) {
               <div
                 className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}
               >
-                공유하기 아이콘
+                <ul className={`flex justify-start space-x-4 align-middle`}>
+                  <li className={`mt-3`}>
+                    <MailButton post={post} />
+                  </li>
+                  <li className={`mt-3`}>
+                    <CopyLinkButton />
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
