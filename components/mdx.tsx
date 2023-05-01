@@ -1,7 +1,39 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
+import Link from "next/link";
 
 interface MdxProps {
   code: string;
+}
+
+const CustomLink = (props) => {
+  const href = props.href;
+
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} {...props}>
+        {props.children}
+      </Link>
+    );
+  }
+
+  if (href.startsWith("#")) {
+    return <a {...props} />;
+  }
+
+  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+};
+
+function RoundedImage(props) {
+  return (
+    <div className={`flex justify-center py-4`}>
+      <Image
+        alt={props.alt}
+        className={`rounded-lg drop-shadow-2xl`}
+        {...props}
+      />
+    </div>
+  );
 }
 
 function Aside(props) {
@@ -17,6 +49,8 @@ function Aside(props) {
 
 const components = {
   Aside,
+  a: CustomLink,
+  Image: RoundedImage,
 };
 
 export function Mdx({ code }: MdxProps) {
