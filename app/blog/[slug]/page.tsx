@@ -29,9 +29,7 @@ export default function Blog({ params }) {
           __html: JSON.stringify(post.structuredData),
         }}
       />
-      <section
-        className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
-      >
+      <section className={`mt-0 overflow-hidden`}>
         <article id="article" className={`pt-10`}>
           <div id="article-header">
             <div
