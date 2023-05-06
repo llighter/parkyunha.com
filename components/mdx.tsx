@@ -25,13 +25,19 @@ const CustomLink = (props) => {
 };
 
 function RoundedImage(props) {
+  const { aspect, ...rest } = props;
+  const aspectRatio = Number(aspect).toFixed(2); // 이미지의 가로 세로 비율 계산
+
   return (
-    <div className={`flex justify-center py-4`}>
-      <Image
-        alt={props.alt}
-        className={`rounded-lg drop-shadow-2xl`}
-        {...props}
-      />
+    <div className={`content-large pb-10`}>
+      <div style={{ aspectRatio: aspectRatio }} className={`relative`}>
+        <Image
+          alt={props.alt}
+          fill={true}
+          className={`rounded-none object-contain shadow-2xl phone:rounded-xl`}
+          {...rest}
+        />
+      </div>
     </div>
   );
 }
@@ -55,9 +61,8 @@ const components = {
 
 export function Mdx({ code }: MdxProps) {
   const Component = useMDXComponent(code);
-
   return (
-    <article className={`prose prose-neutral`}>
+    <article className={`prose prose-neutral mx-auto break-keep`}>
       <Component components={{ ...components }} />
     </article>
   );

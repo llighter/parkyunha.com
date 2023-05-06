@@ -4,6 +4,7 @@ import { Mdx } from "@/components/mdx";
 import Link from "next/link";
 import MailButton from "@/components/mailButton";
 import CopyLinkButton from "@/components/copyLinkButton";
+import Image from "next/image";
 
 export default function Blog({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
@@ -97,11 +98,14 @@ export default function Blog({ params }) {
           </div>
           <figure className={`my-8 tablet:my-9 laptop:my-11`}>
             <div
-              className={`mx-auto max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+              className={`relative mx-auto aspect-[1.5] max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
             >
-              <img
+              <Image
                 src={post.image}
-                className={`aspect-[1.5] rounded-none object-cover phone:rounded-xl`}
+                alt={post.imageDescription}
+                fill={true}
+                priority={true}
+                className={`rounded-none object-cover phone:rounded-xl`}
               />
             </div>
             <div
@@ -116,13 +120,13 @@ export default function Blog({ params }) {
               </div>
             </div>
           </figure>
+
           <div
             className={`mx-auto mb-11 mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
           >
-            <div className={`mx-auto w-full tablet:w-[576px] laptop:w-[653px]`}>
-              <Mdx code={post.body.code} />
-            </div>
+            <Mdx code={post.body.code} />
           </div>
+
           {/* TODO: 조건을 처리하는 더 좋은 방법이 있는지 확인 필요 */}
           {relatedArticles.length > 0 && (
             <div

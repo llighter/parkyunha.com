@@ -1,5 +1,6 @@
 import { allBlogs } from "contentlayer/generated";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function BlogPage() {
   return (
@@ -42,13 +43,15 @@ function Tile({ article }) {
       <div
         className={`group flex h-full flex-col overflow-hidden rounded-2xl @[692px]:flex-row`}
       >
-        {/* TODO: next/image 적용하기 */}
         {/* shrink-0 is Silver Bullet!! */}
         <div
           className={`shrink-0 overflow-hidden @[692px]:w-[453px] @[980px]:w-[643px]`}
         >
-          <img
+          <Image
             src={article.image}
+            alt={article.imageDescription}
+            width={400}
+            height={400}
             className={`aspect-[1.77] h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
           />
         </div>
