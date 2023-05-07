@@ -131,23 +131,10 @@ html, body {
   padding: 0;
   margin: 0;
 }
-
-aside, .my-f {
+aside, .myfoot {
   @apply grow-0 shrink-0;
 }
 
-/* footer style start */
-.my-f li {
-  @apply border-b border-solid border-gray-300 leading-10 tablet:mx-14 tablet:border-none;
-}
-
-.my-f li:first-child {
-  @apply border-t leading-10 tablet:ml-0;
-}
-
-.my-f li:hover {
-  @apply underline;
-}
 
 /* prose width 설정 변경하기 */
 /* TODO: 이미지는 제외하도록 설정 ex) .prose :where(p):not(:where([class~="not-prose"] *)) <- 왠지 모르지만 class로 하면 적용이 잘 안됨 */

@@ -18,7 +18,7 @@ export default function RootLayout({
         <div className="wrapper min-h-full grid grid-rows-[auto_1fr_auto]">
           <Sidebar />
           <main>{children}</main>
-          <Footer />  
+          <Footer />
         </div>
       </body>
     </html>
