@@ -1,0 +1,299 @@
+---
+title: 'Spring으로 HTTP 클라이언트 만들기'
+publishedAt: '2023-07-01'
+category: '블로그'
+summary: 'Spring HTTP 인터페이스를 사용해서 HTTP 클라이언트를 간단히 만들어보자'
+image: '/images/http-interface/server_to_server.jpeg'
+imageDescription: 'HTTP 통신을 통해 서버와 서버 간에 데이터를 주고 받을 수 있다.'
+---
+
+고객에게 정보를 제공해주는 서비스를 운영한다고 생각해보자. 고객에게 제공할 정보를 우리 서비스가 모두 가지고 있다면 DB를 조회해서 결과를 보여주면된다. 하지만 고객에게 제공할 정보중 일부는 외부에서 가져와야한다면 외부 서버와 통신을 해야 한다. 웹 환경에서 통신은 대부분 HTTP API 방식을 사용한다. 이 때 우리 서비스는 외부 서비스를 호출하는 클라이언트이기 때문에 서비스 내부에 HTTP 클라이언트를 구성해야 한다. 스프링에서 HTTP 클라이언트를 구성하는 방법을 여러가지가 있지만 그 중에 최근에 나온 HTTP Interface를 활용하여 클라이언트를 만들어보자.
+
+> 이 글에서 설명하는 예제는 Den Vega의 유튜브 [Spring HTTP Interface Clients: Consuming HTTP services in Spring Boot](https://youtu.be/4U0hUyktpvg)에서 따라해볼 수 있고 소스코드는 Github [http-interfaces](https://github.com/danvega/http-interfaces)에서 확인할 수 있다.
+
+## 환경
+
+[HTTP Interface](https://docs.spring.io/spring-framework/reference/integration/rest-clients.html#rest-http-interface)는 스프링 6 버전 이후부터 사용이 가능하다. 여기에서는 스프링부트 3.1 버전(스프링 6)을 사용하였다.
+
+## 데모 구성도
+
+외부에 서비스를 요청하는 서버인 **article-service**와 요청에 대한 응답을 주는 서버인 **content-service**로 총 두 개의 서버로 구성할 것이다. 각각의 서버는 한 프로젝트 내의 모듈로 구성하여 한 소스 내에서 관리할 수 있도록 했다.
+
+<Image alt={`project map`} src={`/images/http-interface/project-map.png`} aspect={928 / 612}/>
+
+## article service 만들기
+
+**content-service**에 정보를 제공해주는 **article-service**는 `article`이라는 데이터 클래스(`ID`와 `title` 그리고 `body`로 구성)로 정보를 제공한다.
+
+```java
+package com.llighter.articleservice.model;
+
+public record Article(Integer id, String title, String body) {
+}
+```
+
+컨트롤러에서는 `@PostConstuct` 어노테이션으로 `init()` 메소드에서 인메모리에 `article` 리스트를 저장한다.
+그리고 기본적인 조회, 수정, 생성, 삭제 API를 제공하도록 구성하였다.
+
+### article controller
+
+```java
+@RestController
+@RequestMapping("/api/articles")
+public class ArticleController {
+
+    private final List<Article> articles = new ArrayList<>();
+
+    @GetMapping
+    public List<Article> findAll() {
+        return articles;
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Article> findById(@PathVariable Integer id) {
+        return articles.stream().filter(article -> article.id().equals(id)).findFirst();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody Article article) {
+        articles.add(article);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody Article article, @PathVariable Integer id) {
+        Optional<Article> currentArticle = articles.stream().filter(a -> a.id().equals(id)).findFirst();
+        currentArticle.ifPresent(value -> articles.set(articles.indexOf(value), article));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Integer id) {
+        articles.removeIf(article -> article.id().equals(id));
+    }
+
+
+    @PostConstruct
+    private void init() {
+        articles.add(new Article(1, "Hello, World!", "This is my first blog post"));
+    }
+}
+
+```
+
+추가적으로 이후에 구성할 **content-service**와 겹치지 않도록 서버 기본 포트를 **8081**으로 바꿔두자.
+
+```properties
+server.port=8081
+```
+
+### article service 테스트
+
+**article-service**가 잘 동작하는지 확인하기 위해 HTTP 요청을 해보자. HTTP 요청을 하기 위해서는 [포스트맨](https://www.postman.com/)과 같은 별도 프로그램을 사용해도 되고 [cURL](https://ko.wikipedia.org/wiki/CURL)이나 [http-pie](https://httpie.io/) 같은 터미널 프로그램을 사용해도 된다. 여기에서는 intellij 플러그인으로 설치할 수 있는 [HTTP Clinet](https://plugins.jetbrains.com/plugin/13121-http-client)를 사용하였다.
+
+```http request
+### 모든 article 조회
+GET http://localhost:8081/api/articles
+
+### 특정 article 조회
+GET http://localhost:8081/api/articles/1
+
+### 새로운 article 생성
+POST http://localhost:8081/api/articles
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "Article 2",
+  "body": "My Second blog post"
+}
+
+### 기존 article 수정
+PUT http://localhost:8081/api/articles/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "Article 2",
+  "body": "I have updated my 2nd blog post!"
+}
+```
+
+서버를 올리고 테스트 콜을 호출해보면 아래와 같이 정상적으로 호출이 되는 것을 확인할 수 있다.
+아래 로그는 전체 article 목록을 조회하는 요청이고 기본적으로 한 개의 값만을 등록해두었기 때문에 한 건이 조회된 것을 볼 수 있다.
+
+```http request
+GET http://localhost:8081/api/articles
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 01 Jul 2023 11:53:49 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+  {
+    "id": 1,
+    "title": "Hello, World!",
+    "body": "This is my first blog post"
+  }
+]
+```
+
+## content service 만들기
+
+자, 이제 호출할 **aricle-service**를 만들고 테스트까지 해봤으니 **content service**로 HTTP 클라이언트를 작성해보자.
+
+**article-service**에서도 `article`이라는 데이터 클래스(`ID`와 `title` 그리고 `body`로 구성)로 정보를 제공하는것과 컨트롤러로 조회, 수정, 생성, 삭제 API를 제공하는 것은 동일하다. 다만, `article-service`는 사용자가 직접 사용하는 서비스이고 데이터는 외부 서비스인 `article-service`에서 가져온다는 점이 다르다.
+
+### content controller
+
+```java
+@RestController
+@RequestMapping("/api/content")
+public class ContentController {
+
+    public final ArticleClient articleClient;
+
+    public ContentController(ArticleClient articleClient) {
+        this.articleClient = articleClient;
+    }
+
+    @GetMapping("/articles")
+    public List<Article> findAllArticles() {
+        return articleClient.findAll();
+    }
+
+    @GetMapping("/articles/{id}")
+    public Optional<Article> findById(@PathVariable Integer id) {
+        return articleClient.findOne(id);
+    }
+
+    @PostMapping("/articles")
+    public void create(@RequestBody Article article) {
+        articleClient.create(article);
+    }
+
+    @PutMapping("/articles/{id}")
+    public void update(@RequestBody Article article, @PathVariable Integer id) {
+        articleClient.update(article, id);
+    }
+
+    @DeleteMapping("/articles/{id}")
+    public void delete(@PathVariable Integer id) {
+        articleClient.delete(id);
+    }
+}
+```
+
+### article client
+
+위에서 컨트롤러에서 외부 서비스를 호출할 때 필요한 클라이언트를 주입받아 사용했는데 이 클라이언트는 어노테이션 메소드(예. `@GetExchange`)를 사용하여 자바 인터페이스로 HTTP 요청을 정의할 수 있다.
+
+```java
+public interface ArticleClient {
+
+    @GetExchange("/articles")
+    List<Article> findAll();
+
+    @GetExchange("/articles/{id}")
+    Optional<Article> findOne(@PathVariable Integer id);
+
+    @PostExchange("/articles")
+    void create(@RequestBody Article article);
+
+    @PutExchange("/articles/{id}")
+    void update(@RequestBody Article article, @PathVariable Integer id);
+
+    @DeleteExchange("/articles/{id}")
+    void delete(@PathVariable Integer id);
+}
+```
+
+### client config
+
+이렇게 `@HttpExchange` 메소드들로 인터페이스를 선언하고 **config**에서 프록시를 만들어서 빈으로 등록하면 컨트롤러에서 주입을 받아 사용할 수 있다.
+
+```java
+@Configuration
+public class ClientConfig {
+
+    @Bean
+    ArticleClient articleClient() {
+        WebClient client = WebClient.builder()
+                .baseUrl("http://localhost:8081/api")
+                .build();
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
+        return factory.createClient(ArticleClient.class);
+    }
+}
+```
+
+### content service 테스트
+
+자 이제 `content-service`도 실행해서 잘 동작하는지 확인해보자.
+
+<Image alt={`get all articles`} src={`/images/http-interface/article-service-get-all-articles.png`}
+       aspect={1126 / 598}/>
+
+```http request
+### 모든 article 조회
+GET http://localhost:8080/api/content/articles
+
+### 특정 article 조회
+GET http://localhost:8080/api/content/articles/1
+
+### 새로운 article 생성
+POST http://localhost:8080/api/content/articles
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "My 2nd Post",
+  "body": "My Second blog post"
+}
+
+### 기존 article 수정
+PUT http://localhost:8080/api/content/articles/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "My 2nd Post",
+  "body": "I have updated my 2nd blog post!"
+}
+
+### 기존 article 삭제
+DELETE http://localhost:8080/api/content/articles/2
+```
+
+아래 로그는 특정 article 목록을 조회하는 요청이다.
+
+```http request
+GET http://localhost:8080/api/content/articles/1
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 01 Jul 2023 12:08:02 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+  "id": 1,
+  "title": "Hello, World!",
+  "body": "This is my first blog post"
+}
+```
+
+## 정리
+
+외부 서비스 연동을 위해 **HTTP API(REST endpoints)** 를 호출하기위해서 스프링 프레임워크에서는 3가지 방법이 있는데 그 중 **HTTP Interface**를 사용하여 서비스를 구성해보았다.
+
+요즘은 고객에게 어떤 서비스를 제공하더라도 자체적으로 모든 것을 제공하는 경우는 거의 없고 대부분 외부 서비스를 연동하여 제공하는 경우가 일반적이다. 금융에서도 대출, 렌탈, 보험 등 다양한 서비스를 여러 금융사와 연계하여 한 곳에서 서비스를 제공하는 형태가 일반화 되었다. 추후에는 이번에 작성한 **HTTP Interface**를 활용하여 외부 대출 서비스로 부터 고객의 대출 가능여부를 조회하는 서비스를 만들어보자. 👋🏻
+
+
+
+> 스프링 프레임워크에서 HTTP API를 호출하는 [3가지 방법](https://docs.spring.io/spring-framework/reference/integration/rest-clients.html): WebClient, RestRemplate, HTTP Interface
