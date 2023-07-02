@@ -1,6 +1,12 @@
 import { allBlogs } from "contentlayer/generated";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "소프트웨어 개발, 디자인, 그리고 일상에 대한 나의 이야기",
+};
 
 export default async function BlogPage() {
   return (
@@ -27,9 +33,16 @@ export default async function BlogPage() {
           {/*</div>*/}
 
           <div className={`grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3`}>
-            {allBlogs.map((article, i) => (
-              <Tile key={i} article={article} />
-            ))}
+            {allBlogs
+              .sort((a, b) => {
+                if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
+                  return -1;
+                }
+                return 1;
+              })
+              .map((article, i) => (
+                <Tile key={i} article={article} />
+              ))}
           </div>
         </div>
       </div>

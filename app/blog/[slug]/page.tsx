@@ -5,6 +5,46 @@ import Link from "next/link";
 import MailButton from "@/components/mailButton";
 import CopyLinkButton from "@/components/copyLinkButton";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}): Promise<Metadata | undefined> {
+  const post = allBlogs.find((post) => post.slug === params.slug);
+  if (!post) {
+    return;
+  }
+
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+    slug,
+  } = post;
+
+  // TODO: ogImage 를 사용하는 방식으로 변경 필요
+  const ogImage = image
+    ? `https://llighter.vercel.app${image}`
+    : `https://llighter.vercel.app/og?title=${title}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `https://llighter.vercel.app/blog/${slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
+  };
+}
 
 export default function Blog({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
