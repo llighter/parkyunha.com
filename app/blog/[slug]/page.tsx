@@ -25,8 +25,8 @@ export async function generateMetadata({
 
   // TODO: ogImage 를 사용하는 방식으로 변경 필요
   const ogImage = image
-    ? `https://llighter.vercel.app${image}`
-    : `https://llighter.vercel.app/og?title=${title}`;
+    ? `https://parkyunha.com${image}`
+    : `https://parkyunha.com/og?title=${title}`;
 
   return {
     title,
@@ -36,7 +36,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `https://llighter.vercel.app/blog/${slug}`,
+      url: `https://parkyunha.com/blog/${slug}`,
       images: [
         {
           url: ogImage,
