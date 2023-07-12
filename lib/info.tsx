@@ -1,8 +1,8 @@
-export const name = "박 윤하";
+export const name = "박윤하";
 export const about = () => {
   return (
     <>
-      안녕하세요 YUNHA INDUSTRY 블로그를 운영하고 있는 <b>llighter</b> 입니다.
+      안녕하세요 Park Yunha 블로그를 운영하고 있는 <b>llighter</b> 입니다.
       금융권에서 비대면 업무인 모바일 앱과 홈페이지 등 채널계를 개발하는 일을
       합니다.
     </>

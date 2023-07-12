@@ -3,17 +3,17 @@ import "./globals.css";
 import Sidebar from "@/components/sidebar";
 
 export const metadata = {
-  metadataBase: new URL("https://llighter.vercel.app"),
+  metadataBase: new URL("https://parkyunha.com"),
   title: {
-    default: "llighter",
-    template: "%s | llighter",
+    default: "Park Yunha",
+    template: "%s | Park Yunha",
   },
   description: "Developer, writer, and creator.",
   openGraph: {
-    title: "llighter",
+    title: "parkyunha",
     description: "Developer, writer, and creator.",
-    url: "https://llighter.vercel.app",
-    siteName: "llighter",
+    url: "https://parkyunha.com",
+    siteName: "parkyunha",
     locale: "ko_KR",
     type: "website",
   },

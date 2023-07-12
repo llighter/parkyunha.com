@@ -1,13 +1,13 @@
-# llighter.io
+# parkyunha.com
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fllighter%2Fllighter.io)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fllighter%2Fparkyunha.com)
 
 ## Getting Started
 
 ### 1. Clone this repository:
 
 ```
-https://github.com/llighter/llighter.io.git my-blog-name
+git clone https://github.com/llighter/parkyunha.com.git my-blog-name
 ```
 
 ### 2. Navigate to the directory

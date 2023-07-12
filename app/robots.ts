@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://llighter.vercel.app/sitemap.xml",
+    sitemap: "https://parkyunha.com/sitemap.xml",
   };
 }
