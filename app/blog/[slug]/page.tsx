@@ -193,7 +193,7 @@ export default function Blog({ params }) {
               className={`mx-auto my-[44px] flex w-87.5 flex-col items-center tablet:my-[48px] tablet:w-[576px] laptop:my-[52px] laptop:w-[653px]`}
             >
               <figure
-                className={`h-[23px] w-[158px] bg-[url('/images/logo.svg')] bg-cover`}
+                className={`h-[30px] w-[150px] bg-[url('/images/logo.svg')] bg-cover`}
               >
                 <figcaption className={`hidden`}>logo</figcaption>
               </figure>
