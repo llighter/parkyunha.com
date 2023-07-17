@@ -6,6 +6,7 @@ import MailButton from "@/components/mailButton";
 import CopyLinkButton from "@/components/copyLinkButton";
 import Image from "next/image";
 import { Metadata } from "next";
+import { formatDate } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -87,7 +88,7 @@ export default function Blog({ params }) {
                 id="date-eyebrow"
                 className={`mx-auto mt-[4px] w-87.5 text-sm font-semibold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
               >
-                {post.publishedAt}
+                {formatDate(post.publishedAt)}
               </div>
             </div>
             <div
@@ -217,9 +218,7 @@ export default function Blog({ params }) {
 
 function Result({ article }) {
   return (
-    // TODO: LINK 태그로 변경하기
-    // FIXME: LINK 를 사용하면 스크롤이 맨 위로 이동을 하지 않음
-    <a
+    <Link
       href={`/blog/${article.slug}`}
       className={`flex justify-start border-t border-t-gray-300 py-6 last:pb-0 laptop:py-8`}
     >
@@ -240,9 +239,9 @@ function Result({ article }) {
           {article.title}
         </h3>
         <p className={`mt-2 text-[14px] font-bold text-gray-500`}>
-          {article.publishedAt}
+          {formatDate(article.publishedAt)}
         </p>
       </div>
-    </a>
+    </Link>
   );
 }
