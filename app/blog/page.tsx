@@ -2,6 +2,7 @@ import { allBlogs } from "contentlayer/generated";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -80,7 +81,7 @@ function Tile({ article }) {
             </p>
           </div>
           <p className={`mt-2 text-[14px] font-medium text-gray-500`}>
-            {article.publishedAt}
+            {formatDate(article.publishedAt)}
           </p>
         </div>
       </div>
