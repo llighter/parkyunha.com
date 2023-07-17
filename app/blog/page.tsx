@@ -10,9 +10,25 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
+  // allBlogs를 publishedAt 기준으로 내림차순 정렬
+  allBlogs.sort((a, b) => {
+    if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
+      return -1;
+    }
+    return 1;
+  });
+
+  // FIXME: 최소 글 갯수가 6개 이상이어야 함
+  // allBlogs 목록에서 첫번째 건 추출
+  const firstArticle = allBlogs[0];
+  // allBlogs 목록에서 두번째부터 다섯번째 건 추출
+  const mediumArticles = allBlogs.slice(1, 5);
+  // allBlogs 목록에서 여섯번째부터 끝까지 추출
+  const smallArticles = allBlogs.slice(5);
+
   return (
     <section
-      className={`mt-0 h-full overflow-hidden bg-slate-100 pb-10 tablet:pb-16 laptop:pb-20`}
+      className={`mt-0 h-full overflow-hidden bg-zinc-100 pb-10 tablet:pb-16 laptop:pb-20`}
     >
       <div
         className={`mx-auto mt-8 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
@@ -21,29 +37,24 @@ export default async function BlogPage() {
           <h2
             className={`mb-8 text-[24px] font-bold @[692px]:text-[28px] @[980px]:text-[32px]`}
           >
-            &nbsp;최신 뉴스
+            &nbsp;최신 글
           </h2>
         </div>
         <div>
-          {/*<Tile article={article} />*/}
+          <div className={`grid gap-8`}>
+            <Tile article={firstArticle} />
 
-          {/*<div className={`grid gap-8 tablet:grid-cols-2`}>*/}
-          {/*  {mediumArticles.map((article, i) => (*/}
-          {/*    <Tile key={i} article={article} />*/}
-          {/*  ))}*/}
-          {/*</div>*/}
-
-          <div className={`grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3`}>
-            {allBlogs
-              .sort((a, b) => {
-                if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
-                  return -1;
-                }
-                return 1;
-              })
-              .map((article, i) => (
+            <div className={`grid gap-8 tablet:grid-cols-2`}>
+              {mediumArticles.map((article, i) => (
                 <Tile key={i} article={article} />
               ))}
+            </div>
+
+            <div className={`grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3`}>
+              {smallArticles.map((article, i) => (
+                <Tile key={i} article={article} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
