@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="scroll-smooth">
       <body className={`flex flex-col antialiased`}>
         <div className="wrapper grid min-h-full grid-rows-[auto_1fr_auto]">
           <Sidebar />
