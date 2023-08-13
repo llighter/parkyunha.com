@@ -62,8 +62,8 @@ export const Blog = defineDocumentType(() => ({
         datePublished: doc.publishedAt,
         dateModified: doc.publishedAt,
         description: doc.summary,
-        image: `https://parkyunha.com${doc.image}`,
-        url: `https://parkyunha.com/blog/${doc._raw.flattenedPath}`,
+        image: `https://www.parkyunha.com${doc.image}`,
+        url: `https://www.parkyunha.com/blog/${doc._raw.flattenedPath}`,
         author: {
           "@type": "Person",
           name: "Park Yunha",

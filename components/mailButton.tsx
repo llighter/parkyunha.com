@@ -14,7 +14,7 @@ export default function MailButton({ post }) {
 
   return (
     <button
-      data-href={`https://parkyunha.com/blog/${post.slug}`}
+      data-href={`https://www.parkyunha.com/blog/${post.slug}`}
       data-title={post.title}
       data-description={post.summary}
       data-analytics-title="Share via mail"

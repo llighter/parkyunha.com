@@ -3,7 +3,7 @@ import "./globals.css";
 import Sidebar from "@/components/sidebar";
 
 export const metadata = {
-  metadataBase: new URL("https://parkyunha.com"),
+  metadataBase: new URL("https://www.parkyunha.com"),
   title: {
     default: "Park Yunha",
     template: "%s | Park Yunha",
@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     title: "Park Yunha",
     description: "Dreaming to be a Developer and Entrepreneur.",
-    url: "https://parkyunha.com",
+    url: "https://www.parkyunha.com",
     siteName: "Park Yunha",
     locale: "ko_KR",
     type: "website",

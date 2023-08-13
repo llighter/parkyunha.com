@@ -26,8 +26,8 @@ export async function generateMetadata({
 
   // TODO: ogImage 를 사용하는 방식으로 변경 필요
   const ogImage = image
-    ? `https://parkyunha.com${image}`
-    : `https://parkyunha.com/og?title=${title}`;
+    ? `https://www.parkyunha.com${image}`
+    : `https://www.parkyunha.com/og?title=${title}`;
 
   return {
     title,
@@ -37,7 +37,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `https://parkyunha.com/blog/${slug}`,
+      url: `https://www.parkyunha.com/blog/${slug}`,
       images: [
         {
           url: ogImage,
