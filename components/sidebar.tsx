@@ -11,15 +11,15 @@ const navItems = {
     y: 0,
     w: "64px",
   },
-  "/about": {
-    name: "about",
+  "/work": {
+    name: "work",
     x: 60,
     y: 35,
-    w: "65px",
+    w: "56px",
   },
   "/blog": {
     name: "blog",
-    x: 120,
+    x: 114,
     y: 69,
     w: "56px",
   },
@@ -42,7 +42,8 @@ export default function NavBar() {
   return (
     <aside>
       <div
-        className={`mx-auto mb-4 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+        // className={`mx-auto mb-4 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+        className={`mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]`}
       >
         <div>
           <Logo />
