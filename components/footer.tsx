@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     // <div className={styles.myfoot}>
     <footer className="mx-auto w-full tablet:w-full">
-      <div className="mx-auto px-5 laptop:max-w-screen-laptop_inner laptop:p-0">
+      <div className="mx-auto w-87.5 max-w-[366px] px-5 tablet:max-w-[576px] laptop:max-w-[653px] laptop:p-0">
         <div>
           <Logo />
           <ul
@@ -25,7 +25,7 @@ export default function Footer() {
               <a href="/">home</a>
             </li>
             <li>
-              <a href="/about">about</a>
+              <a href="/work">work</a>
             </li>
             <li>
               <a href="/blog">blog</a>
@@ -33,7 +33,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="py-4 pb-5 text-sm text-gray-500">
-          Copyright &copy; 2023 YUNHA INDUSTRIES
+          Copyright &copy; 2024 PARK YUNHA
         </div>
       </div>
     </footer>
