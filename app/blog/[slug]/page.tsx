@@ -1,6 +1,7 @@
-import { allBlogs } from "contentlayer/generated";
+import { getBlogPosts } from 'app/db/blog';
 import { notFound } from "next/navigation";
-import { Mdx } from "@/components/mdx";
+// TODO: components 위치 옮기기
+import { CustomMDX } from 'components/mdx';
 import Link from "next/link";
 import MailButton from "@/components/mailButton";
 import CopyLinkButton from "@/components/copyLinkButton";
@@ -11,21 +12,20 @@ import { formatDate } from "@/lib/utils";
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
-  const post = allBlogs.find((post) => post.slug === params.slug);
+  let post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
     return;
   }
 
-  const {
+  let {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
-    slug,
-  } = post;
+  } = post.metadata;
 
   // TODO: ogImage 를 사용하는 방식으로 변경 필요
-  const ogImage = image
+  let ogImage = image
     ? `https://www.parkyunha.com${image}`
     : `https://www.parkyunha.com/og?title=${title}`;
 
@@ -37,7 +37,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `https://www.parkyunha.com/blog/${slug}`,
+      url: `https://www.parkyunha.com/blog/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -48,30 +48,42 @@ export async function generateMetadata({
 }
 
 export default function Blog({ params }) {
-  const post = allBlogs.find((post) => post.slug === params.slug);
+  let post = getBlogPosts().find((post) => post.slug === params.slug);
 
-  // TODO: contentlayer reference 를 사용하는 방식으로 변경 필요
-  const articles = post.articles ? post.articles.map((item) => item.title) : [];
-  const relatedArticles = allBlogs.filter((item) =>
-    articles.includes(item._id)
-  );
+  // TODO: relatedArticles 사용하는 방식으로 변경 필요
+  // const articles = post.articles ? post.articles.map((item) => item.title) : [];
+  // const relatedArticles = allBlogs.filter((item) =>
+  //   articles.includes(item._id)
+  // );
 
   if (!post) {
     notFound();
   }
 
   return (
-    <>
-      {/*<script type={`application/ld+json`}>*/}
-      {/*  {JSON.stringify(post.structuredData)}*/}
-      {/*</script>*/}
+    <section className='mt-0 overflow-hidden'>
       <script
         type="application/ld+json"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(post.structuredData),
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.metadata.title,
+            datePublished: post.metadata.publishedAt,
+            dateModified: post.metadata.publishedAt,
+            description: post.metadata.summary,
+            image: post.metadata.image
+              ? `https://www.parkyunha.com${post.metadata.image}`
+              : `https://www.parkyunha.com/og?title=${post.metadata.title}`,
+            url: `https://www.parkyunha.com/blog/${post.slug}`,
+            author: {
+              '@type': 'Person',
+              name: 'Park Yunha',
+            },
+          }),
         }}
       />
-      <section className={`mt-0 overflow-hidden`}>
         <article id="article" className={`pt-10`}>
           <div id="article-header">
             <div
@@ -82,13 +94,13 @@ export default function Blog({ params }) {
                 id="category-eyebrow"
                 className={`mx-auto w-87.5 text-xs font-bold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
               >
-                {post.category}
+                {post.metadata.category}
               </div>
               <div
                 id="date-eyebrow"
                 className={`mx-auto mt-[4px] w-87.5 text-sm font-semibold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
               >
-                {formatDate(post.publishedAt)}
+                {formatDate(post.metadata.publishedAt)}
               </div>
             </div>
             <div
@@ -101,7 +113,7 @@ export default function Blog({ params }) {
                 <h1
                   className={`table:text-[42px] break-keep text-[32px] font-extrabold leading-[1.21875] tablet:leading-[1.2] laptop:text-[48px] laptop:leading-[1.1875]`}
                 >
-                  {post.title}
+                  {post.metadata.title}
                 </h1>
               </div>
             </div>
@@ -115,7 +127,7 @@ export default function Blog({ params }) {
                 <div
                   className={`break-keep text-[21px] font-bold laptop:text-[24px]`}
                 >
-                  {post.summary}
+                  {post.metadata.summary}
                 </div>
               </div>
             </div>
@@ -142,8 +154,8 @@ export default function Blog({ params }) {
               className={`relative mx-auto aspect-[1.5] max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
             >
               <Image
-                src={post.image}
-                alt={post.imageDescription}
+                src={post.metadata.image}
+                alt={post.metadata.imageDescription}
                 fill={true}
                 priority={true}
                 className={`rounded-none object-cover phone:rounded-xl`}
@@ -156,7 +168,7 @@ export default function Blog({ params }) {
                 className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}
               >
                 <div className={`break-keep text-xs font-bold text-gray-500`}>
-                  {post.imageDescription}
+                  {post.metadata.imageDescription}
                 </div>
               </div>
             </div>
@@ -165,11 +177,14 @@ export default function Blog({ params }) {
           <div
             className={`mx-auto mb-11 mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
           >
-            <Mdx code={post.body.code} />
+            <article className="prose prose-quoteless prose-neutral mx-auto">
+              <CustomMDX source={post.content} />
+            </article>
           </div>
 
           {/* TODO: 조건을 처리하는 더 좋은 방법이 있는지 확인 필요 */}
-          {relatedArticles.length > 0 && (
+          {/* TODO: relatedArticles 사용하는 방식으로 변경 필요 */}
+          {/* {relatedArticles.length > 0 && (
             <div
               className={`mx-auto mb-11 mt-8 w-87.5 max-w-[362px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
             >
@@ -186,7 +201,7 @@ export default function Blog({ params }) {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
         </article>
         <aside className={`mt-20 flex justify-center bg-gray-50`}>
           <Link href={`/blog`}>
@@ -211,8 +226,7 @@ export default function Blog({ params }) {
             </div>
           </Link>
         </aside>
-      </section>
-    </>
+    </section>
   );
 }
 

@@ -1,4 +1,4 @@
-import { allBlogs } from "contentlayer/generated";
+import { getBlogPosts } from 'app/db/blog'
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -10,9 +10,11 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
+  let allBlogs = getBlogPosts();
+
   // allBlogs를 publishedAt 기준으로 내림차순 정렬
   allBlogs.sort((a, b) => {
-    if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
+    if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
       return -1;
     }
     return 1;
@@ -77,8 +79,8 @@ function Tile({ article }) {
           className={`shrink-0 overflow-hidden @[692px]:w-[453px] @[980px]:w-[643px]`}
         >
           <Image
-            src={article.image}
-            alt={article.imageDescription}
+            src={article.metadata.image}
+            alt={article.metadata.imageDescription}
             width={400}
             height={400}
             className={`aspect-[1.77] h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
@@ -87,16 +89,16 @@ function Tile({ article }) {
         <div className={`flex grow flex-col justify-between bg-white p-6`}>
           <div className={`space-y-[4px] @[474px]:space-y-[8px]`}>
             <p className={`text-[12px] font-bold text-gray-600`}>
-              {article.category}
+              {article.metadata.category}
             </p>
             <p
               className={`mt-2 break-keep text-[19px] font-semibold @[305px]:leading-6 @[474px]:text-[24px] @[474px]:leading-8 @[692px]:text-[21px] @[980px]:text-[32px] @[980px]:font-bold @[980px]:leading-10`}
             >
-              {article.title}
+              {article.metadata.title}
             </p>
           </div>
           <p className={`mt-2 text-[14px] font-medium text-gray-500`}>
-            {formatDate(article.publishedAt)}
+            {formatDate(article.metadata.publishedAt)}
           </p>
         </div>
       </div>

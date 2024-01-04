@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./app/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./content/**/*.{mdx}",
+    // TODO: components 위치 옮길때 수정
+    "./components/**/*.{ts,tsx}",
   ],
   theme: {
     screens: {

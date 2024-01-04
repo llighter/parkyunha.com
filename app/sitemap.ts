@@ -1,10 +1,9 @@
-import { MetadataRoute } from "next";
-import { allBlogs } from "contentlayer/generated";
+import { getBlogPosts } from 'app/db/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const blogs = allBlogs.map((post) => ({
+export default function sitemap() {
+  let blogs = getBlogPosts().map((post) => ({
     url: `https://www.parkyunha.com/blog/${post.slug}`,
-    lastModified: post.publishedAt,
+    lastModified: post.metadata.publishedAt,
   }));
 
   const routes = ["", "/blog", "/work"].map((route) => ({
