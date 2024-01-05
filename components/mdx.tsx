@@ -1,6 +1,8 @@
-import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import React from "react";
+import { highlight } from "sugar-high";
 
 interface MdxProps {
   code: string;
@@ -53,17 +55,67 @@ function Aside(props) {
   );
 }
 
+function Code({children, ...props}) {
+  let codeHTML = highlight(children);
+  return <code dangerouslySetInnerHTML={{__html: codeHTML}} {...props} />
+}
+
+function slugify(str) {
+  return str
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/&/g, "-and-") // Replace & with 'and'
+    .replace(/[^\u3131-\uD79D\w-]+/g, "") // Remove all non-word chars except Korean
+    .replace(/--+/g, "-"); // Replace multiple - with single -
+}
+
+function createHeading(level) {
+  return ({ children }) => {
+    let slug = slugify(children);
+    return React.createElement(
+      `h${level}`,
+      { id: slug },
+      [
+        React.createElement('a', {
+          href: `#${slug}`,
+          key: `link-${slug}`,
+          className: 'anchor',
+        }),
+      ],
+      children
+    );
+  };
+}
+
 const components = {
+  h1: createHeading(1),
+  h2: createHeading(2),
+  h3: createHeading(3),
+  h4: createHeading(4),
+  h5: createHeading(5),
+  h6: createHeading(6),
   Aside,
   a: CustomLink,
   Image: RoundedImage,
+  code: Code,
 };
 
-export function Mdx({ code }: MdxProps) {
-  const Component = useMDXComponent(code);
+// export function Mdx({ code }: MdxProps) {
+//   const Component = useMDXComponent(code);
+//   return (
+//     <article className={`prose prose-neutral mx-auto break-keep`}>
+//       <Component components={{ ...components }} />
+//     </article>
+//   );
+// }
+
+export function CustomMDX(props) {
   return (
-    <article className={`prose prose-neutral mx-auto break-keep`}>
-      <Component components={{ ...components }} />
-    </article>
+    <MDXRemote
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
+    />
   );
 }

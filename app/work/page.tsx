@@ -1,6 +1,4 @@
-import { allBlogs } from "contentlayer/generated";
-
-export default function AboutPage() {
+export default function WorkPage() {
   return (
     <section className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}>
       <div
