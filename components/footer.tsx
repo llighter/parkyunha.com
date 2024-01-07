@@ -1,9 +1,6 @@
 import Link from "next/link";
-import styles from "@/components/styles.module.css";
 
 function Logo() {
-  console.log(styles);
-
   return (
     <Link href={`/`} aria-label={`Park Yunha`}>
       <img className={`h-20 w-32`} src={`/images/logo.svg`} />
@@ -13,23 +10,49 @@ function Logo() {
 
 export default function Footer() {
   return (
-    // <div className={styles.myfoot}>
     <footer className="mx-auto w-full tablet:w-full">
       <div className="mx-auto w-87.5 max-w-[366px] px-5 tablet:max-w-[576px] laptop:max-w-[653px] laptop:p-0">
         <div>
           <Logo />
           <ul
-            className={`${styles.myfoot} text-sm font-semibold tablet:flex laptop:flex`}
+            className={`hidden laptop:flex laptop:flex-row justify-between text-sm text-neutral-700`}
           >
+            <li className="text-neutral-400">
+              <span>|</span>
+            </li>
+            <li className="flex-grow text-center">
+              <a href="/">home</a>
+            </li>
+            <li className="text-center text-neutral-400">
+              <span>|</span>
+            </li>
+            <li className="flex-grow text-center">
+              <a href="/work">work</a>
+            </li>
+            <li className="text-center text-neutral-400">
+              <span>|</span>
+            </li>
+            <li className="flex-grow text-center">
+              <a href="/blog">blog</a>
+            </li>
+            <li className="text-neutral-400">
+              <span>|</span>
+            </li>
+          </ul>
+          <ul className={`block laptop:hidden text-sm text-neutral-800`}>
+            <hr className="my-2 border-neutral-300" />
             <li>
               <a href="/">home</a>
             </li>
+            <hr className="my-2 border-neutral-300" />
             <li>
               <a href="/work">work</a>
             </li>
+            <hr className="my-2 border-neutral-300" />
             <li>
               <a href="/blog">blog</a>
             </li>
+            <hr className="my-2 border-neutral-300" />
           </ul>
         </div>
         <div className="py-4 pb-5 text-sm text-gray-500">
