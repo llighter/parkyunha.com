@@ -9,13 +9,13 @@
 
 /* TODO: 색깔 업데이트 필요 */
 :root {
-  --sh-class: #61AFEF; /* function names */
-  --sh-identifier: #56B6C2; /* constants */
-  --sh-sign: #ABB2BF; /* operators and punctuation */
-  --sh-string: #98C379; /* strings */
-  --sh-keyword: #C678DD; /* keywords */
-  --sh-comment: #5C6370; /* comments */
-  --sh-jsxliterals: #D19A66; /* numbers */
+  --sh-class: #61afef; /* function names */
+  --sh-identifier: #56b6c2; /* constants */
+  --sh-sign: #abb2bf; /* operators and punctuation */
+  --sh-string: #98c379; /* strings */
+  --sh-keyword: #c678dd; /* keywords */
+  --sh-comment: #5c6370; /* comments */
+  --sh-jsxliterals: #d19a66; /* numbers */
 }
 
 .prose .anchor {
@@ -38,7 +38,7 @@
 
 .prose .anchor:after {
   @apply text-neutral-300 dark:text-neutral-700;
-  content: '#';
+  content: "#";
 }
 
 .prose *:hover > .anchor {
@@ -69,8 +69,8 @@
   margin-bottom: 1.25em !important;
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
+code[class*="language-"],
+pre[class*="language-"] {
   @apply text-neutral-50;
 }
 
@@ -84,8 +84,8 @@ pre {
 }
 
 /* Remove Safari input shadow on mobile */
-input[type='text'],
-input[type='email'] {
+input[type="text"],
+input[type="email"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -102,15 +102,15 @@ table {
   margin: 0 !important;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   padding: 0;
   margin: 0;
 }
-aside, .myfoot {
+aside {
   @apply grow-0 shrink-0;
 }
-
 
 /* prose width 설정 변경하기 */
 /* TODO: 이미지는 제외하도록 설정 ex) .prose :where(p):not(:where([class~="not-prose"] *)) <- 왠지 모르지만 class로 하면 적용이 잘 안됨 */
