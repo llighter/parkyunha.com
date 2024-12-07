@@ -5,7 +5,7 @@ import han_river from "public/images/home/han-river.jpeg";
 import eclipse from "public/images/home/eclipse.jpeg";
 import osaka_castle from "public/images/home/osaka-castle.jpeg";
 import seoul from "public/images/home/seoul.jpeg";
-import nanba_city_view from "public/images/home/nanba-city-view.jpeg";
+import me_at_home from "public/images/home/me-at-home.jpg";
 
 function Badge(props) {
   return (
@@ -99,7 +99,7 @@ export default function Home() {
           <div className="relative h-80">
             <Image
               alt="City view from Hotel Monterey Grasmere Osaka"
-              src={nanba_city_view}
+              src={me_at_home}
               fill
               sizes="(min-width: 768px) 213px, 33vw"
               priority
