@@ -21,19 +21,19 @@ export default function Footer() {
               <span>|</span>
             </li>
             <li className="flex-grow text-center">
-              <a href="/">home</a>
+              <Link href="/">home</Link>
             </li>
             <li className="text-center text-neutral-400">
               <span>|</span>
             </li>
             <li className="flex-grow text-center">
-              <a href="/work">work</a>
+              <Link href="/work">work</Link>
             </li>
             <li className="text-center text-neutral-400">
               <span>|</span>
             </li>
             <li className="flex-grow text-center">
-              <a href="/blog">blog</a>
+              <Link href="/blog">blog</Link>
             </li>
             <li className="text-neutral-400">
               <span>|</span>
@@ -42,15 +42,15 @@ export default function Footer() {
           <ul className={`block laptop:hidden text-sm text-neutral-800`}>
             <hr className="my-2 border-neutral-300" />
             <li>
-              <a href="/">home</a>
+              <Link href="/">home</Link>
             </li>
             <hr className="my-2 border-neutral-300" />
             <li>
-              <a href="/work">work</a>
+              <Link href="/work">work</Link>
             </li>
             <hr className="my-2 border-neutral-300" />
             <li>
-              <a href="/blog">blog</a>
+              <Link href="/blog">blog</Link>
             </li>
             <hr className="my-2 border-neutral-300" />
           </ul>
