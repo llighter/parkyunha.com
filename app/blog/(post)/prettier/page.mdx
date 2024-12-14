@@ -1,0 +1,70 @@
+import CustomImage from "@/app/components/CustomImage";
+import node from "./node.png";
+import configure from "./configure.png";
+import plugin from "./plugin.png";
+import PostHeader from "@/app/components/postHeader";
+
+export const metadata = {
+  title: "Webstorm에서 prettier 사용하기",
+  publishedAt: "2023-05-01",
+  category: "블로그",
+  summary: "Webstorm에서 prettier 설정으로 코드를 보기좋게 만들어보자",
+  image: "/images/hero/prettier.jpg",
+  imageDescription: "prettier를 사용하면 코드를 보기 좋게 정리할 수 있다",
+};
+
+<PostHeader metadata={metadata} slug="prettier" />
+
+코드를 작성하다보면 어디에서는 줄을 나누고 어디에서는 띄어쓰기를 하고 어디에서는 길게 늘여쓴다. 개인의 스타일에 따라 그 유형도 천차만별이다.
+그 결과물이 누구에게는 읽기 좋을 수도 있고 그렇지 않을 수도 있다. 코드 작성 규칙을 정해서 모두가 지키도록 할 수도 있지만 [prettier](https://prettier.io/)를 사용해서 자동으로 정리하도록 할 수도 있다.
+
+이 포스트에서는 [Webstorm IDE]()에서 [prettier](https://prettier.io/)를 [설정하는 방법](https://www.jetbrains.com/help/webstorm/prettier.html)에 대해 알아보자.
+prettier는 `.js, .ts, .css, .less, .scss, .vue, .json` 등의 코드를 정리해주는 도구이다. 내가 지정한 범위내의 코드만 정리할 수도 있고 전체 파일을 정리할 수도 있다.
+Webstorm에서는 내 환경에서 전역적으로 또는 현재 프로젝트에 prettier가 설치되어 있기만 하면 이 기능을 사용할 수 있다.
+
+또한 파일이 변경될 때 마다 혹은 저장할 때마다 정리하도록 설정 할 수 있다.
+
+## 시작하기 전에..
+
+1. 내 PC에 `Node.js`가 설치되어 있어야 한다.
+
+```shell
+❯ node --version
+v19.1.0
+```
+
+2. 내 프로젝트에 노드 환경이 설정되어 있어야 한다.
+
+<CustomImage src={node} alt="node" />
+
+3. **설정 | 플러그인** **Javascript와 Typescript** 그리고 **Prettier**가 사용하도록 설정되어 있어야 한다.
+
+<CustomImage src={plugin} alt="plugin" />
+
+## Webstorm에서 Prettier 설치 및 설정
+
+1. 터미널에서 아래 명령어중 하나를 입력한다.
+
+내 프로젝트에서만 사용하려면 첫번째 명령어를 입력하고 내 PC에서 사용하려면 두번째 명령어를 입력하면 된다.
+
+```shell
+npm install --save-dev --save-exact prettier
+
+npm install --global prettier
+```
+
+2. **설정**에서 **언어 및 프레임워크 | Javascript | Prettier** 로 이동 후 설치 패키지가 지정된 것을 확인하고 **저장 시**를 체크한다.
+
+<CustomImage src={configure} alt="configure" />
+
+## Prettier로 코드 정리하기
+
+1. 에디터에서 정라하고 싶은 범위를 선택 후 단축키로 정렬을 한다.(**⌘ ⌥ ⇧ P**)
+2. 또는 **저장 시**를 설정해두었기 때문에 해당 파일을 저장하면 자동으로 정렬이 된다.
+
+## 정리하며..
+
+[Webstorm에서 Prettier를 설정하는 방법](https://www.jetbrains.com/help/webstorm/prettier.html)을 알아보았는데, 이 기능은 단순히 보기 좋게 코드를 정리하는 것 뿐만 아니라 여러 사람들이 협업을 할때에도 정해진 규칙과 포맷에 맞춰 작업을 할 수 있다는 장정이 있다.
+누가 작성하던지 같은 형식의 코드를 보니 이해하기 쉽고 리뷰도 편하게 할 수 있다.
+
+사진: <a href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/r2A6WYI8YIg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>의<a href="https://unsplash.com/@shawnanggg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">shawnanggg</a>
