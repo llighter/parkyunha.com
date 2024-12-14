@@ -1,8 +1,14 @@
 "use client";
 
-import { MailIcon } from "@/components/icons";
+import { MailIcon } from "@/app/components/icons";
 
-export default function MailButton({ post }) {
+interface Post {
+  title: string;
+  slug: string;
+  summary: string;
+}
+
+export default function MailButton({ post }: { post: Post }) {
   function handleMailButtonClick() {
     const urlParams = new URLSearchParams();
     urlParams.append("subject", post.title);

@@ -4,7 +4,14 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const navItems = {
+type NavItem = {
+  name: string;
+  x: number;
+  y: number;
+  w: string;
+};
+
+const navItems: { [key: string]: NavItem } = {
   "/": {
     name: "home",
     x: 0,
@@ -75,7 +82,13 @@ export default function NavBar() {
                 {/*  Mobile version, hidden on desktop, animates x axis */}
                 <div className={`block`}>
                   <motion.div
-                    className={`absolute z-[-1] h-[34px] rounded-md bg-neutral-100`}
+                    style={{
+                      position: "absolute",
+                      zIndex: -1,
+                      height: "34px",
+                      borderRadius: "0.375rem",
+                      backgroundColor: "#f5f5f5",
+                    }}
                     initial={{ opacity: 0, x: navItems[pathname].x }}
                     animate={{
                       opacity: 1,

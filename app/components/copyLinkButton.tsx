@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkIcon } from "@/components/icons";
+import { LinkIcon } from "@/app/components/icons";
 import { useState } from "react";
 
 export default function CopyLinkButton() {
