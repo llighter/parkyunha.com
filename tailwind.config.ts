@@ -1,10 +1,10 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default {
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./content/**/*.{mdx}",
-    // TODO: components 위치 옮길때 수정
-    "./components/**/*.{ts,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     screens: {
@@ -27,4 +27,4 @@ module.exports = {
     require("@tailwindcss/container-queries"),
     require("@tailwindcss/typography"),
   ],
-};
+} satisfies Config;
