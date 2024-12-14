@@ -10,46 +10,62 @@ type Metadata = {
   imageDescription?: string;
 };
 
-function parseFrontmatter(fileContent: string) {
-  let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
-  let match = frontmatterRegex.exec(fileContent);
-  let frontMatterBlock = match![1];
-  let content = fileContent.replace(frontmatterRegex, "").trim();
-  let frontMatterLines = frontMatterBlock.trim().split("\n");
-  let metadata: Partial<Metadata> = {};
+type BlogPost = {
+  slug: string;
+  metadata: Metadata;
+};
 
-  frontMatterLines.forEach((line) => {
-    let [key, ...valueArr] = line.split(":");
-    let value = valueArr.join(":").trim();
-    value = value.replace(/^['"](.*)['"]$/, "$1"); // remove quotes
-    metadata[key.trim() as keyof Metadata] = value;
-  });
+const BLOG_DIR = path.join(process.cwd(), "app/blog/(post)");
 
-  return { metadata: metadata as Metadata, content };
+/**
+ * MDX 파일 경로 탐색
+ */
+function getMDXFolders(dir: string) {
+  return fs
+    .readdirSync(dir)
+    .filter((folder) => fs.statSync(path.join(dir, folder)).isDirectory());
 }
 
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
+/**
+ * MDX 파일에서 metadata 가져오기
+ */
+async function getMetadataFromMDX(folder: string): Promise<BlogPost | null> {
+  const filePath = path.join(BLOG_DIR, folder, "page.mdx");
 
-function readMDXFile(filePath: string) {
-  let rawContent = fs.readFileSync(filePath, "utf-8");
-  return parseFrontmatter(rawContent);
-}
+  if (!fs.existsSync(filePath)) {
+    console.warn(`File not found: ${filePath}`);
+    return null;
+  }
 
-function getMDXData(dir: string) {
-  let mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file));
-    let slug = path.basename(file, path.extname(file));
+  try {
+    const { metadata } = await import(`../blog/(post)/${folder}/page.mdx`);
+
     return {
+      slug: folder, // 폴더 이름을 slug로 사용
       metadata,
-      slug,
-      content,
     };
-  });
+  } catch (error) {
+    console.error(`Error importing metadata from ${filePath}:`, error);
+    return null;
+  }
 }
 
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "content"));
+/**
+ * 전체 블로그 글 목록 가져오기
+ */
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  const folders = getMDXFolders(BLOG_DIR);
+
+  const posts = await Promise.all(
+    folders.map((folder) => getMetadataFromMDX(folder))
+  );
+
+  return posts
+    .filter((post): post is BlogPost => post !== null) // null 제거
+    .sort((a, b) => {
+      return (
+        new Date(b.metadata.publishedAt).getTime() -
+        new Date(a.metadata.publishedAt).getTime()
+      );
+    });
 }
