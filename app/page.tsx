@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import hi_five from "public/images/home/hi-five.jpeg";
-import han_river from "public/images/home/han-river.jpeg";
-import eclipse from "public/images/home/eclipse.jpeg";
-import osaka_castle from "public/images/home/osaka-castle.jpeg";
-import seoul from "public/images/home/seoul.jpeg";
-import me_at_home from "public/images/home/me-at-home.jpg";
+// import eclipse from "public/images/home/eclipse.jpeg";
+// import seoul from "public/images/home/seoul.jpeg";
+// import me_at_home from "public/images/home/me-at-home.jpg";
 
-function Badge(props) {
+interface BadgeProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
+
+function Badge(props: BadgeProps) {
   return (
     <a
       {...props}
@@ -49,7 +48,7 @@ export default function Home() {
           <div className="relative mb-4 h-40">
             <Image
               alt="Me and my younger brother at the Han River in Seoul, South Korea"
-              src={han_river}
+              src="/images/home/han-river.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
@@ -59,7 +58,7 @@ export default function Home() {
           <div className="relative mb-4 h-80 laptop:mb-0">
             <Image
               alt="Me at Osaka Castle in Osaka, Japan"
-              src={osaka_castle}
+              src="/images/home/osaka-castle.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
@@ -69,7 +68,7 @@ export default function Home() {
           <div className="relative h-40 laptop:mb-4 laptop:h-80">
             <Image
               alt="high five with the Glico sign"
-              src={hi_five}
+              src="/images/home/hi-five.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
@@ -79,7 +78,7 @@ export default function Home() {
           <div className="relative mb-4 h-40 laptop:mb-0">
             <Image
               alt="A picture I drew characterizing Eclipse and Java"
-              src={eclipse}
+              src="/images/home/eclipse.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
@@ -89,7 +88,7 @@ export default function Home() {
           <div className="relative mb-4 h-40">
             <Image
               alt="Seoul seen from above an airplane"
-              src={seoul}
+              src="/images/home/seoul.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
@@ -99,7 +98,7 @@ export default function Home() {
           <div className="relative h-80">
             <Image
               alt="City view from Hotel Monterey Grasmere Osaka"
-              src={me_at_home}
+              src="/images/home/me-at-home.jpg"
               fill
               sizes="(min-width: 768px) 213px, 33vw"
               priority

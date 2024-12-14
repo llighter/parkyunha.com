@@ -1,0 +1,141 @@
+import React from "react";
+import CopyLinkButton from "@/app/components/copyLinkButton";
+import MailButton from "@/app/components/mailButton";
+import { formatDate } from "@/lib/utils";
+import Image from "next/image";
+
+interface Metadata {
+  title: string;
+  publishedAt: string;
+  summary: string;
+  image?: string;
+  category: string;
+  imageDescription: string;
+}
+
+interface PostHeaderProps {
+  metadata: Metadata;
+  slug: string;
+}
+
+const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
+  // TODO: 하나로 합치기
+  const post = {
+    title: metadata.title,
+    slug: slug,
+    summary: metadata.summary,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: metadata.title,
+            datePublished: metadata.publishedAt,
+            dateModified: metadata.publishedAt,
+            description: metadata.summary,
+            image: metadata.image
+              ? `https://www.parkyunha.com${metadata.image}`
+              : `https://www.parkyunha.com/og?title=${metadata.title}`,
+            url: `https://www.parkyunha.com/blog/${slug}`,
+            author: {
+              "@type": "Person",
+              name: "Park Yunha",
+            },
+          }),
+        }}
+      />
+      <article id="article" className={`pt-10`}>
+        <div id="article-header">
+          <div
+            id="category"
+            className={`mx-auto mb-[20px] max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+          >
+            <div
+              id="category-eyebrow"
+              className={`mx-auto w-87.5 text-xs font-bold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
+            >
+              {metadata.category}
+            </div>
+            <div
+              id="date-eyebrow"
+              className={`mx-auto mt-[4px] w-87.5 text-sm font-semibold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
+            >
+              {formatDate(metadata.publishedAt)}
+            </div>
+          </div>
+          <div
+            id="page-title"
+            className={`mx-auto max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+          >
+            <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
+              <h1
+                className={`table:text-[42px] break-keep text-[32px] font-extrabold leading-[1.21875] tablet:leading-[1.2] laptop:text-[48px] laptop:leading-[1.1875]`}
+              >
+                {metadata.title}
+              </h1>
+            </div>
+          </div>
+          <div
+            id="page-summary"
+            className={`mx-auto mt-4 max-w-[414px] leading-[1.2858] tablet:max-w-screen-tablet_inner tablet:leading-[1.29167] laptop:mt-5 laptop:max-w-screen-laptop_inner laptop:leading-[1.19048]`}
+          >
+            <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
+              <div
+                className={`break-keep text-[21px] font-bold laptop:text-[24px]`}
+              >
+                {metadata.summary}
+              </div>
+            </div>
+          </div>
+          <div
+            id="sharesheet"
+            className={`mx-auto mt-[20px] max-w-[414px] tablet:max-w-screen-tablet_inner laptop:mt-6 laptop:max-w-screen-laptop_inner`}
+          >
+            <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
+              <ul
+                className={`flex justify-start space-x-4 align-middle not-prose`}
+              >
+                <li className={`mt-3`}>
+                  <MailButton post={post} />
+                </li>
+                <li className={`mt-3`}>
+                  <CopyLinkButton />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+      <figure className={`my-8 tablet:my-9 laptop:my-11`}>
+        <div
+          className={`relative mx-auto aspect-[1.5] max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+        >
+          <Image
+            src={metadata.image || "/default-image.jpg"}
+            alt={metadata.imageDescription}
+            fill={true}
+            priority={true}
+            className={`rounded-none object-cover phone:rounded-xl`}
+          />
+        </div>
+        <div
+          className={`mx-auto mt-[12px] max-w-[414px] leading-[1.2858] tablet:max-w-screen-tablet_inner tablet:leading-[1.29167] laptop:mt-4 laptop:max-w-screen-laptop_inner laptop:leading-[1.19048]`}
+        >
+          <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
+            <div className={`break-keep text-xs font-bold text-gray-500`}>
+              {metadata.imageDescription}
+            </div>
+          </div>
+        </div>
+      </figure>
+    </>
+  );
+};
+
+export default PostHeader;

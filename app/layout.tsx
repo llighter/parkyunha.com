@@ -1,8 +1,9 @@
-import Footer from "@/components/footer";
+import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "@/components/sidebar";
+import Footer from "./components/footer";
+import Sidebar from "./components/sidebar";
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL("https://www.parkyunha.com"),
   title: {
     default: "Park Yunha",
@@ -35,9 +36,9 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="ko" className="scroll-smooth">
       <body className={`flex flex-col antialiased`}>

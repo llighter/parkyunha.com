@@ -1,23 +1,37 @@
-import { getBlogPosts } from 'app/db/blog'
+import { getBlogPosts } from "@/app/db/blog";
 import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+
+interface BlogMetadata extends Metadata {
+  image: string | undefined;
+  imageDescription: string;
+  category: string;
+  title: string;
+  publishedAt: string;
+  description: string;
+}
 import { formatDate } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata: BlogMetadata = {
   title: "Blog",
   description: "소프트웨어 개발, 디자인, 그리고 일상에 대한 나의 이야기",
+  image: undefined,
+  imageDescription: "",
+  category: "",
+  publishedAt: "",
 };
 
 export default async function BlogPage() {
-  let allBlogs = getBlogPosts();
+  // 비동기로 블로그 데이터를 가져옴
+  const allBlogs = await getBlogPosts();
 
   // allBlogs를 publishedAt 기준으로 내림차순 정렬
   allBlogs.sort((a, b) => {
-    if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-      return -1;
-    }
-    return 1;
+    return (
+      new Date(b.metadata.publishedAt).getTime() -
+      new Date(a.metadata.publishedAt).getTime()
+    );
   });
 
   // FIXME: 최소 글 갯수가 6개 이상이어야 함
@@ -68,7 +82,18 @@ export default async function BlogPage() {
   );
 }
 
-function Tile({ article }) {
+interface Article {
+  slug: string;
+  metadata: {
+    image?: string; // 선택적으로 변경
+    imageDescription?: string;
+    category: string;
+    title: string;
+    publishedAt: string;
+  };
+}
+
+function Tile({ article }: { article: Article }) {
   return (
     <Link href={`/blog/${article.slug}`} className={`@container`}>
       <div
@@ -79,8 +104,8 @@ function Tile({ article }) {
           className={`shrink-0 overflow-hidden @[692px]:w-[453px] @[980px]:w-[643px]`}
         >
           <Image
-            src={article.metadata.image}
-            alt={article.metadata.imageDescription}
+            src={article.metadata.image || "/default-image.jpg"}
+            alt={article.metadata.imageDescription || "Default description"}
             width={400}
             height={400}
             className={`aspect-[1.77] h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
