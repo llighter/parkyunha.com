@@ -1,7 +1,8 @@
-import { getBlogPosts } from 'app/db/blog';
+import { getBlogPosts } from "app/db/blog";
 
-export default function sitemap() {
-  let blogs = getBlogPosts().map((post) => ({
+export default async function sitemap() {
+  const allBlogs = await getBlogPosts();
+  let blogs = allBlogs.map((post) => ({
     url: `https://www.parkyunha.com/blog/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));
