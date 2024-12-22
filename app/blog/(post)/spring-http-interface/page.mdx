@@ -1,6 +1,8 @@
-import CustomImage from "@/app/components/CustomImage";
+import HeroImage from "@/app/components/HeroImage";
+import AppleImage from "@/app/components/AppleImage";
 import projectMap from "./project-map.png";
 import articleServiceGetAllArticles from "./article-service-get-all-articles.png";
+import serverToServer from "./server_to_server.jpeg";
 import PostHeader from "@/app/components/postHeader";
 
 export const metadata = {
@@ -15,6 +17,11 @@ export const metadata = {
 };
 
 <PostHeader metadata={metadata} slug="spring-http-interface" />
+<HeroImage
+  src={serverToServer}
+  alt="serverToServer"
+  caption="HTTP 통신을 통해 서버와 서버 간에 데이터를 주고 받을 수 있다."
+/>
 
 고객에게 정보를 제공해주는 서비스를 운영한다고 생각해보자. 고객에게 제공할 정보를 우리 서비스가 모두 가지고 있다면 DB를 조회해서 결과를 보여주면된다. 하지만 고객에게 제공할 정보중 일부는 외부에서 가져와야한다면 외부 서버와 통신을 해야 한다. 웹 환경에서 통신은 대부분 HTTP API 방식을 사용한다. 이 때 우리 서비스는 외부 서비스를 호출하는 클라이언트이기 때문에 서비스 내부에 HTTP 클라이언트를 구성해야 한다. 스프링에서 HTTP 클라이언트를 구성하는 방법을 여러가지가 있지만 그 중에 최근에 나온 HTTP Interface를 활용하여 클라이언트를 만들어보자.
 
@@ -28,7 +35,12 @@ export const metadata = {
 
 외부에 서비스를 요청하는 서버인 **article-service**와 요청에 대한 응답을 주는 서버인 **content-service**로 총 두 개의 서버로 구성할 것이다. 각각의 서버는 한 프로젝트 내의 모듈로 구성하여 한 소스 내에서 관리할 수 있도록 했다.
 
-<CustomImage src={projectMap} alt="projectMap" />
+<AppleImage
+  src={projectMap}
+  alt="projectMap"
+  caption="데모를 위한 프로젝트 구성도"
+  inline={true}
+/>
 
 ## article service 만들기
 
@@ -244,9 +256,11 @@ public class ClientConfig {
 
 자 이제 `content-service`도 실행해서 잘 동작하는지 확인해보자.
 
-<CustomImage
+<AppleImage
   src={articleServiceGetAllArticles}
-  alt="articleServiceGetAllArticles"
+  alt="get all articles"
+  caption="content-service에서 article-service로부터 article 목록을 조회하는 요청"
+  inline={true}
 />
 
 ```http request title="content.http"
