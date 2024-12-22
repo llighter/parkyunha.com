@@ -1,4 +1,6 @@
 import PostHeader from "@/app/components/postHeader";
+import HeroImage from "@/app/components/HeroImage";
+import helloWorld from "./hello-world.jpeg";
 
 export const metadata = {
   title:
@@ -11,6 +13,7 @@ export const metadata = {
 };
 
 <PostHeader metadata={metadata} slug="hello-world" />
+<HeroImage src={helloWorld} alt="helloWorld" caption="테스트 용 블로그 글" />
 
 # 블로그 새로 만들다
 

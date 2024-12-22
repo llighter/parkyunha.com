@@ -7,11 +7,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
       <section
         className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
       >
-        <div
-          className={`mx-auto max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner prose`}
-        >
-          {children}
-        </div>
+        <div className="prose mx-auto max-w-full">{children}</div>
       </section>
     </div>
   );

@@ -99,7 +99,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
           >
             <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
               <ul
-                className={`flex justify-start space-x-4 align-middle not-prose`}
+                className={`not-prose flex justify-start space-x-4 align-middle`}
               >
                 <li className={`mt-3`}>
                   <MailButton post={post} />
@@ -112,28 +112,6 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
           </div>
         </div>
       </article>
-      <figure className={`my-8 tablet:my-9 laptop:my-11`}>
-        <div
-          className={`relative mx-auto aspect-[1.5] max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
-        >
-          <Image
-            src={metadata.image || "/default-image.jpg"}
-            alt={metadata.imageDescription}
-            fill={true}
-            priority={true}
-            className={`rounded-none object-cover phone:rounded-xl`}
-          />
-        </div>
-        <div
-          className={`mx-auto mt-[12px] max-w-[414px] leading-[1.2858] tablet:max-w-screen-tablet_inner tablet:leading-[1.29167] laptop:mt-4 laptop:max-w-screen-laptop_inner laptop:leading-[1.19048]`}
-        >
-          <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
-            <div className={`break-keep text-xs font-bold text-gray-500`}>
-              {metadata.imageDescription}
-            </div>
-          </div>
-        </div>
-      </figure>
     </>
   );
 };

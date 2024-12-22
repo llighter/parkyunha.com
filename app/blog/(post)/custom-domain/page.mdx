@@ -1,5 +1,7 @@
 import PostHeader from "@/app/components/postHeader";
-import CustomImage from "@/app/components/CustomImage";
+import AppleImage from "@/app/components/AppleImage";
+import HeroImage from "@/app/components/HeroImage";
+import AppleGallery from "@/app/components/AppleGallery";
 
 import entrance from "./entrance.jpeg";
 import domain from "./domain.jpeg";
@@ -9,6 +11,8 @@ import domainApply1 from "./domain-apply1.png";
 import domainApply2 from "./domain-apply2.png";
 import domainApply3 from "./domain-apply3.png";
 import domainApply4 from "./domain-apply4.png";
+
+import { caption } from "framer-motion/client";
 
 export const metadata = {
   title: "나만의 도메인 만들기",
@@ -21,11 +25,22 @@ export const metadata = {
 
 <PostHeader metadata={metadata} slug="custom-domain" />
 
+<HeroImage
+  src={entrance}
+  alt="hero image"
+  caption="누구나 자신의 공간을 가지고 싶어한다. 나만의 도메인을 만들어보자."
+/>
+
 티스토리, 네이버 블로그, 깃헙 블로그 등 나만의 블로그, 웹 사이트를 만들어서 운영할 때 고민하는 것이 도메인이다. [도메인](https://ko.wix.com/blog/post/what-is-a-domain)은 내 블로그에 들어올 수 있는 주소이자, 첫인상을 결정할 수 있어서 매우 중요하다.
 
 네이버 블로그에서는 기본적으로 https://blog.naver.com/hadbsgk/30119521429 와 같이 도메인 네임은 동일하고 뒤에 아이디와 일련번호가 붙는 방식을 사용할 수 있고 깃헙에서는 https://llighter.github.io/install_zsh_in_wsl2/ 와 같이 github.io 으로 끝나는 도메인 네임을 무료로 제공해주기도 한다. 하지만 서비스 제공업체가 정해준 방식이 아니라 https://parkyunha.com 과 같이 나만의 멋진 주소를 가지고 싶으면 도메인을 구입하면 된다.
 
-<CustomImage src={domain} alt="domain" />
+<AppleImage
+  src={domain}
+  alt="domain"
+  caption="도메인은 내 홈페이지의 첫인상이다"
+  inline={true}
+/>
 
 > 도메인은 요청 중인 웹 서버를 말한다. 일반적으로 이것은 [도메인 이름](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_domain_name) 이지만 IP 주소 도 사용할 수 있습니다(편리하지 않지만 회사 내부에서는 IP를 사용하는 경우도 종종있다).
 
@@ -37,13 +52,23 @@ export const metadata = {
 
 가비아에 접속해서 도메인으로 원하는 주소를 검색하면 아래와 같이 목록이 나오고 그중에 원하는 주소를 선택하면 된다.
 
-<CustomImage src={domainSearch} alt="domainSearch" />
+<AppleImage
+  src={domainSearch}
+  alt="내가 사용할 도메인 검색하기"
+  caption="내가 사용할 도메인을 검색해보자"
+  inline={true}
+/>
 
 ### 도메인 구입
 
 신청하기를 누르면 구입할 수 있는 화면으로 넘어오는데 이메일인증을 하고 주소나 이름 등 개인정보를 입력한다. 그리고 도메인을 검색할 네임서버를 입력할 수 있는데 나의 경우는 이미 [Vercel](https://vercel.com/)에서 이미 운영중인 사이트가 있기 때문에 Vercel의 네임서버를 바로 입력해주었다. 이제 다음단계로 넘어가서 결제를 완료하면 된다.
 
-<CustomImage src={domainNameServer} alt="domainNameServer" />
+<AppleImage
+  src={domainNameServer}
+  alt="DNS 서버 정보를 입력한다."
+  caption="DNS 서버 정보는 Vercel에서 확인한 정보를 입력한다."
+  inline={true}
+/>
 
 ## 도메인 적용하기
 
@@ -51,19 +76,39 @@ export const metadata = {
 
 내 도메인을 입력한다.
 
-<CustomImage src={domainApply1} alt="domainApply1" />
+<AppleImage
+  src={domainApply1}
+  alt="내 도메인을 입력한다."
+  caption="내 도메인을 입력한다."
+  inline={true}
+/>
 
 www 도메인으로 리다이렉트 옵션을 선택하였다.
 
-<CustomImage src={domainApply2} alt="domainApply2" />
+<AppleImage
+  src={domainApply2}
+  alt="리다이렉트 세팅"
+  caption="www.parkyunha.com 으로 리다이렉트 옵션을 선택하였다."
+  inline={true}
+/>
 
 가비아에서 입력했던 네임서버는 여기에서 복사한 내용이다.
 
-<CustomImage src={domainApply3} alt="domainApply3" />
+<AppleImage
+  src={domainApply3}
+  alt="DNS 서버 정보를 입력한다."
+  caption="가비아에서 입력했던 네임서버 정보를 확인할 수 있다."
+  inline={true}
+/>
 
 연결이 완료되면 아래와 같이 파란색 체크 박스가 뜬다.
 
-<CustomImage src={domainApply4} alt="domainApply4" />
+<AppleImage
+  src={domainApply4}
+  alt="도메인 연결 완료"
+  caption="도메인이 정상적으로 연결되었으면 파란색 체크박스를 확인할 수 있다."
+  inline={true}
+/>
 
 ## 정리하며
 

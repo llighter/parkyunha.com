@@ -1,4 +1,5 @@
-import CustomImage from "@/app/components/CustomImage";
+import AppleImage from "@/app/components/AppleImage";
+import HeroImage from "@/app/components/HeroImage";
 import approve from "./approve.png";
 import branch from "./branch.png";
 import clone from "./clone.png";
@@ -6,6 +7,7 @@ import commit1 from "./commit1.png";
 import commit2 from "./commit2.png";
 import merge from "./merge.png";
 import pr from "./pr.png";
+import pullRequest from "./pull-request.jpg";
 import PostHeader from "@/app/components/postHeader";
 
 export const metadata = {
@@ -19,6 +21,11 @@ export const metadata = {
 };
 
 <PostHeader metadata={metadata} slug="pull-request" />
+<HeroImage
+  src={pullRequest}
+  alt="pull-request"
+  caption="IDE에서 다양한 브랜치로 작성된 git commit 로그를 보여주는 사진"
+/>
 
 다른 사람과 협업하여 코드를 작성하고 하나의 소스를 관리하기 위해 우리는 Github을 사용한다.
 Pull Reuqest를 하면 Github에서는 기존 브랜치에서 변경된 내용을 확인할 수 있다.
@@ -37,7 +44,12 @@ Pull Reuqest를 하면 Github에서는 기존 브랜치에서 변경된 내용�
 5. 경로 필드에서 원하는 **디렉토리** 위치 선택
 6. **복제** 버튼 선택
 
-<CustomImage src={clone} alt="clone" />
+<AppleImage
+  src={clone}
+  alt="clone source code"
+  caption="Jetbrain IDE에서 Github 프로젝트를 복제하는 방법"
+  inline={true}
+/>
 
 ## 브랜치 만들기
 
@@ -47,7 +59,12 @@ Pull Reuqest를 하면 Github에서는 기존 브랜치에서 변경된 내용�
 
 아래 사진과 같이 **브랜치 체크아웃**을 선택 하였으면 현재 작업 브랜치가 **feature**으로 변경되어 있을 것이다.
 
-<CustomImage src={branch} alt="branch" />
+<AppleImage
+  src={branch}
+  alt="branch name setting"
+  caption="Jetbrain IDE에서 새로운 브랜치를 생성하는 방법"
+  inline={true}
+/>
 
 ## 소스 수정하기(커밋)
 
@@ -55,9 +72,19 @@ Pull Reuqest를 하면 Github에서는 기존 브랜치에서 변경된 내용�
 
 왼쪽 상단의 메뉴에서 **커밋** 아이콘을 선택하고 변경사항에 대한 메시지를 작성 후 **커밋** 버튼을 누른다.
 
-<CustomImage src={commit1} alt="commit1" />
+<AppleImage
+  src={commit1}
+  alt="commit sample1"
+  caption="Jetbrain IDE에서 커밋하는 방법"
+  inline={true}
+/>
 
-<CustomImage src={commit2} alt="commit2" />
+<AppleImage
+  src={commit2}
+  alt="commit sample2"
+  caption="Jetbrain IDE에서 커밋메시지를 작성하고 커밋을 한다."
+  inline={true}
+/>
 
 ## Pull Request 요청하기
 
@@ -65,19 +92,34 @@ Pull Reuqest를 하면 Github에서는 기존 브랜치에서 변경된 내용�
 
 메인 메뉴에서 **Git | Github | 풀 리퀘스트 생성...** 또는 왼쪽 메뉴에서 **풀 리퀘스트** 아이콘 선택 후 **➕** 버튼으로 풀 리퀘스트를 생성한다.
 
-<CustomImage src={pr} alt="pr" />
+<AppleImage
+  src={pr}
+  alt="pull request"
+  caption="Jetbrain IDE에서 Pull Request를 생성하는 방법"
+  inline={true}
+/>
 
 ## 리뷰어: 승인하기
 
 풀 리퀘스트를 하면 리뷰어가 변경사항을 확인하고 덧글을 달거나 수정을 요청하는 피드백 루프를 거친다. 확인이 완료된 내용은 승인을 하면 된다.
 
-<CustomImage src={approve} alt="approve" />
+<AppleImage
+  src={approve}
+  alt="approve"
+  caption="Github에서 Pull Request가 생성된것을 확인하고 변경사항을 검토한다."
+  inline={true}
+/>
 
 ## 리뷰어: 병합하기
 
 확인된 코드를 이제 다시 `main` 브랜치로 합치기 위해서는 `merge`를 해야한다. `main` 브랜치와 충돌이 나지 않는다면 아래 그림과 같이 `merge pull request` 버튼이 보이고 버튼을 눌러주면 된다.
 
-<CustomImage src={merge} alt="merge" />
+<AppleImage
+  src={merge}
+  alt="merge"
+  caption="Github에서 Pull Request가 승인되면 병합을 진행한다."
+  inline={true}
+/>
 
 ## 병합된 결과 내려 받기
 

@@ -11,49 +11,49 @@ type ListItemProps = ComponentPropsWithoutRef<"li">;
 const components = {
   h1: (props: HeadingProps) => (
     <h1
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   h2: (props: HeadingProps) => (
     <h2
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   h3: (props: HeadingProps) => (
     <h3
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   h4: (props: HeadingProps) => (
     <h4
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   p: (props: ParagraphProps) => (
     <p
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   blockquote: (props: BlockQuoteProps) => (
     <blockquote
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   ol: (props: ListProps) => (
     <ol
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
   ul: (props: ListProps) => (
     <ul
-      className="w-87.5 mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
       {...props}
     />
   ),
@@ -79,7 +79,7 @@ declare global {
 }
 
 export function useMDXComponents(
-  customComponents: MDXComponents
+  customComponents: MDXComponents,
 ): MDXComponents {
   return {
     ...customComponents,
