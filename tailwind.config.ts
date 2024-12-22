@@ -8,7 +8,7 @@ export default {
   ],
   theme: {
     screens: {
-      phone: "414px",
+      phone: "415px",
       tablet: "735px",
       laptop: "1069px",
       tablet_inner: "692px",
@@ -17,6 +17,10 @@ export default {
     extend: {
       width: {
         87.5: "87.5%",
+      },
+      inset: {
+        "45%": "45%",
+        "43%": "43%",
       },
       aspectRatio: {
         1.77: "1.77",
