@@ -95,7 +95,7 @@ interface Article {
 
 function Tile({ article }: { article: Article }) {
   return (
-    <Link href={`/blog/${article.slug}`} className={`@container`}>
+    <div className={`relative isolate @container`}>
       <div
         className={`group flex h-full flex-col overflow-hidden rounded-2xl @[692px]:flex-row`}
       >
@@ -119,7 +119,13 @@ function Tile({ article }: { article: Article }) {
             <p
               className={`mt-2 break-keep text-[19px] font-semibold @[305px]:leading-6 @[474px]:text-[24px] @[474px]:leading-8 @[692px]:text-[21px] @[980px]:text-[32px] @[980px]:font-bold @[980px]:leading-10`}
             >
-              {article.metadata.title}
+              <Link href={`/blog/${article.slug}`}>
+                <span
+                  className="absolute inset-0 z-10"
+                  aria-hidden="true"
+                ></span>
+                {article.metadata.title}
+              </Link>
             </p>
           </div>
           <p className={`mt-2 text-[14px] font-medium text-gray-500`}>
@@ -127,6 +133,6 @@ function Tile({ article }: { article: Article }) {
           </p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

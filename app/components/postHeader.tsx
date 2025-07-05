@@ -73,7 +73,9 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
             id="page-title"
             className={`mx-auto max-w-[414px] tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
           >
-            <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
+            <div
+              className={`not-prose mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}
+            >
               <h1
                 className={`table:text-[42px] break-keep text-[32px] font-extrabold leading-[1.21875] tablet:leading-[1.2] laptop:text-[48px] laptop:leading-[1.1875]`}
               >
