@@ -1,0 +1,59 @@
+import AppleImage from "@/app/components/AppleImage";
+import HeroImage from "@/app/components/HeroImage";
+import PostHeader from "@/app/components/postHeader";
+import diskUtility from "./disk_utility.png";
+import internalSSD from "./internalSSD.png";
+import externalSSD from "./externalSSD.png";
+import externalHDD from "./externalHDD.png";
+import AppleGallery from "@/app/components/AppleGallery";
+
+export const metadata = {
+  title: "맥에서 저장공간 선택하기",
+  publishedAt: "2025-02-17",
+  category: "블로그",
+  summary:
+    "디양한 파일을 저장, 활용하기 위해 맥에서 저장공간을 어떻게 선택할지 고민해보자.",
+  image: "/images/hero/disk_utility.png",
+  imageDescription: "disk utility",
+};
+
+<PostHeader metadata={metadata} slug="pull-request" />
+<HeroImage
+  src={diskUtility}
+  alt="diskUtility"
+  caption="맥에서는 여러 저장공간을 선택할 수 있다. 내장, 외장, 클라우드 중 어떤 것을 선택할까?"
+/>
+
+카메라, 영상 촬영 등을 많이 하게 되면 용량이 많이 필요하다. 맥을 사게될 때 고민하는 것 중 하나가 용량 고민이다.
+
+용량을 추가하기 위해 보통 3가지를 고려한다. 맥의 기본 용량을 늘리거나, 클라우드 서비스를 이용하거나, 외장장치를 활용하는 것이다. 맥의 용량은 기본에서 한단계 추가한 **512GB**로 타협을 보았고, 클라우드도 **200GB**로 한단계 늘려둔 상태이다. 마지막으로 외장장치를 추가하는 옵션에는 여러가지 방법이 있는데, 크게 외장 HDD, 외장 SSD, NAS 가 있다.
+
+비용은 **외장 HDD** < **외장 SSD** < **NAS** 순서로 높아지지만 쉽게 접근할 수 있는 것은 반대이다. 즉, 내가 주로 사용하는 방식에 따라서 타협을 봐야 한다.
+
+<AppleGallery
+  images={[
+    {
+      src: internalSSD,
+      alt: "내장 SSD",
+      caption: "내장 SSD는 속도가 빠르지만 용량이 부족할 수 있다.",
+    },
+    {
+      src: externalSSD,
+      alt: "외장 SSD",
+      caption: "외장 SSD는 속도가 빠르고 휴대성이 좋지만 가격이 비싸다.",
+    },
+    {
+      src: externalHDD,
+      alt: "외장 HDD",
+      caption: "외장 HDD는 용량이 크고 가격이 저렴하지만 속도가 느리다.",
+    },
+  ]}
+/>
+
+처음에는 NAS를 고려하기 위해 NAS용 HDD를 하나 구입해두었다. 그런데 NAS 장비로 유명한 시놀로지는 설정이 비교적 복잡하고, 장비 값이 너무 비싸다. 그리고 NAS는 소규모 인원이 같이 작업하는 환경에 유리한데 나는 사용자가 혼자이기 때문에 제외하기로 했다.
+
+그리고 간단한 영상을 만들거나 사진들을 작업하기 위해 빠른 속도를 지원하는 SDD를 고려했다. 내가 구입한 맥미니 기본 512GB는 드라이드 속도가 `3200 MB/s`인데 이정도 수준을 유지하는 외장장치가 있다면 사진 작업이나 영상 작업에 적합할 것 같았다. 그래서 블랙프라이데이 등 할인 기간에 SSD 2TB를 구입했다. 꽤나 속도가 나오는 SSD였는데, 이 성능을 다 사용하려면 외장 케이스가 속도를 지원해야하고 본체인 맥미니도 지원을 해야한다. 다행히 맥미니 기본형이 지원하는 썬더볼드4가 SSD 최대속도보다 높은 대역폭(40Gbps)을 지원해서 외장 케이스를 알아보았다. 여러 케이스가 있었지만 USB4를 지원하고 발열관리도 적절히 될 것 같은 인클로저를 찾았고 그래서 구입했다. 장치를 설치하고 속도를 측정해보니 `3400 Mb/s` 정도로 기본 내장SSD 보다 살짝 높거나 같았다.
+
+작업용으로 2TB는 충분한 용량이다. 그런데 항상 작업을 하지는 않기 때문에 장기적으로 보관할 자료를 위한 공간도 필요했다. 그래서 이미 구입해둔 NAS용 외장하드를 직결해서 사용하기로 했다. HDD도 SSD와 마찬가지로 외장 인클로져가 있다. 내가 구입한 것은 IPTIME인데 가격도 괜찮고 많이 사용하는 제품으로 보여서 구매를 했다.
+
+이렇게 내장SSD, 외장SSD, 외장HDD를 모두 세팅해두고 사용한지 6개월 정도 지났는데, 용량이 큰 사진이나 영상을 자주 작업하는 것은 아니어서 내장SSD와 외장SSD만으로도 충분히 작업이 가능했다. 외장HDD는 장기 보관용으로 사용하고 있다. NAS는 아직 구입하지 않았지만, 필요할 때 구입해도 될 것 같다.
