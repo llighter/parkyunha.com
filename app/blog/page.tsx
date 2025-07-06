@@ -58,7 +58,7 @@ export default async function BlogPage() {
         </div>
       </div>
       <div
-        className={`mx-auto w-87.5 max-w-[366px] tablet:w-full tablet:max-w-(--breakpoint-tablet_inner) laptop:max-w-(--breakpoint-laptop_inner)`}
+        className={`mx-auto w-87.5 max-w-[366px] tablet:w-full tablet:max-w-(--breakpoint-content-tablet) laptop:max-w-(--breakpoint-content-laptop)`}
       >
         <div>
           <div className={`grid gap-8`}>

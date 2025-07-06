@@ -5,11 +5,14 @@
 
 @theme {
   --breakpoint-*: initial;
+  /* Layout breakpoints - viewport-based responsive design */
   --breakpoint-phone: 415px;
   --breakpoint-tablet: 735px;
   --breakpoint-laptop: 1069px;
-  --breakpoint-tablet_inner: 692px;
-  --breakpoint-laptop_inner: 980px;
+  
+  /* Content container widths - max content area for each breakpoint */
+  --breakpoint-content-tablet: 692px;
+  --breakpoint-content-laptop: 980px;
 
   --width-87_5: 87.5%;
 

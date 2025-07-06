@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function AppleImage({ src, alt, caption, inline = false }) {
   const classNames = inline
     ? `tablet:max-w-[576px] laptop:max-w-[653px]`
-    : `tablet:max-w-(--breakpoint-tablet_inner) laptop:my-11 laptop:max-w-(--breakpoint-laptop_inner)`;
+    : `tablet:max-w-(--breakpoint-content-tablet) laptop:my-11 laptop:max-w-(--breakpoint-content-laptop)`;
 
   return (
     <figure

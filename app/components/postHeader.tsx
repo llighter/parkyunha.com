@@ -54,7 +54,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
         <div id="article-header">
           <div
             id="category"
-            className={`mx-auto mb-[20px] max-w-[414px] tablet:max-w-(--breakpoint-tablet_inner) laptop:max-w-(--breakpoint-laptop_inner)`}
+            className={`mx-auto mb-[20px] max-w-[414px] tablet:max-w-(--breakpoint-content-tablet) laptop:max-w-(--breakpoint-content-laptop)`}
           >
             <div
               id="category-eyebrow"
@@ -71,7 +71,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
           </div>
           <div
             id="page-title"
-            className={`mx-auto max-w-[414px] tablet:max-w-(--breakpoint-tablet_inner) laptop:max-w-(--breakpoint-laptop_inner)`}
+            className={`mx-auto max-w-[414px] tablet:max-w-(--breakpoint-content-tablet) laptop:max-w-(--breakpoint-content-laptop)`}
           >
             <div
               className={`not-prose mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}
@@ -85,7 +85,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
           </div>
           <div
             id="page-summary"
-            className={`mx-auto mt-4 max-w-[414px] leading-[1.2858] tablet:max-w-(--breakpoint-tablet_inner) tablet:leading-[1.29167] laptop:mt-5 laptop:max-w-(--breakpoint-laptop_inner) laptop:leading-[1.19048]`}
+            className={`mx-auto mt-4 max-w-[414px] leading-[1.2858] tablet:max-w-(--breakpoint-content-tablet) tablet:leading-[1.29167] laptop:mt-5 laptop:max-w-(--breakpoint-content-laptop) laptop:leading-[1.19048]`}
           >
             <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
               <div
@@ -97,7 +97,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
           </div>
           <div
             id="sharesheet"
-            className={`mx-auto mt-[20px] max-w-[414px] tablet:max-w-(--breakpoint-tablet_inner) laptop:mt-6 laptop:max-w-(--breakpoint-laptop_inner)`}
+            className={`mx-auto mt-[20px] max-w-[414px] tablet:max-w-(--breakpoint-content-tablet) laptop:mt-6 laptop:max-w-(--breakpoint-content-laptop)`}
           >
             <div className={`mx-auto w-87.5 tablet:w-[576px] laptop:w-[653px]`}>
               <ul

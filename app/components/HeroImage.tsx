@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AppleImage({ src, alt, caption }) {
   return (
-    <figure className="mx-auto my-8 max-w-[414px] tablet:my-9 tablet:max-w-(--breakpoint-tablet_inner) laptop:my-11 laptop:max-w-(--breakpoint-laptop_inner)">
+    <figure className="mx-auto my-8 max-w-[414px] tablet:my-9 tablet:max-w-(--breakpoint-content-tablet) laptop:my-11 laptop:max-w-(--breakpoint-content-laptop)">
       <div className="component-content">
         <div className="image-sharesheet">
           <div className="image-asset">
