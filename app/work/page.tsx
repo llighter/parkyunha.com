@@ -9,7 +9,7 @@ export default function WorkPage() {
   return (
     <section className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}>
       <div
-        className={`mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]`}
+        className="content-container"
       >
         <div className={`@container`}>
           <h2

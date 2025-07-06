@@ -50,7 +50,7 @@ export default function NavBar() {
     <aside>
       <div
         // className={`mx-auto mb-4 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-(--breakpoint-content-tablet) laptop:max-w-(--breakpoint-content-laptop)`}
-        className={`mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]`}
+        className="content-container"
       >
         <div>
           <Logo />

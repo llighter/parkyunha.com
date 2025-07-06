@@ -11,49 +11,49 @@ type ListItemProps = ComponentPropsWithoutRef<"li">;
 const components = {
   h1: (props: HeadingProps) => (
     <h1
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
   h2: (props: HeadingProps) => (
     <h2
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
   h3: (props: HeadingProps) => (
     <h3
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
   h4: (props: HeadingProps) => (
     <h4
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
   p: (props: ParagraphProps) => (
     <p
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
   blockquote: (props: BlockQuoteProps) => (
     <blockquote
-      className="mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container-full"
       {...props}
     />
   ),
   ol: (props: ListProps) => (
     <ol
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
   ul: (props: ListProps) => (
     <ul
-      className="mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+      className="content-container"
       {...props}
     />
   ),
@@ -61,7 +61,7 @@ const components = {
   pre: ({ children, ...props }: ComponentPropsWithoutRef<"pre">) => {
     return (
       <pre
-        className="mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]"
+        className="content-container-full"
         {...props}
       >
         {children}

@@ -22,6 +22,17 @@
   --aspect-1_77: 1.77;
 }
 
+/* Utility classes for common responsive patterns */
+@layer utilities {
+  .content-container {
+    @apply mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px];
+  }
+  
+  .content-container-full {
+    @apply mx-auto max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px];
+  }
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
