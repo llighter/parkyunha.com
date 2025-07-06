@@ -58,7 +58,7 @@ export default async function BlogPage() {
         </div>
       </div>
       <div
-        className={`mx-auto w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+        className={`mx-auto w-87.5 max-w-[366px] tablet:w-full tablet:max-w-(--breakpoint-tablet_inner) laptop:max-w-(--breakpoint-laptop_inner)`}
       >
         <div>
           <div className={`grid gap-8`}>
@@ -108,7 +108,7 @@ function Tile({ article }: { article: Article }) {
             alt={article.metadata.imageDescription || "Default description"}
             width={400}
             height={400}
-            className={`aspect-[1.77] h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
+            className={`aspect-1.77 h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
           />
         </div>
         <div className={`flex grow flex-col justify-between bg-white p-6`}>

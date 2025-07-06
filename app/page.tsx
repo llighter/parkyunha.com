@@ -11,7 +11,7 @@ function Badge(props: BadgeProps) {
     <a
       {...props}
       target="_blank"
-      className="inline-flex items-center rounded border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline"
+      className="inline-flex items-center rounded-sm border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline"
       // TODO: 다크모드 지원(dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100)
     />
   );
