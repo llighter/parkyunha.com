@@ -1,6 +1,41 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/container-queries';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-phone: 415px;
+  --breakpoint-tablet: 735px;
+  --breakpoint-laptop: 1069px;
+  --breakpoint-tablet_inner: 692px;
+  --breakpoint-laptop_inner: 980px;
+
+  --width-87_5: 87.5%;
+
+  --inset-45\%: 45%;
+  --inset-43\%: 43%;
+
+  --aspect-1_77: 1.77;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 :root {
   --sh-class: #7aa2f7;
