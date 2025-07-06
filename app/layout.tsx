@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "./components/footer";
 import Sidebar from "./components/sidebar";
+import localFont from "next/font/local";
+
+// Font files can be colocated inside of `app`
+const myFont = localFont({
+  src: "./font/RIDIBatang.otf",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.parkyunha.com"),
@@ -41,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="scroll-smooth">
-      <body className={`flex flex-col antialiased`}>
+      <body className={`${myFont.className} flex flex-col antialiased`}>
         <div className="wrapper grid min-h-full grid-rows-[auto_1fr_auto]">
           <Sidebar />
           <main>{children}</main>
