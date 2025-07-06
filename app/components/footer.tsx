@@ -20,19 +20,19 @@ export default function Footer() {
             <li className="text-neutral-400">
               <span>|</span>
             </li>
-            <li className="flex-grow text-center">
+            <li className="grow text-center">
               <Link href="/">home</Link>
             </li>
             <li className="text-center text-neutral-400">
               <span>|</span>
             </li>
-            <li className="flex-grow text-center">
+            <li className="grow text-center">
               <Link href="/work">work</Link>
             </li>
             <li className="text-center text-neutral-400">
               <span>|</span>
             </li>
-            <li className="flex-grow text-center">
+            <li className="grow text-center">
               <Link href="/blog">blog</Link>
             </li>
             <li className="text-neutral-400">

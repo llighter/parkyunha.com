@@ -49,7 +49,7 @@ export default function NavBar() {
   return (
     <aside>
       <div
-        // className={`mx-auto mb-4 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`}
+        // className={`mx-auto mb-4 w-87.5 max-w-[366px] tablet:w-full tablet:max-w-(--breakpoint-tablet_inner) laptop:max-w-(--breakpoint-laptop_inner)`}
         className={`mx-auto w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]`}
       >
         <div>

@@ -110,7 +110,7 @@ export default function AppleGallery({ images }) {
             return (
               <div
                 key={index}
-                className={`gallery-item w-full transform max-[734px]:flex-shrink-0 tablet:col-start-1 tablet:col-end-2 tablet:row-start-1 tablet:row-end-2 tablet:inline-block tablet:translate-x-0 tablet:translate-y-0 tablet:transition-opacity tablet:duration-500 tablet:ease-in-out ${classNames}`}
+                className={`gallery-item w-full transform max-[734px]:shrink-0 tablet:col-start-1 tablet:col-end-2 tablet:row-start-1 tablet:row-end-2 tablet:inline-block tablet:translate-x-0 tablet:translate-y-0 tablet:transition-opacity tablet:duration-500 tablet:ease-in-out ${classNames}`}
               >
                 <figure className="image-sharesheet-gallery">
                   <div className="image-sharesheet">

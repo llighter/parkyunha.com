@@ -2,7 +2,7 @@ export default function YoutubeIframe({ src, title, caption, inline = false }) {
   // AppleImage에서 사용하는 max-width 설정을 inline 여부에 따라 적용
   const classNames = inline
     ? `tablet:max-w-[576px] laptop:max-w-[653px]`
-    : `tablet:max-w-screen-tablet_inner laptop:max-w-screen-laptop_inner`;
+    : `tablet:max-w-(--breakpoint-tablet_inner) laptop:max-w-(--breakpoint-laptop_inner)`;
 
   return (
     <figure
