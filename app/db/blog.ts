@@ -1,19 +1,6 @@
 import fs from "fs";
 import path from "path";
-
-type Metadata = {
-  title: string;
-  publishedAt: string;
-  category: string;
-  summary: string;
-  image?: string;
-  imageDescription?: string;
-};
-
-type BlogPost = {
-  slug: string;
-  metadata: Metadata;
-};
+import type { BlogPost } from "@/lib/types";
 
 const BLOG_DIR = path.join(process.cwd(), "app/blog/(post)");
 

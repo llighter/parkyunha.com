@@ -1,6 +1,7 @@
 "use client";
 
 import { MailIcon } from "@/app/components/icons";
+import { SITE_URL } from "@/lib/constants";
 
 interface Post {
   title: string;
@@ -20,7 +21,7 @@ export default function MailButton({ post }: { post: Post }) {
 
   return (
     <button
-      data-href={`https://www.parkyunha.com/blog/${post.slug}`}
+      data-href={`${SITE_URL}/blog/${post.slug}`}
       data-title={post.title}
       data-description={post.summary}
       data-analytics-title="Share via mail"

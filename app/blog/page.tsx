@@ -2,24 +2,12 @@ import { getBlogPosts } from "@/app/db/blog";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-
-interface BlogMetadata extends Metadata {
-  image: string | undefined;
-  imageDescription: string;
-  category: string;
-  title: string;
-  publishedAt: string;
-  description: string;
-}
+import type { BlogPost } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
-export const metadata: BlogMetadata = {
+export const metadata: Metadata = {
   title: "Blog",
   description: "소프트웨어 개발, 디자인, 그리고 일상에 대한 나의 이야기",
-  image: undefined,
-  imageDescription: "",
-  category: "",
-  publishedAt: "",
 };
 
 export default async function BlogPage() {
@@ -82,18 +70,7 @@ export default async function BlogPage() {
   );
 }
 
-interface Article {
-  slug: string;
-  metadata: {
-    image?: string; // 선택적으로 변경
-    imageDescription?: string;
-    category: string;
-    title: string;
-    publishedAt: string;
-  };
-}
-
-function Tile({ article }: { article: Article }) {
+function Tile({ article }: { article: BlogPost }) {
   return (
     <div className={`relative isolate @container`}>
       <div

@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "./components/footer";
 import Sidebar from "./components/sidebar";
 import localFont from "next/font/local";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
@@ -11,17 +12,17 @@ const myFont = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.parkyunha.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Park Yunha",
-    template: "%s | Park Yunha",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "Dreaming to be a Developer and Entrepreneur.",
+  description: SITE_DESCRIPTION,
   openGraph: {
-    title: "Park Yunha",
-    description: "Dreaming to be a Developer and Entrepreneur.",
-    url: "https://www.parkyunha.com",
-    siteName: "Park Yunha",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "ko_KR",
     type: "website",
   },

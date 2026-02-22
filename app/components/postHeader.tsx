@@ -1,31 +1,16 @@
-import React from "react";
 import CopyLinkButton from "@/app/components/copyLinkButton";
 import MailButton from "@/app/components/mailButton";
 import { formatDate } from "@/lib/utils";
-import Image from "next/image";
+import { SITE_URL, SITE_NAME } from "@/lib/constants";
+import type { BlogMetadata } from "@/lib/types";
 
-interface Metadata {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-  category: string;
-  imageDescription: string;
-}
-
-interface PostHeaderProps {
-  metadata: Metadata;
+export default function PostHeader({
+  metadata,
+  slug,
+}: {
+  metadata: BlogMetadata;
   slug: string;
-}
-
-const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
-  // TODO: 하나로 합치기
-  const post = {
-    title: metadata.title,
-    slug: slug,
-    summary: metadata.summary,
-  };
-
+}) {
   return (
     <>
       <script
@@ -40,12 +25,12 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
             dateModified: metadata.publishedAt,
             description: metadata.summary,
             image: metadata.image
-              ? `https://www.parkyunha.com${metadata.image}`
-              : `https://www.parkyunha.com/og?title=${metadata.title}`,
-            url: `https://www.parkyunha.com/blog/${slug}`,
+              ? `${SITE_URL}${metadata.image}`
+              : `${SITE_URL}/og?title=${metadata.title}`,
+            url: `${SITE_URL}/blog/${slug}`,
             author: {
               "@type": "Person",
-              name: "Park Yunha",
+              name: SITE_NAME,
             },
           }),
         }}
@@ -104,7 +89,13 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
                 className={`not-prose flex justify-start space-x-4 align-middle`}
               >
                 <li className={`mt-3`}>
-                  <MailButton post={post} />
+                  <MailButton
+                    post={{
+                      title: metadata.title,
+                      slug,
+                      summary: metadata.summary,
+                    }}
+                  />
                 </li>
                 <li className={`mt-3`}>
                   <CopyLinkButton />
@@ -116,6 +107,4 @@ const PostHeader: React.FC<PostHeaderProps> = ({ metadata, slug }) => {
       </article>
     </>
   );
-};
-
-export default PostHeader;
+}

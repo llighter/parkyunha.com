@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+
+const MOBILE_BREAKPOINT = 734;
+const SWIPE_THRESHOLD = 50;
 
 interface GalleryImage {
   src: string;
@@ -14,10 +17,12 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visited, setVisited] = useState<Record<number, boolean>>({});
   const [isMobile, setIsMobile] = useState(false);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   useEffect(() => {
     function checkWidth() {
-      setIsMobile(window.innerWidth <= 734);
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
     }
 
     checkWidth();
@@ -27,16 +32,10 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
 
   const transformStyle = isMobile
     ? { transform: `translateX(-${currentIndex * 100}%)` }
-    : {}; // 734px 이하일 때만 transform 적용
+    : {};
 
-  let touchStartX = 0; // 터치 시작 위치
-  let touchEndX = 0; // 터치 종료 위치
-
-  // 애니메이션을 트리거한 후 인덱스를 변경
   const changeImage = (newIndex: number) => {
-    // 새 슬라이드로 전환
     setCurrentIndex(newIndex);
-    // 방문 기록을 업데이트
     setVisited((prev) => ({ ...prev, [newIndex]: true }));
   };
 
@@ -50,22 +49,19 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
     changeImage(newIndex);
   };
 
-  // 터치 이벤트 핸들러
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    touchStartX = e.touches[0].clientX;
+    touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    touchEndX = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = () => {
-    if (touchStartX - touchEndX > 50) {
-      // 왼쪽 스와이프: 다음 슬라이드
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > SWIPE_THRESHOLD) {
       handleNext();
-    }
-    if (touchStartX - touchEndX < -50) {
-      // 오른쪽 스와이프: 이전 슬라이드
+    } else if (diff < -SWIPE_THRESHOLD) {
       handlePrev();
     }
   };
