@@ -1,86 +1,20 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { animate } from "animejs";
+import ThemeToggle from "./themeToggle";
 
-type NavItem = {
-  name: string;
-  x: number;
-  y: number;
-  w: string;
-};
-
-const navItems: { [key: string]: NavItem } = {
-  "/": {
-    name: "home",
-    x: 1,
-    y: 0,
-    w: "60px",
-  },
-  "/work": {
-    name: "work",
-    x: 64,
-    y: 35,
-    w: "60px",
-  },
-  "/blog": {
-    name: "blog",
-    x: 122,
-    y: 69,
-    w: "60px",
-  },
-};
+const navItems = [
+  { name: "home", path: "/" },
+  { name: "work", path: "/work" },
+  { name: "blog", path: "/blog" },
+];
 
 function Logo() {
-  const logoRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    // Gentle logo entrance animation
-    const el = logoRef.current;
-    if (el) {
-      el.style.willChange = "transform, opacity";
-
-      animate(el, {
-        scale: [0.95, 1],
-        opacity: [0, 1],
-        duration: 800,
-        ease: "outQuart",
-        delay: 100,
-      });
-
-      // Subtle hover animation
-      const onEnter = () => {
-        animate(el, {
-          scale: 1.02,
-          duration: 200,
-          ease: "outQuad",
-        });
-      };
-      const onLeave = () => {
-        animate(el, {
-          scale: 1,
-          duration: 200,
-          ease: "outQuad",
-        });
-      };
-
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-
-      return () => {
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mouseleave", onLeave);
-      };
-    }
-  }, []);
-
   return (
     <Link href="/" aria-label="Park Yunha">
       <img
-        ref={logoRef}
-        className="h-20 w-36"
+        className="h-20 w-36 animate-[fade-in-up_0.6s_ease-out_both] transition-transform duration-200 hover:scale-[1.02] dark:invert"
         src="/images/logo.svg"
         alt="Park Yunha Logo"
       />
@@ -94,68 +28,6 @@ export default function NavBar() {
     pathname = "/blog";
   }
 
-  const navRef = useRef<HTMLDivElement>(null);
-  const activeIndicatorRef = useRef<HTMLDivElement>(null);
-  const navLinksRef = useRef<HTMLAnchorElement[]>([]);
-
-  useEffect(() => {
-    // Simple stagger animation for nav items entrance
-    if (navLinksRef.current.length > 0) {
-      navLinksRef.current.forEach((el) => {
-        if (el) el.style.willChange = "transform, opacity";
-      });
-
-      animate(navLinksRef.current, {
-        translateY: [15, 0],
-        opacity: [0, 1],
-        delay: (_, i) => 300 + i * 80,
-        duration: 600,
-        ease: "outQuart",
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    // Smooth slide animation for active indicator when pathname changes
-    if (activeIndicatorRef.current && navItems[pathname]) {
-      animate(activeIndicatorRef.current, {
-        translateX: navItems[pathname].x,
-        translateY: "-50%",
-        width: navItems[pathname].w,
-        duration: 300,
-        ease: "outQuint",
-      });
-    }
-  }, [pathname]);
-
-  const handleNavHover = (element: HTMLAnchorElement, isEntering: boolean) => {
-    animate(element, {
-      scale: isEntering ? 1.05 : 1,
-      duration: 150,
-      ease: "outQuad",
-    });
-
-    // Add subtle summer-themed ripple effect on hover
-    if (isEntering) {
-      const ripple = document.createElement("div");
-      ripple.className = "absolute inset-0 rounded-full opacity-10";
-      ripple.style.background =
-        "radial-gradient(circle, #87CEEB 0%, #B0E0E6 100%)";
-      ripple.style.transform = "scale(0)";
-      ripple.style.pointerEvents = "none";
-      element.style.position = "relative";
-      element.appendChild(ripple);
-
-      animate(ripple, {
-        scale: [0, 1.5],
-        opacity: [0.1, 0],
-        duration: 600,
-        ease: "outQuad",
-        complete: () => ripple.remove(),
-      });
-    }
-  };
-
   return (
     <aside>
       <div className="content-container mb-2">
@@ -163,56 +35,31 @@ export default function NavBar() {
           <Logo />
         </div>
         <nav
-          ref={navRef}
-          className="laptop:flex-col laptop:overflow-auto laptop:px-0 relative flex scroll-pr-6 items-start overflow-hidden px-4 pb-0"
+          className="relative flex scroll-pr-6 items-start overflow-hidden px-4 pb-0 laptop:flex-col laptop:overflow-auto laptop:px-0"
           id="nav"
         >
-          <div className="laptop:mt-0 relative my-2 flex flex-row items-center pr-10">
-            {navItems[pathname] ? (
-              <div className="block">
-                <div
-                  ref={activeIndicatorRef}
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    transform: `translateX(${navItems[pathname].x}px) translateY(-50%)`,
-                    zIndex: -1,
-                    height: "36px",
-                    borderRadius: "0.375rem",
-                    background:
-                      "linear-gradient(135deg, #87CEEB 0%, #87CEFA 50%, #B0E0E6 100%)",
-                    boxShadow:
-                      "0 4px 20px rgba(135, 206, 235, 0.4), 0 0 15px rgba(135, 206, 250, 0.3)",
-                    width: navItems[pathname].w,
-                    willChange: "transform, width",
-                    backfaceVisibility: "hidden",
-                  }}
-                />
-              </div>
-            ) : null}
-
-            {Object.entries(navItems).map(([path, { name }], index) => {
+          <div className="relative my-2 flex flex-row items-center laptop:mt-0">
+            {navItems.map(({ name, path }, index) => {
               const isActive = path === pathname;
-
               return (
                 <Link
                   href={path}
                   key={path}
-                  ref={(el) => {
-                    if (el) navLinksRef.current[index] = el;
-                  }}
-                  className={`relative inline-block overflow-hidden px-3 py-2 text-center transition-all hover:text-neutral-800 ${
+                  className={`relative rounded-md px-3 py-2 text-sm transition-colors duration-200 animate-[fade-in-up_0.5s_ease-out_both] ${
                     isActive
-                      ? "font-semibold text-neutral-800"
-                      : "text-neutral-600"
+                      ? "font-semibold text-stone-900 dark:text-neutral-100"
+                      : "text-stone-400 hover:text-stone-700 hover:bg-stone-50 dark:text-neutral-500 dark:hover:text-neutral-300 dark:hover:bg-neutral-800"
                   }`}
-                  onMouseEnter={(e) => handleNavHover(e.currentTarget, true)}
-                  onMouseLeave={(e) => handleNavHover(e.currentTarget, false)}
+                  style={{ animationDelay: `${100 + index * 80}ms` }}
                 >
+                  {isActive && (
+                    <span className="absolute inset-0 -z-10 rounded-md bg-stone-100 ring-1 ring-stone-200/60 dark:bg-neutral-800 dark:ring-neutral-700/60 animate-[pill-in_0.25s_ease-out_both]" />
+                  )}
                   {name}
                 </Link>
               );
             })}
+            <ThemeToggle />
           </div>
         </nav>
       </div>
