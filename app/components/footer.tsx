@@ -3,7 +3,7 @@ import Link from "next/link";
 function Logo() {
   return (
     <Link href={`/`} aria-label={`Park Yunha`}>
-      <img className={`h-20 w-32`} src={`/images/logo.svg`} />
+      <img className={`h-20 w-32`} src={`/images/logo.svg`} alt="Park Yunha Logo" />
     </Link>
   );
 }
@@ -56,10 +56,9 @@ export default function Footer() {
           </ul>
         </div>
         <div className="py-4 pb-5 text-sm text-gray-500">
-          Copyright &copy; 2024 PARK YUNHA
+          Copyright &copy; {new Date().getFullYear()} PARK YUNHA
         </div>
       </div>
     </footer>
-    // </div>
   );
 }

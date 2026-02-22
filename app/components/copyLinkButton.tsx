@@ -7,26 +7,24 @@ export default function CopyLinkButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
   function handleClick() {
-    navigator.clipboard.writeText(window.location.href).then((r) => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
       setShowTooltip(true);
       setTimeout(() => setShowTooltip(false), 1000);
     });
   }
 
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} aria-label="링크 복사">
       <LinkIcon />
-      {showTooltip && ToolTip()}
+      {showTooltip && (
+        <span
+          role="status"
+          aria-live="polite"
+          className="absolute rounded-md bg-black px-2 py-1 text-xs text-white"
+        >
+          클립보드에 복사하기
+        </span>
+      )}
     </button>
-  );
-}
-
-function ToolTip() {
-  return (
-    <span
-      className={`absolute rounded-md bg-black px-2 py-1 text-xs text-white`}
-    >
-      클립보드에 복사하기
-    </span>
   );
 }

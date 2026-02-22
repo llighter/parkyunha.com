@@ -1,8 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import eclipse from "public/images/home/eclipse.jpeg";
-// import seoul from "public/images/home/seoul.jpeg";
-// import me_at_home from "public/images/home/me-at-home.jpg";
 
 interface BadgeProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
 
@@ -71,7 +68,6 @@ export default function Home() {
               src="/images/home/hi-five.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
-              priority
               className="rounded-lg object-cover object-top laptop:object-center"
             />
           </div>
@@ -81,7 +77,6 @@ export default function Home() {
               src="/images/home/eclipse.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
-              priority
               className="rounded-lg object-cover"
             />
           </div>
@@ -91,7 +86,6 @@ export default function Home() {
               src="/images/home/seoul.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
-              priority
               className="rounded-lg object-cover"
             />
           </div>
@@ -101,7 +95,6 @@ export default function Home() {
               src="/images/home/me-at-home.jpg"
               fill
               sizes="(min-width: 768px) 213px, 33vw"
-              priority
               className="rounded-lg object-cover"
             />
           </div>
