@@ -1,6 +1,14 @@
 import Image from "next/image";
 
-export default function AppleImage({ src, alt, caption }) {
+export default function AppleImage({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
   return (
     <figure className="mx-auto my-8 max-w-[414px] tablet:my-9 tablet:max-w-(--breakpoint-content-tablet) laptop:my-11 laptop:max-w-(--breakpoint-content-laptop)">
       <div className="component-content">

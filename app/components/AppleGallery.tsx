@@ -4,9 +4,15 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-export default function AppleGallery({ images }) {
+interface GalleryImage {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+export default function AppleGallery({ images }: { images: GalleryImage[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visited, setVisited] = useState({});
+  const [visited, setVisited] = useState<Record<number, boolean>>({});
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export default function AppleGallery({ images }) {
   let touchEndX = 0; // 터치 종료 위치
 
   // 애니메이션을 트리거한 후 인덱스를 변경
-  const changeImage = (newIndex) => {
+  const changeImage = (newIndex: number) => {
     // 새 슬라이드로 전환
     setCurrentIndex(newIndex);
     // 방문 기록을 업데이트

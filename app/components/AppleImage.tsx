@@ -1,6 +1,16 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
-export default function AppleImage({ src, alt, caption, inline = false }) {
+export default function AppleImage({
+  src,
+  alt,
+  caption,
+  inline = false,
+}: {
+  src: string | StaticImageData;
+  alt: string;
+  caption: string;
+  inline?: boolean;
+}) {
   const classNames = inline
     ? `tablet:max-w-[576px] laptop:max-w-[653px]`
     : `tablet:max-w-(--breakpoint-content-tablet) laptop:my-11 laptop:max-w-(--breakpoint-content-laptop)`;

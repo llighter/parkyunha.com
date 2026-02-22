@@ -27,7 +27,7 @@ const navItems: { [key: string]: NavItem } = {
   },
   "/blog": {
     name: "blog",
-    x: 121,
+    x: 122,
     y: 69,
     w: "60px",
   },
@@ -38,10 +38,11 @@ function Logo() {
 
   useEffect(() => {
     // Gentle logo entrance animation
-    if (logoRef.current) {
-      logoRef.current.style.willChange = "transform, opacity";
+    const el = logoRef.current;
+    if (el) {
+      el.style.willChange = "transform, opacity";
 
-      animate(logoRef.current, {
+      animate(el, {
         scale: [0.95, 1],
         opacity: [0, 1],
         duration: 800,
@@ -50,21 +51,28 @@ function Logo() {
       });
 
       // Subtle hover animation
-      logoRef.current.addEventListener("mouseenter", () => {
-        animate(logoRef.current, {
+      const onEnter = () => {
+        animate(el, {
           scale: 1.02,
           duration: 200,
           ease: "outQuad",
         });
-      });
-
-      logoRef.current.addEventListener("mouseleave", () => {
-        animate(logoRef.current, {
+      };
+      const onLeave = () => {
+        animate(el, {
           scale: 1,
           duration: 200,
           ease: "outQuad",
         });
-      });
+      };
+
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+
+      return () => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      };
     }
   }, []);
 
