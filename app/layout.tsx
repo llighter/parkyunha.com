@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "./components/footer";
 import Sidebar from "./components/sidebar";
+import ThemeProvider from "./components/themeProvider";
 import localFont from "next/font/local";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
 
@@ -48,13 +49,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="scroll-smooth">
-      <body className={`${myFont.className} flex flex-col antialiased`}>
-        <div className="wrapper grid min-h-full grid-rows-[auto_1fr_auto]">
-          <Sidebar />
-          <main>{children}</main>
-          <Footer />
-        </div>
+    <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
+      <body
+        className={`${myFont.className} flex flex-col antialiased bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100`}
+      >
+        <ThemeProvider>
+          <div className="wrapper grid min-h-full grid-rows-[auto_1fr_auto]">
+            <Sidebar />
+            <main>{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
