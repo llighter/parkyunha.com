@@ -25,7 +25,7 @@ export default function AppleImage({
               />
             </picture>
           </div>
-          <div className="image-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
+          <div className="image-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
             <div className="image-caption break-all">{caption}</div>
           </div>
         </div>

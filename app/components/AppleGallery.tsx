@@ -82,8 +82,8 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
                 key={index}
                 className={`mx-2 h-2 w-2 cursor-pointer rounded-full ${
                   index === currentIndex
-                    ? "bg-black"
-                    : "bg-gray-300 hover:bg-gray-400"
+                    ? "bg-black dark:bg-white"
+                    : "bg-gray-300 hover:bg-gray-400 dark:bg-neutral-600 dark:hover:bg-neutral-500"
                 }`}
                 onClick={() => changeImage(index)}
               ></li>
@@ -127,7 +127,7 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
                       </picture>
                     </div>
                     <div
-                      className={`gallery-caption mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]`}
+                      className={`gallery-caption mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]`}
                     >
                       <div className="image-caption break-all">
                         {image.caption}
@@ -146,7 +146,7 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
             {/* 이전 버튼 */}
             <li>
               <button
-                className="-mt-[22px] flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
+                className="-mt-[22px] flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
                 onClick={handlePrev}
                 aria-label="Previous Slide"
               >
@@ -156,7 +156,7 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
             {/* 다음 버튼 */}
             <li>
               <button
-                className="-mt-[22px] flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
+                className="-mt-[22px] flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
                 onClick={handleNext}
                 aria-label="Next Slide"
               >

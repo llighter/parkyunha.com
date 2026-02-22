@@ -18,16 +18,16 @@ export default function WorkPage() {
             &nbsp;나의 이력
           </h2>
         </div>
-        <div className={`prose prose-neutral`}>
+        <div className={`prose prose-neutral dark:prose-invert`}>
           <p>
             금융을 IT로 구현하고 운영하는 일을 하고 있습니다. 아래는 지금까지
             해왔던 일에 대한 간단한 요약입니다.
           </p>
-          <hr className="my-6 border-neutral-100" />
+          <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
           <h2 className="font-medium text-xl mb-1 tracking-tighter">
             롯데캐피탈
           </h2>
-          <p className="text-neutral-600 text-sm">
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm">
             대리(Senior Associate), 2020.12 ~ 현재
           </p>
           <p>
@@ -48,11 +48,11 @@ export default function WorkPage() {
               프로세스 개발에 참여하였습니다.
             </li>
           </ul>
-          <hr className="my-6 border-neutral-100" />
+          <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
           <h2 className="font-medium text-xl mb-1 tracking-tighter">
             롯데정보통신
           </h2>
-          <p className="text-neutral-600 text-sm">
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm">
             사원(Associate), 2018.08 ~ 2020.12
           </p>
           <p>

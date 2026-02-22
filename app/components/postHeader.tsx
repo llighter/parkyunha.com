@@ -43,13 +43,13 @@ export default function PostHeader({
           >
             <div
               id="category-eyebrow"
-              className={`mx-auto w-87.5 text-xs font-bold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
+              className={`mx-auto w-87.5 text-xs font-bold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:w-[653px]`}
             >
               {metadata.category}
             </div>
             <div
               id="date-eyebrow"
-              className={`mx-auto mt-[4px] w-87.5 text-sm font-semibold text-gray-500 tablet:w-[576px] laptop:w-[653px]`}
+              className={`mx-auto mt-[4px] w-87.5 text-sm font-semibold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:w-[653px]`}
             >
               {formatDate(metadata.publishedAt)}
             </div>

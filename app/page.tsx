@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/constants";
 
 interface BadgeProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
 
@@ -8,8 +9,7 @@ function Badge(props: BadgeProps) {
     <a
       {...props}
       target="_blank"
-      className="inline-flex items-center rounded-sm border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline"
-      // TODO: 다크모드 지원(dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100)
+      className="inline-flex items-center rounded-sm border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
     />
   );
 }
@@ -27,11 +27,11 @@ export default function Home() {
             &nbsp;안녕하세요, <b>박윤하</b>입니다.
           </h2>
         </div>
-        <div className="prose prose-neutral">
+        <div className="prose prose-neutral dark:prose-invert">
           <p>
             {`안녕하세요. `}
             <span className="not-prose">
-              <Badge href="https://www.parkyunha.com">parkyunha.com</Badge>
+              <Badge href={SITE_URL}>parkyunha.com</Badge>
             </span>
             {` 블로그를 운영하고 있는 `}
             <b>박윤하</b>
@@ -99,7 +99,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="prose prose-neutral">
+        <div className="prose prose-neutral dark:prose-invert">
           <p>
             {`최근에는 Next.js를 사용해서 블로그를 만들고 있고 자바를 주로
           개발합니다. 저는 스스로 만들어낸 결과를 다듬어서 여러 사람과 공유하는

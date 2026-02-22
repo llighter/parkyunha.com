@@ -20,7 +20,7 @@ export default function CopyLinkButton() {
         <span
           role="status"
           aria-live="polite"
-          className="absolute rounded-md bg-black px-2 py-1 text-xs text-white"
+          className="absolute rounded-md bg-black px-2 py-1 text-xs text-white dark:bg-neutral-200 dark:text-neutral-900"
         >
           클립보드에 복사하기
         </span>

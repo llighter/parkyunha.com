@@ -22,17 +22,13 @@ export default async function BlogPage() {
     );
   });
 
-  // FIXME: 최소 글 갯수가 6개 이상이어야 함
-  // allBlogs 목록에서 첫번째 건 추출
   const firstArticle = allBlogs[0];
-  // allBlogs 목록에서 두번째부터 다섯번째 건 추출
   const mediumArticles = allBlogs.slice(1, 5);
-  // allBlogs 목록에서 여섯번째부터 끝까지 추출
   const smallArticles = allBlogs.slice(5);
 
   return (
     <section
-      className={`mt-0 h-full overflow-hidden bg-zinc-100 pb-10 tablet:pb-16 laptop:pb-20`}
+      className={`mt-0 h-full overflow-hidden bg-zinc-100 dark:bg-neutral-900 pb-10 tablet:pb-16 laptop:pb-20`}
     >
       <div
         className={`mx-auto my-8 w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]`}
@@ -50,19 +46,23 @@ export default async function BlogPage() {
       >
         <div>
           <div className={`grid gap-8`}>
-            <Tile article={firstArticle} />
+            {firstArticle && <Tile article={firstArticle} />}
 
-            <div className={`grid gap-8 tablet:grid-cols-2`}>
-              {mediumArticles.map((article, i) => (
-                <Tile key={i} article={article} />
-              ))}
-            </div>
+            {mediumArticles.length > 0 && (
+              <div className={`grid gap-8 tablet:grid-cols-2`}>
+                {mediumArticles.map((article, i) => (
+                  <Tile key={i} article={article} />
+                ))}
+              </div>
+            )}
 
-            <div className={`grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3`}>
-              {smallArticles.map((article, i) => (
-                <Tile key={i} article={article} />
-              ))}
-            </div>
+            {smallArticles.length > 0 && (
+              <div className={`grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3`}>
+                {smallArticles.map((article, i) => (
+                  <Tile key={i} article={article} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -85,12 +85,13 @@ function Tile({ article }: { article: BlogPost }) {
             alt={article.metadata.imageDescription || "Default description"}
             width={400}
             height={400}
+            sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 50vw, 33vw"
             className={`aspect-1.77 h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
           />
         </div>
-        <div className={`flex grow flex-col justify-between bg-white p-6`}>
+        <div className={`flex grow flex-col justify-between bg-white dark:bg-neutral-800 p-6`}>
           <div className={`space-y-[4px] @[474px]:space-y-[8px]`}>
-            <p className={`text-[12px] font-bold text-gray-600`}>
+            <p className={`text-[12px] font-bold text-gray-600 dark:text-neutral-400`}>
               {article.metadata.category}
             </p>
             <p
@@ -105,7 +106,7 @@ function Tile({ article }: { article: BlogPost }) {
               </Link>
             </p>
           </div>
-          <p className={`mt-2 text-[14px] font-medium text-gray-500`}>
+          <p className={`mt-2 text-[14px] font-medium text-gray-500 dark:text-neutral-400`}>
             {formatDate(article.metadata.publishedAt)}
           </p>
         </div>

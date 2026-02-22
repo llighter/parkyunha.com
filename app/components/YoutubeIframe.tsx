@@ -35,7 +35,7 @@ export default function YoutubeIframe({
           </div>
 
           {caption && (
-            <div className="iframe-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
+            <div className="iframe-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
               <div className="iframe-caption break-all">{caption}</div>
             </div>
           )}
