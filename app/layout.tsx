@@ -49,12 +49,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="ko" className="h-full scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${myFont.className} flex flex-col antialiased bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100`}
+        className={`${myFont.className} flex h-full flex-col antialiased bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100`}
       >
         <ThemeProvider>
-          <div className="wrapper grid min-h-full grid-rows-[auto_1fr_auto]">
+          <div className="wrapper grid min-h-screen grid-rows-[auto_1fr_auto]">
             <Sidebar />
             <main>{children}</main>
             <Footer />

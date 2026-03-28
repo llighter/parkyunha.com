@@ -8,6 +8,7 @@ const navItems = [
   { name: "home", path: "/" },
   { name: "work", path: "/work" },
   { name: "blog", path: "/blog" },
+  { name: "project", path: "/project" },
 ];
 
 function Logo() {
@@ -22,8 +23,15 @@ function Logo() {
   );
 }
 
+const APP_ROUTES = ["/studycard"];
+
 export default function NavBar() {
   let pathname = usePathname() || "/";
+
+  if (APP_ROUTES.some((route) => pathname.startsWith(route))) {
+    return null;
+  }
+
   if (pathname.includes("/blog/")) {
     pathname = "/blog";
   }
