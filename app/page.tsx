@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 interface BadgeProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
 
@@ -16,10 +16,10 @@ function Badge(props: BadgeProps) {
 
 export default function Home() {
   return (
-    <section className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}>
-      <div
-        className="content-container"
-      >
+    <section
+      className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
+    >
+      <div className="content-container">
         <div className={`@container`}>
           <h2
             className={`my-8 text-[24px] font-bold @[576px]:text-[28px] @[653px]:text-[32px]`}
@@ -35,10 +35,9 @@ export default function Home() {
             </span>
             {` 블로그를 운영하고 있는 `}
             <b>박윤하</b>
-            {`입니다. 금융권에서 비대면 업무인 모바일 앱과 홈페이지 등
-          채널계를 개발하는 `}
-            <Link href="/work">업무</Link>
-            {`를 합니다.`}
+            {`입니다. 금융권에서 비대면 채널 개발과 운영을 담당하고 있으며, 개인적으로 `}
+            <Link href="/project">앱을 만들고</Link>
+            {` 있습니다.`}
           </p>
         </div>
         <div className="my-8 columns-2 gap-4 laptop:columns-3">
@@ -101,11 +100,42 @@ export default function Home() {
         </div>
         <div className="prose prose-neutral dark:prose-invert">
           <p>
-            {`최근에는 Next.js를 사용해서 블로그를 만들고 있고 자바를 주로
-          개발합니다. 저는 스스로 만들어낸 결과를 다듬어서 여러 사람과 공유하는
-          것을 좋아합니다. 글이나 영상 혹은 나만의 프로덕트를 꾸준히 만들어
-          가는것이 목표입니다.`}
+            {`스스로 만들어낸 결과를 다듬어서 여러 사람과 공유하는 것을 좋아합니다. 글이나 영상 혹은 나만의 프로덕트를 꾸준히 만들어 가는것이 목표입니다.`}
           </p>
+        </div>
+        <div className="mt-6 flex gap-4">
+          <a
+            href={SOCIAL_LINKS.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            YouTube
+          </a>
+          <a
+            href={SOCIAL_LINKS.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            Instagram
+          </a>
+          <a
+            href={SOCIAL_LINKS.x}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            X
+          </a>
+          <a
+            href={SOCIAL_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            GitHub
+          </a>
         </div>
       </div>
     </section>

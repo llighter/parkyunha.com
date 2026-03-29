@@ -6,8 +6,8 @@ import ThemeToggle from "./themeToggle";
 
 const navItems = [
   { name: "home", path: "/" },
-  { name: "work", path: "/work" },
   { name: "blog", path: "/blog" },
+  { name: "works", path: "/works" },
   { name: "project", path: "/project" },
 ];
 

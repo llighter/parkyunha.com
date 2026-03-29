@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const navLinks = [
   { name: "home", path: "/" },
-  { name: "work", path: "/work" },
   { name: "blog", path: "/blog" },
+  { name: "works", path: "/works" },
   { name: "project", path: "/project" },
 ];
 
