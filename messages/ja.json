@@ -1,0 +1,120 @@
+{
+  "project": {
+    "title": "Project",
+    "description": "自分で作り、運営しているプロジェクト",
+    "comingSoon": "準備中"
+  },
+  "studycard": {
+    "meta": {
+      "title": "StudyCard - フラッシュカード学習",
+      "description": "間隔反復アルゴリズムで効率的な暗記をサポートするフラッシュカードアプリ。iPhone、iPad、Mac、Apple Watch対応。"
+    },
+    "tagline": "間隔反復で効率的な暗記をサポートするフラッシュカードアプリ",
+    "hero": {
+      "line1": "毎日10分、着実な反復が実力になります。",
+      "line2": "科学的な間隔反復で効率的な暗記をサポートする",
+      "line3": "フラッシュカードアプリ。",
+      "download": "App Storeでダウンロード（準備中）"
+    },
+    "preview": {
+      "title": "シンプルだけどパワフル",
+      "description": "複雑な設定なしですぐに始められます。カードを作り、学習し、成長を確認しましょう。",
+      "placeholder": "アプリのスクリーンショット"
+    },
+    "features": {
+      "title": "主な機能",
+      "subtitle": "Appleデバイスで最も自然なフラッシュカード体験",
+      "cardTypes": {
+        "title": "3種類のカードタイプ",
+        "description": "テキスト、穴埋め、キャンバスカードで多様な学習スタイルに対応します。"
+      },
+      "spacedRepetition": {
+        "title": "間隔反復学習",
+        "description": "SM-2アルゴリズムに基づくレベルシステムで、科学的に最適化された復習間隔を提供します。"
+      },
+      "stats": {
+        "title": "学習統計",
+        "description": "連続学習日数、正確率、トレンド分析を一目で確認できるダッシュボードを提供します。"
+      },
+      "pencil": {
+        "title": "Apple Pencil対応",
+        "description": "iPadでApple Pencilを使って手書きやイラストカードを作成できます。"
+      },
+      "widgets": {
+        "title": "ウィジェット＆リマインダー",
+        "description": "ホーム画面やロック画面のウィジェットで学習状況を確認し、リマインダーで継続的な学習を維持しましょう。"
+      },
+      "icloud": {
+        "title": "iCloud同期",
+        "description": "すべてのAppleデバイスで自動的に同期されます。別途アカウント不要、iCloudだけで十分です。"
+      }
+    },
+    "platforms": {
+      "title": "どこでも学習",
+      "subtitle": "iPhone、iPad、Mac、Apple Watch。すべてのAppleデバイスで自然に。",
+      "iPhone": "片手で素早く学習",
+      "iPad": "Apple Pencilでキャンバスカード作成",
+      "Mac": "大画面でカード管理",
+      "AppleWatch": "手首で手軽に復習",
+      "appStore": "App Storeでダウンロード"
+    },
+    "differences": {
+      "title": "なぜStudyCardなのか？",
+      "noSubscription": "サブスク不要",
+      "noSubscriptionDetail": "一度ダウンロード、永久に使用",
+      "noAds": "広告なし",
+      "noAdsDetail": "学習だけに集中",
+      "noTracking": "個人情報収集なし",
+      "noTrackingDetail": "すべてのデータはデバイスとiCloudにのみ保存",
+      "native": "100% Appleネイティブ",
+      "nativeDetail": "サードパーティ依存のない純粋なSwiftUIアプリ"
+    },
+    "cta": {
+      "title": "今すぐ始めましょう",
+      "description": "最初のカードがあなたの学習を変えます。"
+    }
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "lastUpdated": "最終更新日: 2026年2月14日",
+    "collection": {
+      "title": "収集する情報",
+      "description": "本アプリはユーザーが直接入力した学習カードデータのみを保存します。",
+      "item1": "デッキおよびカードの内容",
+      "item2": "学習統計（正答率、学習時間）",
+      "item3": "アプリ設定（1日の目標、通知時間）"
+    },
+    "storage": {
+      "title": "データ保存",
+      "item1": "すべてのデータはユーザーのデバイスとiCloudにのみ保存されます。",
+      "item2": "外部サーバーへのデータ送信は行いません。",
+      "item3": "iCloud同期にはAppleのCloudKitを使用しています。"
+    },
+    "sharing": {
+      "title": "第三者への共有",
+      "description": "収集した情報を第三者と共有しません。"
+    },
+    "tracking": {
+      "title": "ユーザー追跡",
+      "description": "本アプリはユーザーを追跡しません。広告ネットワークや分析サービスを使用していません。"
+    },
+    "deletion": {
+      "title": "データ削除",
+      "description": "設定 > 全データ削除機能ですべてのデータを削除できます。"
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "description": "アプリに関するお問い合わせは<link>GitHubリポジトリ</link>からご連絡ください。"
+    }
+  },
+  "nav": {
+    "features": "Features",
+    "privacy": "Privacy",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Dreaming to be a Developer and Entrepreneur.",
+    "navigate": "Navigate",
+    "project": "Project"
+  }
+}

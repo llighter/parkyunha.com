@@ -1,5 +1,8 @@
 import { getBlogPosts } from "@/app/db/blog";
 import { SITE_URL } from "@/lib/constants";
+import { locales } from "@/i18n/routing";
+
+const i18nRoutes = ["/project", "/studycard", "/studycard/privacy"];
 
 export default async function sitemap() {
   const allBlogs = await getBlogPosts();
@@ -8,19 +11,17 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }));
 
-  const routes = [
-    "",
-    "/blog",
-    "/work",
-    "/project",
-    "/studycard",
-    "/studycard/privacy",
-  ].map(
-    (route) => ({
-      url: `${SITE_URL}${route}`,
+  const staticRoutes = ["", "/blog", "/work"].map((route) => ({
+    url: `${SITE_URL}${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+
+  const i18nEntries = i18nRoutes.flatMap((route) =>
+    locales.map((locale) => ({
+      url: `${SITE_URL}${locale === "ko" ? "" : `/${locale}`}${route}`,
       lastModified: new Date().toISOString().split("T")[0],
-    }),
+    })),
   );
 
-  return [...routes, ...blogs];
+  return [...staticRoutes, ...i18nEntries, ...blogs];
 }

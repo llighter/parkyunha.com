@@ -1,0 +1,120 @@
+{
+  "project": {
+    "title": "Project",
+    "description": "我亲自构建和运营的项目",
+    "comingSoon": "即将推出"
+  },
+  "studycard": {
+    "meta": {
+      "title": "StudyCard - 闪卡学习",
+      "description": "通过间隔重复算法帮助高效记忆的闪卡应用。支持 iPhone、iPad、Mac 和 Apple Watch。"
+    },
+    "tagline": "通过间隔重复实现高效记忆的闪卡应用",
+    "hero": {
+      "line1": "每天10分钟，持续的重复让你更强。",
+      "line2": "基于科学间隔重复算法的",
+      "line3": "闪卡应用。",
+      "download": "从 App Store 下载（即将推出）"
+    },
+    "preview": {
+      "title": "简单而强大",
+      "description": "无需复杂设置，立即开始。创建卡片、学习、追踪成长。",
+      "placeholder": "应用截图占位"
+    },
+    "features": {
+      "title": "主要功能",
+      "subtitle": "Apple 设备上最自然的闪卡体验",
+      "cardTypes": {
+        "title": "3种卡片类型",
+        "description": "支持文本、填空和画布卡片，满足多样化的学习方式。"
+      },
+      "spacedRepetition": {
+        "title": "间隔重复学习",
+        "description": "基于 SM-2 算法的等级系统，提供科学优化的复习周期。"
+      },
+      "stats": {
+        "title": "学习统计",
+        "description": "提供连续学习天数、准确率和趋势分析的一览式仪表盘。"
+      },
+      "pencil": {
+        "title": "Apple Pencil 支持",
+        "description": "在 iPad 上使用 Apple Pencil 创建手写和绘画卡片。"
+      },
+      "widgets": {
+        "title": "小组件和提醒",
+        "description": "通过主屏幕和锁屏小组件查看学习进度，通过提醒保持持续学习。"
+      },
+      "icloud": {
+        "title": "iCloud 同步",
+        "description": "在所有 Apple 设备间自动同步。无需额外账号，iCloud 即可。"
+      }
+    },
+    "platforms": {
+      "title": "随时随地学习",
+      "subtitle": "iPhone、iPad、Mac、Apple Watch。在所有 Apple 设备上自然流畅。",
+      "iPhone": "单手快速学习",
+      "iPad": "用 Apple Pencil 创建画布卡片",
+      "Mac": "在大屏幕上管理卡片",
+      "AppleWatch": "手腕上轻松复习",
+      "appStore": "从 App Store 下载"
+    },
+    "differences": {
+      "title": "为什么选择 StudyCard？",
+      "noSubscription": "无需订阅",
+      "noSubscriptionDetail": "一次下载，永久使用",
+      "noAds": "无广告",
+      "noAdsDetail": "专注于学习",
+      "noTracking": "不收集个人信息",
+      "noTrackingDetail": "所有数据仅存储在设备和 iCloud 中",
+      "native": "100% Apple 原生",
+      "nativeDetail": "零第三方依赖的纯 SwiftUI 应用"
+    },
+    "cta": {
+      "title": "立即开始",
+      "description": "第一张卡片将改变你的学习方式。"
+    }
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "lastUpdated": "最后更新：2026年2月14日",
+    "collection": {
+      "title": "收集的信息",
+      "description": "本应用仅存储用户直接输入的学习卡片数据。",
+      "item1": "卡组和卡片内容",
+      "item2": "学习统计（准确率、学习时间）",
+      "item3": "应用设置（每日目标、通知时间）"
+    },
+    "storage": {
+      "title": "数据存储",
+      "item1": "所有数据仅存储在用户的设备和 iCloud 中。",
+      "item2": "不会将数据传输到外部服务器。",
+      "item3": "iCloud 同步使用 Apple 的 CloudKit。"
+    },
+    "sharing": {
+      "title": "第三方共享",
+      "description": "我们不会与第三方共享任何收集的信息。"
+    },
+    "tracking": {
+      "title": "用户追踪",
+      "description": "本应用不追踪用户。不使用广告网络或分析服务。"
+    },
+    "deletion": {
+      "title": "数据删除",
+      "description": "您可以通过设置 > 删除所有数据来删除所有数据。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "description": "如有关于应用的问题，请通过<link>GitHub 仓库</link>联系我们。"
+    }
+  },
+  "nav": {
+    "features": "Features",
+    "privacy": "Privacy",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Dreaming to be a Developer and Entrepreneur.",
+    "navigate": "Navigate",
+    "project": "Project"
+  }
+}

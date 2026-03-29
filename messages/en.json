@@ -1,0 +1,120 @@
+{
+  "project": {
+    "title": "Project",
+    "description": "Projects I build and maintain",
+    "comingSoon": "Coming Soon"
+  },
+  "studycard": {
+    "meta": {
+      "title": "StudyCard - Flashcard Learning",
+      "description": "A flashcard app that helps you memorize efficiently with spaced repetition. Supports iPhone, iPad, Mac, and Apple Watch."
+    },
+    "tagline": "A flashcard app with spaced repetition for efficient memorization",
+    "hero": {
+      "line1": "10 minutes a day, consistent repetition builds mastery.",
+      "line2": "A flashcard app powered by scientific spaced repetition",
+      "line3": "for efficient memorization.",
+      "download": "Download on the App Store (Coming Soon)"
+    },
+    "preview": {
+      "title": "Simple yet Powerful",
+      "description": "Start right away without complex setup. Create cards, study, and track your growth.",
+      "placeholder": "App screenshot placeholder"
+    },
+    "features": {
+      "title": "Key Features",
+      "subtitle": "The most natural flashcard experience on Apple devices",
+      "cardTypes": {
+        "title": "3 Card Types",
+        "description": "Supports text, fill-in-the-blank, and canvas cards for diverse learning styles."
+      },
+      "spacedRepetition": {
+        "title": "Spaced Repetition",
+        "description": "SM-2 algorithm-based level system provides scientifically optimized review intervals."
+      },
+      "stats": {
+        "title": "Study Statistics",
+        "description": "A dashboard to track your study streaks, accuracy, and trend analysis at a glance."
+      },
+      "pencil": {
+        "title": "Apple Pencil Support",
+        "description": "Create handwritten and drawn cards with Apple Pencil on iPad."
+      },
+      "widgets": {
+        "title": "Widgets & Reminders",
+        "description": "Check your study progress from home and lock screen widgets, and stay consistent with reminders."
+      },
+      "icloud": {
+        "title": "iCloud Sync",
+        "description": "Automatically syncs across all Apple devices. No separate account needed — just iCloud."
+      }
+    },
+    "platforms": {
+      "title": "Study Anywhere",
+      "subtitle": "iPhone, iPad, Mac, Apple Watch. Natural on every Apple device.",
+      "iPhone": "Quick study with one hand",
+      "iPad": "Create canvas cards with Apple Pencil",
+      "Mac": "Manage cards on a larger screen",
+      "AppleWatch": "Quick review on your wrist",
+      "appStore": "Download on the App Store"
+    },
+    "differences": {
+      "title": "Why StudyCard?",
+      "noSubscription": "No Subscription",
+      "noSubscriptionDetail": "Download once, use forever",
+      "noAds": "No Ads",
+      "noAdsDetail": "Focus only on learning",
+      "noTracking": "No Data Collection",
+      "noTrackingDetail": "All data stays on your device and iCloud only",
+      "native": "100% Apple Native",
+      "nativeDetail": "Pure SwiftUI app with zero third-party dependencies"
+    },
+    "cta": {
+      "title": "Get Started",
+      "description": "Your first card will change the way you learn."
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: February 14, 2026",
+    "collection": {
+      "title": "Information We Collect",
+      "description": "This app only stores learning card data that you directly input.",
+      "item1": "Deck and card contents",
+      "item2": "Study statistics (accuracy, study time)",
+      "item3": "App settings (daily goals, notification times)"
+    },
+    "storage": {
+      "title": "Data Storage",
+      "item1": "All data is stored only on your device and iCloud.",
+      "item2": "No data is transmitted to external servers.",
+      "item3": "iCloud sync uses Apple's CloudKit."
+    },
+    "sharing": {
+      "title": "Third-Party Sharing",
+      "description": "We do not share any collected information with third parties."
+    },
+    "tracking": {
+      "title": "User Tracking",
+      "description": "This app does not track users. No advertising networks or analytics services are used."
+    },
+    "deletion": {
+      "title": "Data Deletion",
+      "description": "You can delete all data through Settings > Delete All Data."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "For inquiries about the app, please contact us through the <link>GitHub repository</link>."
+    }
+  },
+  "nav": {
+    "features": "Features",
+    "privacy": "Privacy",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Dreaming to be a Developer and Entrepreneur.",
+    "navigate": "Navigate",
+    "project": "Project"
+  }
+}

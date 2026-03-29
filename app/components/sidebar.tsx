@@ -24,11 +24,13 @@ function Logo() {
 }
 
 const APP_ROUTES = ["/studycard"];
+const localePattern = /^\/(ko|en|ja|zh|es|fr|de)(\/|$)/;
 
 export default function NavBar() {
   let pathname = usePathname() || "/";
+  const cleanPathname = pathname.replace(localePattern, "/");
 
-  if (APP_ROUTES.some((route) => pathname.startsWith(route))) {
+  if (APP_ROUTES.some((route) => cleanPathname.startsWith(route))) {
     return null;
   }
 

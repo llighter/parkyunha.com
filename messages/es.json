@@ -1,0 +1,120 @@
+{
+  "project": {
+    "title": "Project",
+    "description": "Proyectos que construyo y gestiono",
+    "comingSoon": "Próximamente"
+  },
+  "studycard": {
+    "meta": {
+      "title": "StudyCard - Aprendizaje con Tarjetas",
+      "description": "Una aplicación de tarjetas didácticas que te ayuda a memorizar eficientemente con repetición espaciada. Compatible con iPhone, iPad, Mac y Apple Watch."
+    },
+    "tagline": "Una app de tarjetas con repetición espaciada para memorización eficiente",
+    "hero": {
+      "line1": "10 minutos al día, la repetición constante construye dominio.",
+      "line2": "Una app de tarjetas impulsada por repetición espaciada científica",
+      "line3": "para una memorización eficiente.",
+      "download": "Descargar en App Store (Próximamente)"
+    },
+    "preview": {
+      "title": "Simple pero Poderoso",
+      "description": "Comienza de inmediato sin configuración compleja. Crea tarjetas, estudia y sigue tu progreso.",
+      "placeholder": "Captura de pantalla de la app"
+    },
+    "features": {
+      "title": "Características Principales",
+      "subtitle": "La experiencia de tarjetas más natural en dispositivos Apple",
+      "cardTypes": {
+        "title": "3 Tipos de Tarjetas",
+        "description": "Compatible con tarjetas de texto, completar espacios y lienzo para diversos estilos de aprendizaje."
+      },
+      "spacedRepetition": {
+        "title": "Repetición Espaciada",
+        "description": "Sistema de niveles basado en el algoritmo SM-2 que proporciona intervalos de repaso científicamente optimizados."
+      },
+      "stats": {
+        "title": "Estadísticas de Estudio",
+        "description": "Un panel para seguir tus rachas de estudio, precisión y análisis de tendencias de un vistazo."
+      },
+      "pencil": {
+        "title": "Soporte para Apple Pencil",
+        "description": "Crea tarjetas escritas a mano y dibujadas con Apple Pencil en iPad."
+      },
+      "widgets": {
+        "title": "Widgets y Recordatorios",
+        "description": "Consulta tu progreso desde los widgets de pantalla de inicio y bloqueo, y mantén la constancia con recordatorios."
+      },
+      "icloud": {
+        "title": "Sincronización iCloud",
+        "description": "Se sincroniza automáticamente en todos los dispositivos Apple. Sin cuenta adicional, solo iCloud."
+      }
+    },
+    "platforms": {
+      "title": "Estudia en Cualquier Lugar",
+      "subtitle": "iPhone, iPad, Mac, Apple Watch. Natural en cada dispositivo Apple.",
+      "iPhone": "Estudio rápido con una mano",
+      "iPad": "Crea tarjetas lienzo con Apple Pencil",
+      "Mac": "Gestiona tarjetas en pantalla grande",
+      "AppleWatch": "Repaso rápido en tu muñeca",
+      "appStore": "Descargar en App Store"
+    },
+    "differences": {
+      "title": "¿Por qué StudyCard?",
+      "noSubscription": "Sin Suscripción",
+      "noSubscriptionDetail": "Descarga una vez, usa para siempre",
+      "noAds": "Sin Anuncios",
+      "noAdsDetail": "Concéntrate solo en aprender",
+      "noTracking": "Sin Recopilación de Datos",
+      "noTrackingDetail": "Todos los datos se quedan en tu dispositivo e iCloud",
+      "native": "100% Nativo Apple",
+      "nativeDetail": "App SwiftUI pura sin dependencias de terceros"
+    },
+    "cta": {
+      "title": "Comienza Ahora",
+      "description": "Tu primera tarjeta cambiará la forma en que aprendes."
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: 14 de febrero de 2026",
+    "collection": {
+      "title": "Información que Recopilamos",
+      "description": "Esta app solo almacena los datos de tarjetas de aprendizaje que introduces directamente.",
+      "item1": "Contenido de mazos y tarjetas",
+      "item2": "Estadísticas de estudio (precisión, tiempo de estudio)",
+      "item3": "Configuración de la app (objetivos diarios, horarios de notificación)"
+    },
+    "storage": {
+      "title": "Almacenamiento de Datos",
+      "item1": "Todos los datos se almacenan solo en tu dispositivo e iCloud.",
+      "item2": "No se transmiten datos a servidores externos.",
+      "item3": "La sincronización iCloud utiliza CloudKit de Apple."
+    },
+    "sharing": {
+      "title": "Compartir con Terceros",
+      "description": "No compartimos información recopilada con terceros."
+    },
+    "tracking": {
+      "title": "Seguimiento de Usuarios",
+      "description": "Esta app no rastrea usuarios. No se utilizan redes publicitarias ni servicios de análisis."
+    },
+    "deletion": {
+      "title": "Eliminación de Datos",
+      "description": "Puedes eliminar todos los datos a través de Configuración > Eliminar Todos los Datos."
+    },
+    "contact": {
+      "title": "Contacto",
+      "description": "Para consultas sobre la app, contáctanos a través del <link>repositorio de GitHub</link>."
+    }
+  },
+  "nav": {
+    "features": "Features",
+    "privacy": "Privacy",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Dreaming to be a Developer and Entrepreneur.",
+    "navigate": "Navigate",
+    "project": "Project"
+  }
+}

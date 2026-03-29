@@ -1,7 +1,11 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import ThemeToggle from "@/app/components/themeToggle";
+import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 
 function AppNav() {
+  const t = useTranslations("nav");
+
   return (
     <header className="border-b border-neutral-200 dark:border-neutral-800">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
@@ -14,22 +18,17 @@ function AppNav() {
         <div className="flex items-center gap-6 text-sm">
           <Link
             href="/studycard#features"
-            className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="hidden text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 tablet:inline"
           >
-            Features
+            {t("features")}
           </Link>
           <Link
             href="/studycard/privacy"
-            className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="hidden text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 tablet:inline"
           >
-            Privacy
+            {t("privacy")}
           </Link>
-          <Link
-            href="/"
-            className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-          >
-            Blog
-          </Link>
+          <LanguageSwitcher />
           <ThemeToggle />
         </div>
       </nav>

@@ -1,0 +1,120 @@
+{
+  "project": {
+    "title": "Project",
+    "description": "Projekte, die ich entwickle und betreibe",
+    "comingSoon": "Demnächst verfügbar"
+  },
+  "studycard": {
+    "meta": {
+      "title": "StudyCard - Karteikarten-Lernen",
+      "description": "Eine Karteikarten-App, die dir hilft, effizient mit verteiltem Lernen zu memorieren. Unterstützt iPhone, iPad, Mac und Apple Watch."
+    },
+    "tagline": "Eine Karteikarten-App mit verteiltem Lernen für effizientes Memorieren",
+    "hero": {
+      "line1": "10 Minuten am Tag, konsequente Wiederholung bringt Meisterschaft.",
+      "line2": "Eine Karteikarten-App mit wissenschaftlich fundiertem",
+      "line3": "verteiltem Lernen.",
+      "download": "Im App Store laden (Demnächst)"
+    },
+    "preview": {
+      "title": "Einfach aber Leistungsstark",
+      "description": "Starte sofort ohne komplexe Einrichtung. Erstelle Karten, lerne und verfolge deinen Fortschritt.",
+      "placeholder": "App-Screenshot Platzhalter"
+    },
+    "features": {
+      "title": "Hauptfunktionen",
+      "subtitle": "Das natürlichste Karteikarten-Erlebnis auf Apple-Geräten",
+      "cardTypes": {
+        "title": "3 Kartentypen",
+        "description": "Unterstützt Text-, Lückentext- und Leinwandkarten für verschiedene Lernstile."
+      },
+      "spacedRepetition": {
+        "title": "Verteiltes Lernen",
+        "description": "SM-2-Algorithmus-basiertes Stufensystem bietet wissenschaftlich optimierte Wiederholungsintervalle."
+      },
+      "stats": {
+        "title": "Lernstatistiken",
+        "description": "Ein Dashboard zur Verfolgung deiner Lernserien, Genauigkeit und Trendanalyse auf einen Blick."
+      },
+      "pencil": {
+        "title": "Apple Pencil Unterstützung",
+        "description": "Erstelle handschriftliche und gezeichnete Karten mit dem Apple Pencil auf dem iPad."
+      },
+      "widgets": {
+        "title": "Widgets & Erinnerungen",
+        "description": "Überprüfe deinen Lernfortschritt über Home- und Sperrbildschirm-Widgets und bleibe mit Erinnerungen konsequent."
+      },
+      "icloud": {
+        "title": "iCloud-Synchronisierung",
+        "description": "Synchronisiert automatisch auf allen Apple-Geräten. Kein separates Konto nötig — nur iCloud."
+      }
+    },
+    "platforms": {
+      "title": "Überall Lernen",
+      "subtitle": "iPhone, iPad, Mac, Apple Watch. Natürlich auf jedem Apple-Gerät.",
+      "iPhone": "Schnelles Lernen mit einer Hand",
+      "iPad": "Leinwandkarten mit Apple Pencil erstellen",
+      "Mac": "Karten auf großem Bildschirm verwalten",
+      "AppleWatch": "Schnelle Wiederholung am Handgelenk",
+      "appStore": "Im App Store laden"
+    },
+    "differences": {
+      "title": "Warum StudyCard?",
+      "noSubscription": "Kein Abo",
+      "noSubscriptionDetail": "Einmal laden, für immer nutzen",
+      "noAds": "Keine Werbung",
+      "noAdsDetail": "Konzentriere dich nur aufs Lernen",
+      "noTracking": "Keine Datenerfassung",
+      "noTrackingDetail": "Alle Daten bleiben auf deinem Gerät und in iCloud",
+      "native": "100% Apple Nativ",
+      "nativeDetail": "Reine SwiftUI-App ohne Drittanbieter-Abhängigkeiten"
+    },
+    "cta": {
+      "title": "Jetzt Starten",
+      "description": "Deine erste Karte wird deine Art zu lernen verändern."
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzrichtlinie",
+    "lastUpdated": "Zuletzt aktualisiert: 14. Februar 2026",
+    "collection": {
+      "title": "Erfasste Informationen",
+      "description": "Diese App speichert nur Lernkartendaten, die du direkt eingibst.",
+      "item1": "Deck- und Karteninhalte",
+      "item2": "Lernstatistiken (Genauigkeit, Lernzeit)",
+      "item3": "App-Einstellungen (Tagesziele, Benachrichtigungszeiten)"
+    },
+    "storage": {
+      "title": "Datenspeicherung",
+      "item1": "Alle Daten werden nur auf deinem Gerät und in iCloud gespeichert.",
+      "item2": "Es werden keine Daten an externe Server übertragen.",
+      "item3": "Die iCloud-Synchronisierung verwendet Apples CloudKit."
+    },
+    "sharing": {
+      "title": "Weitergabe an Dritte",
+      "description": "Wir geben keine gesammelten Informationen an Dritte weiter."
+    },
+    "tracking": {
+      "title": "Nutzerverfolgung",
+      "description": "Diese App verfolgt keine Nutzer. Es werden keine Werbenetzwerke oder Analysedienste verwendet."
+    },
+    "deletion": {
+      "title": "Datenlöschung",
+      "description": "Du kannst alle Daten über Einstellungen > Alle Daten löschen entfernen."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Bei Fragen zur App kontaktiere uns über das <link>GitHub-Repository</link>."
+    }
+  },
+  "nav": {
+    "features": "Features",
+    "privacy": "Privacy",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Dreaming to be a Developer and Entrepreneur.",
+    "navigate": "Navigate",
+    "project": "Project"
+  }
+}

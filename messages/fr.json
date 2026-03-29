@@ -1,0 +1,120 @@
+{
+  "project": {
+    "title": "Project",
+    "description": "Projets que je construis et maintiens",
+    "comingSoon": "Bientôt disponible"
+  },
+  "studycard": {
+    "meta": {
+      "title": "StudyCard - Apprentissage par Cartes",
+      "description": "Une application de cartes mémoire qui vous aide à mémoriser efficacement grâce à la répétition espacée. Compatible iPhone, iPad, Mac et Apple Watch."
+    },
+    "tagline": "Une app de cartes mémoire avec répétition espacée pour une mémorisation efficace",
+    "hero": {
+      "line1": "10 minutes par jour, la répétition constante forge la maîtrise.",
+      "line2": "Une app de cartes mémoire propulsée par la répétition espacée scientifique",
+      "line3": "pour une mémorisation efficace.",
+      "download": "Télécharger sur l'App Store (Bientôt)"
+    },
+    "preview": {
+      "title": "Simple mais Puissant",
+      "description": "Commencez immédiatement sans configuration complexe. Créez des cartes, étudiez et suivez votre progression.",
+      "placeholder": "Capture d'écran de l'app"
+    },
+    "features": {
+      "title": "Fonctionnalités Clés",
+      "subtitle": "L'expérience de cartes mémoire la plus naturelle sur les appareils Apple",
+      "cardTypes": {
+        "title": "3 Types de Cartes",
+        "description": "Prend en charge les cartes texte, à trous et canevas pour divers styles d'apprentissage."
+      },
+      "spacedRepetition": {
+        "title": "Répétition Espacée",
+        "description": "Système de niveaux basé sur l'algorithme SM-2 offrant des intervalles de révision scientifiquement optimisés."
+      },
+      "stats": {
+        "title": "Statistiques d'Étude",
+        "description": "Un tableau de bord pour suivre vos séries d'étude, votre précision et l'analyse des tendances en un coup d'œil."
+      },
+      "pencil": {
+        "title": "Support Apple Pencil",
+        "description": "Créez des cartes manuscrites et dessinées avec l'Apple Pencil sur iPad."
+      },
+      "widgets": {
+        "title": "Widgets et Rappels",
+        "description": "Consultez votre progression depuis les widgets d'écran d'accueil et de verrouillage, et restez constant avec les rappels."
+      },
+      "icloud": {
+        "title": "Synchronisation iCloud",
+        "description": "Synchronisation automatique sur tous les appareils Apple. Pas de compte supplémentaire nécessaire, juste iCloud."
+      }
+    },
+    "platforms": {
+      "title": "Étudiez Partout",
+      "subtitle": "iPhone, iPad, Mac, Apple Watch. Naturel sur chaque appareil Apple.",
+      "iPhone": "Étude rapide d'une seule main",
+      "iPad": "Créez des cartes canevas avec Apple Pencil",
+      "Mac": "Gérez vos cartes sur grand écran",
+      "AppleWatch": "Révision rapide au poignet",
+      "appStore": "Télécharger sur l'App Store"
+    },
+    "differences": {
+      "title": "Pourquoi StudyCard ?",
+      "noSubscription": "Sans Abonnement",
+      "noSubscriptionDetail": "Téléchargez une fois, utilisez pour toujours",
+      "noAds": "Sans Publicité",
+      "noAdsDetail": "Concentrez-vous uniquement sur l'apprentissage",
+      "noTracking": "Aucune Collecte de Données",
+      "noTrackingDetail": "Toutes les données restent sur votre appareil et iCloud uniquement",
+      "native": "100% Natif Apple",
+      "nativeDetail": "Application SwiftUI pure sans dépendances tierces"
+    },
+    "cta": {
+      "title": "Commencez Maintenant",
+      "description": "Votre première carte changera votre façon d'apprendre."
+    }
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "lastUpdated": "Dernière mise à jour : 14 février 2026",
+    "collection": {
+      "title": "Informations Collectées",
+      "description": "Cette app stocke uniquement les données de cartes d'apprentissage que vous saisissez directement.",
+      "item1": "Contenu des paquets et cartes",
+      "item2": "Statistiques d'étude (précision, temps d'étude)",
+      "item3": "Paramètres de l'app (objectifs quotidiens, horaires de notification)"
+    },
+    "storage": {
+      "title": "Stockage des Données",
+      "item1": "Toutes les données sont stockées uniquement sur votre appareil et iCloud.",
+      "item2": "Aucune donnée n'est transmise à des serveurs externes.",
+      "item3": "La synchronisation iCloud utilise CloudKit d'Apple."
+    },
+    "sharing": {
+      "title": "Partage avec des Tiers",
+      "description": "Nous ne partageons aucune information collectée avec des tiers."
+    },
+    "tracking": {
+      "title": "Suivi des Utilisateurs",
+      "description": "Cette app ne suit pas les utilisateurs. Aucun réseau publicitaire ni service d'analyse n'est utilisé."
+    },
+    "deletion": {
+      "title": "Suppression des Données",
+      "description": "Vous pouvez supprimer toutes les données via Paramètres > Supprimer Toutes les Données."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Pour toute question concernant l'app, contactez-nous via le <link>dépôt GitHub</link>."
+    }
+  },
+  "nav": {
+    "features": "Features",
+    "privacy": "Privacy",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Dreaming to be a Developer and Entrepreneur.",
+    "navigate": "Navigate",
+    "project": "Project"
+  }
+}
