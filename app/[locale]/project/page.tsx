@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
 interface Project {
@@ -15,7 +16,7 @@ const projects: Project[] = [
   {
     name: "StudyCard",
     href: "/studycard",
-    icon: "📚",
+    icon: "/images/studycard-logo.png",
     platforms: ["iPhone", "iPad", "Mac", "Apple Watch"],
     status: "coming-soon",
     taglineKey: "studycard",
@@ -35,7 +36,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectPage() {
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const t = await getTranslations("project");
   const st = await getTranslations("studycard");
 
@@ -54,9 +62,13 @@ export default async function ProjectPage() {
             href={project.href}
             className="group flex gap-5 rounded-2xl border border-neutral-200 p-6 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
           >
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 text-3xl shadow-sm">
-              {project.icon}
-            </div>
+            <Image
+              src={project.icon}
+              alt={`${project.name} logo`}
+              width={64}
+              height={64}
+              className="h-16 w-16 shrink-0"
+            />
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-semibold text-neutral-900 group-hover:text-blue-600 dark:text-neutral-100 dark:group-hover:text-blue-400">

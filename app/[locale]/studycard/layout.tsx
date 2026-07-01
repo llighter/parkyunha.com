@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import ThemeToggle from "@/app/components/themeToggle";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
@@ -36,11 +37,16 @@ function AppNav() {
   );
 }
 
-export default function StudyCardLayout({
+export default async function StudyCardLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <>
       <AppNav />

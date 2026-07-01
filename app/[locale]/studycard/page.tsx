@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { use } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { useTranslations, useLocale } from "next-intl";
 
 export async function generateMetadata({
@@ -49,15 +50,30 @@ const differenceKeys = [
   { key: "native", detailKey: "nativeDetail" },
 ] as const;
 
+function DownloadButton() {
+  const t = useTranslations("studycard.hero");
+
+  return (
+    <div className="inline-flex h-14 items-center rounded-xl bg-neutral-900 px-8 text-base font-medium text-white dark:bg-white dark:text-neutral-900">
+      {t("download")}
+    </div>
+  );
+}
+
 function HeroSection() {
   const t = useTranslations("studycard.hero");
 
   return (
     <section className="px-6 pb-16 pt-20 text-center tablet:pb-24 tablet:pt-28">
       <div className="mx-auto max-w-2xl">
-        <div className="mx-auto mb-8 flex h-32 w-32 items-center justify-center rounded-[28px] bg-gradient-to-br from-blue-400 to-blue-600 text-6xl shadow-lg">
-          📚
-        </div>
+        <Image
+          src="/images/studycard-logo.png"
+          alt="StudyCard logo"
+          width={192}
+          height={192}
+          priority
+          className="mx-auto mb-8 h-48 w-48"
+        />
         <h1 className="mb-4 text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 tablet:text-6xl">
           StudyCard
         </h1>
@@ -68,9 +84,7 @@ function HeroSection() {
           <br />
           {t("line3")}
         </p>
-        <div className="inline-flex h-14 items-center rounded-xl bg-neutral-900 px-8 text-base font-medium text-white dark:bg-white dark:text-neutral-900">
-          {t("download")}
-        </div>
+        <DownloadButton />
       </div>
     </section>
   );
@@ -160,11 +174,8 @@ function PlatformSection() {
               <p className="mt-1 text-xs text-neutral-400 dark:text-neutral-500">
                 {requirement}
               </p>
-              <a
-                href="#"
-                className="mt-auto pt-4 transition-opacity hover:opacity-80"
-                aria-label={`${t("appStore")} - ${displayName}`}
-              >
+              {/* 출시 후 App Store 링크로 교체 */}
+              <div className="mt-auto pt-4">
                 <Image
                   src={`/images/badges/app-store-${locale}.svg`}
                   alt={t("appStore")}
@@ -172,7 +183,7 @@ function PlatformSection() {
                   height={40}
                   className="dark:brightness-0 dark:invert"
                 />
-              </a>
+              </div>
             </div>
           ))}
         </div>
@@ -222,15 +233,20 @@ function CtaSection() {
         <p className="mb-8 text-lg text-neutral-600 dark:text-neutral-400">
           {t("description")}
         </p>
-        <div className="inline-flex h-14 items-center rounded-xl bg-neutral-900 px-8 text-base font-medium text-white dark:bg-white dark:text-neutral-900">
-          {useTranslations("studycard.hero")("download")}
-        </div>
+        <DownloadButton />
       </div>
     </section>
   );
 }
 
-export default function StudyCardPage() {
+export default function StudyCardPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = use(params);
+  setRequestLocale(locale);
+
   return (
     <>
       <HeroSection />
