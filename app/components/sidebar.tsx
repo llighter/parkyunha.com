@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import ThemeToggle from "./themeToggle";
+import Logo from "./Logo";
+import { locales } from "@/i18n/routing";
 
 const navItems = [
   { name: "home", path: "/" },
@@ -11,20 +13,8 @@ const navItems = [
   { name: "project", path: "/project" },
 ];
 
-function Logo() {
-  return (
-    <Link href="/" aria-label="Park Yunha">
-      <img
-        className="h-20 w-36 animate-[fade-in-up_0.6s_ease-out_both] transition-transform duration-200 hover:scale-[1.02] dark:invert"
-        src="/images/logo.svg"
-        alt="Park Yunha Logo"
-      />
-    </Link>
-  );
-}
-
 const APP_ROUTES = ["/studycard"];
-const localePattern = /^\/(ko|en|ja|zh|es|fr|de)(\/|$)/;
+const localePattern = new RegExp(`^/(${locales.join("|")})(/|$)`);
 
 export default function NavBar() {
   let pathname = usePathname() || "/";
@@ -42,7 +32,7 @@ export default function NavBar() {
     <aside>
       <div className="content-container mb-2">
         <div>
-          <Logo />
+          <Logo className="h-20 w-36 animate-[fade-in-up_0.6s_ease-out_both] transition-transform duration-200 hover:scale-[1.02] dark:invert" />
         </div>
         <nav
           className="relative flex scroll-pr-6 items-start overflow-hidden px-4 pb-0 laptop:flex-col laptop:overflow-auto laptop:px-0"
