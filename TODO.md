@@ -2,6 +2,18 @@
 
 ## 변경 이력 (Changelog)
 
+### 2026-07-02: 코드베이스 점검 및 정비
+
+- **ESLint 복구**: FlatCompat이 eslint-config-next 16과 충돌해 `npm run lint` 크래시 → 네이티브 flat config(`eslint-config-next/core-web-vitals`)로 재작성
+- **`[locale]` 페이지 정적 생성(SSG) 전환**: 레이아웃/페이지에 `setRequestLocale` 추가 (기존엔 매 요청 동적 렌더링)
+- AppleGallery.tsx: 훅 호출 전 early return 제거 (rules-of-hooks 위반 수정), 중복 visited effect 제거
+- themeToggle.tsx: setState-in-effect 패턴 → `useSyncExternalStore` 기반 `useMounted`로 교체
+- footer/sidebar 중복 `Logo` 컴포넌트 → 공유 `Logo.tsx` 추출, `<img>` → `next/image`
+- sidebar.tsx: 하드코딩된 로케일 정규식 → `i18n/routing`의 `locales`에서 생성
+- studycard: 중복 다운로드 버튼 → `DownloadButton` 추출, CTA의 JSX 인라인 훅 호출 제거, App Store 뱃지 죽은 링크(`href="#"`) → 비링크 처리
+- page.tsx: 갤러리 `sizes` 오타 수정(min-width → max-width), `Badge`에 `rel="noopener noreferrer"` 추가
+- studycard-logo.png: 1024px/1.5MB → 512px/240KB 최적화
+
 ### 2026-02-22: 버그 수정 및 코드 개선
 
 - footer.tsx: 잔여 코드 제거, alt 속성 추가, 저작권 연도 동적 처리
@@ -41,9 +53,7 @@
 - [x] ~~footer.tsx: 저작권 연도 하드코딩~~
 - [x] ~~CustomImage.tsx: 폐기된 Image API 사용~~ (컴포넌트 삭제)
 - [x] ~~postHeader.tsx: `table:` -> `tablet:` 오타~~
-- [ ] **[blog/page.tsx] 블로그 글 6개 미만 시 레이아웃 깨짐**
-  - `FIXME: 최소 글 갯수가 6개 이상이어야 함` 주석 있음
-  - 글이 적을 때도 정상 렌더링 되도록 방어 코드 필요
+- [x] ~~blog/page.tsx: 블로그 글 6개 미만 시 레이아웃 깨짐~~ (`firstArticle &&`, `length > 0` 가드 적용됨)
 
 ---
 
@@ -66,12 +76,10 @@
 ## 성능 (Performance)
 
 - [x] ~~홈페이지 이미지 priority 과다 설정 (6개 -> 2개)~~
-- [ ] **[blog/page.tsx] 블로그 타일 이미지 sizes 누락**
-  - `<Image width={400} height={400} />` 에 `sizes` prop 없음
-  - 반응형 sizes 추가 필요
-- [ ] **anime.js 사용 범위 검토**
-  - 간단한 애니메이션은 CSS transition/animation으로 대체 가능
-  - 번들 사이즈 절약 여부 검토
+- [x] ~~blog/page.tsx: 블로그 타일 이미지 sizes 누락~~ (반응형 sizes 적용됨)
+- [x] ~~anime.js 사용 범위 검토~~ (의존성에서 제거 완료, CSS 애니메이션으로 대체됨)
+- [x] ~~studycard-logo.png 원본 과대(1.5MB)~~ (512px/240KB로 축소)
+- [x] ~~`[locale]` 페이지 동적 렌더링~~ (`setRequestLocale` 추가로 SSG 전환)
 
 ---
 
@@ -79,18 +87,23 @@
 
 - [x] ~~copyLinkButton.tsx: aria-label 추가~~
 - [x] ~~copyLinkButton.tsx: 툴팁 접근성 개선~~
-- [ ] **[AppleGallery.tsx] 갤러리 키보드 내비게이션**
-  - 점 네비게이션이 클릭만 지원 -> 키보드(화살표, Enter) 지원 추가
-  - `role="tablist"`, `role="tab"`, `tabIndex` 추가
+- [x] ~~AppleGallery.tsx: 갤러리 키보드 내비게이션~~ (`role="tablist"`/`"tab"`, 화살표·Home·End 키 지원 적용됨)
+
+---
+
+## 구조적 한계 (Known Limitations)
+
+- [ ] **html lang 초기값 문제**
+  - 루트 레이아웃이 `lang="ko"` 고정, `SetHtmlLang`이 클라이언트에서 사후 패치
+  - 영어 등 다른 로케일 페이지도 초기 HTML은 `lang="ko"`로 전송됨 (SEO 영향)
+  - 블로그(비국제화)와 `[locale]` 영역이 루트 레이아웃을 공유해서 생긴 절충
+  - 근본 해결은 블로그까지 `[locale]` 하위로 옮기는 구조 재설계 필요
 
 ---
 
 ## 기능 추가 (Feature)
 
-- [ ] **다크 모드**
-  - `page.tsx`에 TODO 주석 있음
-  - `globals.css`에 다크모드 CSS 변수가 주석 처리됨
-  - Tailwind `dark:` 클래스 + `next-themes` 또는 수동 구현
+- [x] ~~다크 모드~~ (next-themes + `dark:` 클래스 적용 완료)
 - [ ] **블로그 읽기 시간 표시**
   - MDX 콘텐츠 기반 예상 읽기 시간 계산
 - [ ] **블로그 검색/필터**
@@ -120,5 +133,6 @@
 | Tailwind CSS | 4.1.11 |
 | ESLint | 9.x (flat config) |
 | Node.js | 24.1.0 |
-| anime.js | 4.0.2 |
+| next-intl | 4.8.3 |
+| next-themes | 0.4.6 |
 | MDX | 3.1.0 |
