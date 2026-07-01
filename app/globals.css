@@ -6,6 +6,12 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
+  /* Avenir Next는 Apple 기기에만 내장 — 그 외 플랫폼은 Nunito Sans로 폴백 */
+  --font-sans:
+    "Avenir Next", Avenir, var(--font-nunito-sans), "Pretendard Variable",
+    ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
+
   --breakpoint-*: initial;
   /* Layout breakpoints - viewport-based responsive design */
   --breakpoint-phone: 415px;
