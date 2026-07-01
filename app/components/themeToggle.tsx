@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 function SunIcon({ className }: { className?: string }) {
   return (
@@ -56,13 +56,19 @@ const themeConfig = {
   dark: { icon: MoonIcon, label: "다크", next: "system" as const },
 };
 
+// 서버/하이드레이션 중에는 false, 클라이언트 마운트 후 true
+const emptySubscribe = () => () => {};
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+}
+
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   if (!mounted) {
     return (

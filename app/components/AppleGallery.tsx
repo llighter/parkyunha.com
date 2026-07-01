@@ -14,10 +14,6 @@ interface GalleryImage {
 }
 
 export default function AppleGallery({ images }: { images: GalleryImage[] }) {
-  if (images.length === 0) {
-    return null;
-  }
-
   const totalSlides = images.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visited, setVisited] = useState<Record<number, boolean>>({ 0: true });
@@ -25,10 +21,6 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const dotButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
-
-  useEffect(() => {
-    setVisited((prev) => ({ ...prev, [currentIndex]: true }));
-  }, [currentIndex]);
 
   useEffect(() => {
     function checkWidth() {
@@ -56,6 +48,10 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
   const handleNext = useCallback(() => {
     changeImage(currentIndex + 1);
   }, [changeImage, currentIndex]);
+
+  if (totalSlides === 0) {
+    return null;
+  }
 
   const transformStyle = isMobile
     ? { transform: `translateX(-${currentIndex * 100}%)` }

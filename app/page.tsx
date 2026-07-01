@@ -9,6 +9,7 @@ function Badge(props: BadgeProps) {
     <a
       {...props}
       target="_blank"
+      rel="noopener noreferrer"
       className="inline-flex items-center rounded-sm border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
     />
   );
@@ -93,7 +94,7 @@ export default function Home() {
               alt="City view from Hotel Monterey Grasmere Osaka"
               src="/images/home/me-at-home.jpg"
               fill
-              sizes="(min-width: 768px) 213px, 33vw"
+              sizes="(max-width: 768px) 213px, 33vw"
               className="rounded-lg object-cover"
             />
           </div>
