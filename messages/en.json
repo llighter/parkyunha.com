@@ -30,7 +30,7 @@
       },
       "spacedRepetition": {
         "title": "Spaced Repetition",
-        "description": "SM-2 algorithm-based level system provides scientifically optimized review intervals."
+        "description": "A Leitner-style level system automatically resurfaces cards right when they're due, before you forget."
       },
       "stats": {
         "title": "Study Statistics",
@@ -61,13 +61,13 @@
     "differences": {
       "title": "Why StudyCard?",
       "noSubscription": "No Subscription",
-      "noSubscriptionDetail": "Download once, use forever",
+      "noSubscriptionDetail": "Free to start — Pro is a one-time purchase, no subscription",
       "noAds": "No Ads",
       "noAdsDetail": "Focus only on learning",
       "noTracking": "No Data Collection",
       "noTrackingDetail": "All data stays on your device and iCloud only",
-      "native": "100% Apple Native",
-      "nativeDetail": "Pure SwiftUI app with zero third-party dependencies"
+      "allDevices": "All your Apple devices",
+      "allDevicesDetail": "Study on iPhone on the go, create cards comfortably on iPad or Mac"
     },
     "cta": {
       "title": "Get Started",

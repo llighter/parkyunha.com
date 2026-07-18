@@ -30,7 +30,7 @@
       },
       "spacedRepetition": {
         "title": "間隔反復学習",
-        "description": "SM-2アルゴリズムに基づくレベルシステムで、科学的に最適化された復習間隔を提供します。"
+        "description": "ライトナー方式のレベルシステムが復習時期を迎えたカードを自動で選び、忘れる前にもう一度表示します。"
       },
       "stats": {
         "title": "学習統計",
@@ -61,13 +61,13 @@
     "differences": {
       "title": "なぜStudyCardなのか？",
       "noSubscription": "サブスク不要",
-      "noSubscriptionDetail": "一度ダウンロード、永久に使用",
+      "noSubscriptionDetail": "無料で始めて、Proはサブスクなしの買い切りで永久に使用",
       "noAds": "広告なし",
       "noAdsDetail": "学習だけに集中",
       "noTracking": "個人情報収集なし",
       "noTrackingDetail": "すべてのデータはデバイスとiCloudにのみ保存",
-      "native": "100% Appleネイティブ",
-      "nativeDetail": "サードパーティ依存のない純粋なSwiftUIアプリ"
+      "allDevices": "すべてのAppleデバイスで",
+      "allDevicesDetail": "外出先ではiPhoneで学習し、カード作成はiPadやMacで"
     },
     "cta": {
       "title": "今すぐ始めましょう",

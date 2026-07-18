@@ -30,7 +30,7 @@
       },
       "spacedRepetition": {
         "title": "间隔重复学习",
-        "description": "基于 SM-2 算法的等级系统，提供科学优化的复习周期。"
+        "description": "莱特纳式等级系统会自动挑出到了复习时间的卡片，在你遗忘之前再次呈现。"
       },
       "stats": {
         "title": "学习统计",
@@ -61,13 +61,13 @@
     "differences": {
       "title": "为什么选择 StudyCard？",
       "noSubscription": "无需订阅",
-      "noSubscriptionDetail": "一次下载，永久使用",
+      "noSubscriptionDetail": "免费开始使用，Pro 无需订阅，一次购买，终身使用",
       "noAds": "无广告",
       "noAdsDetail": "专注于学习",
       "noTracking": "不收集个人信息",
       "noTrackingDetail": "所有数据仅存储在设备和 iCloud 中",
-      "native": "100% Apple 原生",
-      "nativeDetail": "零第三方依赖的纯 SwiftUI 应用"
+      "allDevices": "覆盖所有 Apple 设备",
+      "allDevicesDetail": "在路上用 iPhone 学习，在 iPad 或 Mac 上从容制作卡片"
     },
     "cta": {
       "title": "立即开始",

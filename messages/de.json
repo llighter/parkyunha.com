@@ -30,7 +30,7 @@
       },
       "spacedRepetition": {
         "title": "Verteiltes Lernen",
-        "description": "SM-2-Algorithmus-basiertes Stufensystem bietet wissenschaftlich optimierte Wiederholungsintervalle."
+        "description": "Ein Stufensystem nach dem Leitner-Prinzip zeigt dir Karten automatisch genau dann wieder, wenn sie zur Wiederholung fällig sind — bevor du sie vergisst."
       },
       "stats": {
         "title": "Lernstatistiken",
@@ -61,13 +61,13 @@
     "differences": {
       "title": "Warum StudyCard?",
       "noSubscription": "Kein Abo",
-      "noSubscriptionDetail": "Einmal laden, für immer nutzen",
+      "noSubscriptionDetail": "Kostenlos starten — Pro ist ein Einmalkauf, kein Abo",
       "noAds": "Keine Werbung",
       "noAdsDetail": "Konzentriere dich nur aufs Lernen",
       "noTracking": "Keine Datenerfassung",
       "noTrackingDetail": "Alle Daten bleiben auf deinem Gerät und in iCloud",
-      "native": "100% Apple Nativ",
-      "nativeDetail": "Reine SwiftUI-App ohne Drittanbieter-Abhängigkeiten"
+      "allDevices": "Auf all deinen Apple-Geräten",
+      "allDevicesDetail": "Lerne unterwegs auf dem iPhone und erstelle Karten bequem auf iPad oder Mac"
     },
     "cta": {
       "title": "Jetzt Starten",

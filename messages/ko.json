@@ -30,7 +30,7 @@
       },
       "spacedRepetition": {
         "title": "간격 반복 학습",
-        "description": "SM-2 알고리즘 기반 레벨 시스템으로 과학적으로 최적화된 복습 주기를 제공합니다."
+        "description": "라이트너 방식 레벨 시스템이 복습할 때가 된 카드를 자동으로 골라, 잊기 전에 다시 보여줍니다."
       },
       "stats": {
         "title": "학습 통계",
@@ -61,13 +61,13 @@
     "differences": {
       "title": "왜 StudyCard인가요?",
       "noSubscription": "구독 없음",
-      "noSubscriptionDetail": "한 번 다운로드, 영원히 사용",
+      "noSubscriptionDetail": "무료로 시작하고, Pro는 구독 없이 한 번 구매로 평생 사용",
       "noAds": "광고 없음",
       "noAdsDetail": "학습에만 집중",
       "noTracking": "개인정보 수집 없음",
       "noTrackingDetail": "모든 데이터는 기기와 iCloud에만 저장",
-      "native": "100% Apple 네이티브",
-      "nativeDetail": "서드파티 의존성 없는 순수 SwiftUI 앱"
+      "allDevices": "모든 Apple 기기에서",
+      "allDevicesDetail": "이동 중엔 iPhone으로 학습하고, 카드는 iPad와 Mac에서 편하게 만드세요"
     },
     "cta": {
       "title": "지금 시작하세요",

@@ -30,7 +30,7 @@
       },
       "spacedRepetition": {
         "title": "Répétition Espacée",
-        "description": "Système de niveaux basé sur l'algorithme SM-2 offrant des intervalles de révision scientifiquement optimisés."
+        "description": "Un système de niveaux inspiré de la méthode Leitner fait remonter automatiquement les cartes au moment de les réviser, avant que vous ne les oubliiez."
       },
       "stats": {
         "title": "Statistiques d'Étude",
@@ -61,13 +61,13 @@
     "differences": {
       "title": "Pourquoi StudyCard ?",
       "noSubscription": "Sans Abonnement",
-      "noSubscriptionDetail": "Téléchargez une fois, utilisez pour toujours",
+      "noSubscriptionDetail": "Commencez gratuitement — Pro s'obtient en un achat unique, sans abonnement",
       "noAds": "Sans Publicité",
       "noAdsDetail": "Concentrez-vous uniquement sur l'apprentissage",
       "noTracking": "Aucune Collecte de Données",
       "noTrackingDetail": "Toutes les données restent sur votre appareil et iCloud uniquement",
-      "native": "100% Natif Apple",
-      "nativeDetail": "Application SwiftUI pure sans dépendances tierces"
+      "allDevices": "Sur tous vos appareils Apple",
+      "allDevicesDetail": "Révisez sur iPhone en déplacement, créez vos cartes confortablement sur iPad ou Mac"
     },
     "cta": {
       "title": "Commencez Maintenant",

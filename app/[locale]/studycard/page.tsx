@@ -47,7 +47,7 @@ const differenceKeys = [
   { key: "noSubscription", detailKey: "noSubscriptionDetail" },
   { key: "noAds", detailKey: "noAdsDetail" },
   { key: "noTracking", detailKey: "noTrackingDetail" },
-  { key: "native", detailKey: "nativeDetail" },
+  { key: "allDevices", detailKey: "allDevicesDetail" },
 ] as const;
 
 function DownloadButton() {
