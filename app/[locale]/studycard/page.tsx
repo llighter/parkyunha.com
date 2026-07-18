@@ -50,6 +50,15 @@ const differenceKeys = [
   { key: "allDevices", detailKey: "allDevicesDetail" },
 ] as const;
 
+// 스크린샷 원본: studycard-wiki docs/public/screens (라이트/다크 쌍)
+const previewScreens = [
+  { key: "sidebar", file: "sidebar-iphone", width: 1206, height: 2622 },
+  { key: "deckContent", file: "deck-content-iphone", width: 1206, height: 2622 },
+  { key: "cardDetail", file: "card-detail-iphone", width: 1206, height: 2622 },
+  { key: "statistics", file: "statistics-iphone", width: 1206, height: 2622 },
+  { key: "canvasEdit", file: "canvas-edit-ipad", width: 2064, height: 2752 },
+] as const;
+
 function DownloadButton() {
   const t = useTranslations("studycard.hero");
 
@@ -102,10 +111,30 @@ function AppPreviewSection() {
         <p className="mb-12 text-lg text-neutral-600 dark:text-neutral-400">
           {t("description")}
         </p>
-        <div className="mx-auto flex aspect-video max-w-3xl items-center justify-center rounded-2xl border-2 border-dashed border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-800">
-          <p className="text-neutral-400 dark:text-neutral-500">
-            {t("placeholder")}
-          </p>
+        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+          {previewScreens.map(({ key, file, width, height }) => (
+            <figure key={key} className="shrink-0 snap-center first:ml-auto last:mr-auto">
+              <Image
+                src={`/images/studycard/screens/${file}.png`}
+                alt={t(`screens.${key}`)}
+                width={width}
+                height={height}
+                sizes="400px"
+                className="h-96 w-auto rounded-2xl border border-neutral-200 bg-white shadow-sm dark:hidden"
+              />
+              <Image
+                src={`/images/studycard/screens/${file}-dark.png`}
+                alt={t(`screens.${key}`)}
+                width={width}
+                height={height}
+                sizes="400px"
+                className="hidden h-96 w-auto rounded-2xl border border-neutral-700 bg-neutral-950 shadow-sm dark:block"
+              />
+              <figcaption className="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
+                {t(`screens.${key}`)}
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>

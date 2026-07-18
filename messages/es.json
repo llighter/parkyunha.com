@@ -19,7 +19,13 @@
     "preview": {
       "title": "Simple pero Poderoso",
       "description": "Comienza de inmediato sin configuración compleja. Crea tarjetas, estudia y sigue tu progreso.",
-      "placeholder": "Captura de pantalla de la app"
+      "screens": {
+        "sidebar": "Lista de mazos",
+        "deckContent": "Lista de tarjetas",
+        "cardDetail": "Detalle de tarjeta",
+        "statistics": "Panel de resumen",
+        "canvasEdit": "Editor de lienzo"
+      }
     },
     "features": {
       "title": "Características Principales",

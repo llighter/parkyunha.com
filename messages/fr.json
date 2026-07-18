@@ -19,7 +19,13 @@
     "preview": {
       "title": "Simple mais Puissant",
       "description": "Commencez immédiatement sans configuration complexe. Créez des cartes, étudiez et suivez votre progression.",
-      "placeholder": "Capture d'écran de l'app"
+      "screens": {
+        "sidebar": "Liste des paquets",
+        "deckContent": "Liste des cartes",
+        "cardDetail": "Détails de la carte",
+        "statistics": "Tableau de bord",
+        "canvasEdit": "Éditeur de canevas"
+      }
     },
     "features": {
       "title": "Fonctionnalités Clés",

@@ -19,7 +19,13 @@
     "preview": {
       "title": "シンプルだけどパワフル",
       "description": "複雑な設定なしですぐに始められます。カードを作り、学習し、成長を確認しましょう。",
-      "placeholder": "アプリのスクリーンショット"
+      "screens": {
+        "sidebar": "デッキ一覧",
+        "deckContent": "カード一覧",
+        "cardDetail": "カード詳細",
+        "statistics": "概要ダッシュボード",
+        "canvasEdit": "キャンバス編集"
+      }
     },
     "features": {
       "title": "主な機能",

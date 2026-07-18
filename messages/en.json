@@ -19,7 +19,13 @@
     "preview": {
       "title": "Simple yet Powerful",
       "description": "Start right away without complex setup. Create cards, study, and track your growth.",
-      "placeholder": "App screenshot placeholder"
+      "screens": {
+        "sidebar": "Deck list",
+        "deckContent": "Card list",
+        "cardDetail": "Card details",
+        "statistics": "Summary dashboard",
+        "canvasEdit": "Canvas editor"
+      }
     },
     "features": {
       "title": "Key Features",

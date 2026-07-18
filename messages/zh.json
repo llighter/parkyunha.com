@@ -19,7 +19,13 @@
     "preview": {
       "title": "简单而强大",
       "description": "无需复杂设置，立即开始。创建卡片、学习、追踪成长。",
-      "placeholder": "应用截图占位"
+      "screens": {
+        "sidebar": "卡组列表",
+        "deckContent": "卡片列表",
+        "cardDetail": "卡片详情",
+        "statistics": "摘要仪表盘",
+        "canvasEdit": "画布编辑"
+      }
     },
     "features": {
       "title": "主要功能",

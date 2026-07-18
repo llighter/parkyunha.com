@@ -19,7 +19,13 @@
     "preview": {
       "title": "간단하지만 강력하게",
       "description": "복잡한 설정 없이 바로 시작하세요. 카드를 만들고, 학습하고, 성장을 확인하세요.",
-      "placeholder": "앱 스크린샷이 들어갈 자리"
+      "screens": {
+        "sidebar": "덱 목록",
+        "deckContent": "카드 목록",
+        "cardDetail": "카드 상세",
+        "statistics": "요약 대시보드",
+        "canvasEdit": "캔버스 편집"
+      }
     },
     "features": {
       "title": "주요 기능",

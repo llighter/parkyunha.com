@@ -19,7 +19,13 @@
     "preview": {
       "title": "Einfach aber Leistungsstark",
       "description": "Starte sofort ohne komplexe Einrichtung. Erstelle Karten, lerne und verfolge deinen Fortschritt.",
-      "placeholder": "App-Screenshot Platzhalter"
+      "screens": {
+        "sidebar": "Deckliste",
+        "deckContent": "Kartenliste",
+        "cardDetail": "Kartendetails",
+        "statistics": "Übersichts-Dashboard",
+        "canvasEdit": "Leinwand-Editor"
+      }
     },
     "features": {
       "title": "Hauptfunktionen",
