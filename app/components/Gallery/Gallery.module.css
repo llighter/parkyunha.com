@@ -1,0 +1,367 @@
+@reference "../../globals.css";
+
+/* =====================================================================
+   갤러리 — 본문보다 넓은 액자 + 화살표 · 설명 · 내려받기 · 점
+   ---------------------------------------------------------------------
+   부모는 lane-full(글 전체 폭). 안에서 폭을 다시 고른다.
+     액자   100% − 2 × 화살표 자리, 최대 --lane-media
+     설명   본문 레인 — 글의 왼쪽 선에 맞춘다
+   화살표 자리 = 간격 12 + 지름 44 + 화면 끝 여백 16 = 72px (태블릿 이상)
+     화면이 넉넉하면 액자는 레인 폭 그대로, 모자랄 때만 그만큼 줄어든다.
+
+   비율 (aspect — Gallery.tsx 가 --gallery-aspect · --gallery-ratio 로 내려 준다)
+     16:9(기본) · 21:9 · 3:2 · 4:3 · 1:1 · 4:5 · 9:16
+     세로로 긴 비율은 높이 상한(--gallery-max-block)에 걸리면 폭이 줄어든다.
+
+   보여 주는 방식 (data-mode — Gallery.tsx 가 정한다)
+     slide  가로 스크롤 + 스냅. 손가락 · 트랙패드로 넘긴다 (터치 · 좁은 화면)
+     fade   한 칸에 겹쳐 두고 투명도만 바꾼다 (마우스 + 태블릿 이상)
+
+   화살표는 태블릿 이상에서만 — 폰에서는 손가락으로 넘긴다.
+   ===================================================================== */
+
+.gallery {
+  /* 4층 · 부품 토큰 — 이 부품의 손잡이는 여기에만 */
+  --gallery-aspect: 16 / 9; /* 액자 비율 — 뉴스룸 980 × 551 */
+  --gallery-ratio: 1.7778; /* 가로 ÷ 세로 — 높이 상한 계산용 */
+  --gallery-max-block: min(
+    78svh,
+    820px
+  ); /* 액자 높이 상한 — 세로 비율이 화면을 넘지 않게 */
+  --gallery-paddle: 44px; /* 화살표 지름 (터치 최소 44) */
+  --gallery-paddle-gap: 12px; /* 액자 ~ 화살표 */
+  --gallery-paddle-edge: 16px; /* 화살표 ~ 화면 끝 (최소) */
+  --gallery-control: 24px; /* 내려받기 지름 */
+  --gallery-caption-gap: 12px; /* 액자 ~ 설명 줄 */
+  --gallery-dot: 8px;
+  --gallery-dot-hit: 24px; /* 점 누름 영역 (WCAG 2.2 최소 24) — 점 간격도 24 */
+  --gallery-dots-gap: 9px; /* 설명 줄 ~ 점 누름 영역 (점 중심까지 21) */
+  --gallery-fade: var(--duration-slow);
+  --gallery-media-control: 36px; /* 영상 재생 · 일시정지 */
+  --gallery-media-control-big: 64px; /* 아직 재생 전 — 가운데 큰 버튼 */
+
+  --_reserve: 0px; /* 폰: 화살표 없음 */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block: var(--spacing-media);
+
+  @variant tablet {
+    --_reserve: calc(
+      var(--gallery-paddle-gap) + var(--gallery-paddle) +
+        var(--gallery-paddle-edge)
+    );
+  }
+}
+
+/* ── 액자 ──────────────────────────────────────────────────────────── */
+.stage {
+  position: relative;
+  inline-size: calc(100% - 2 * var(--_reserve));
+  max-inline-size: min(
+    var(--lane-media),
+    var(--gallery-max-block) * var(--gallery-ratio)
+  );
+}
+
+.viewport {
+  aspect-ratio: var(--gallery-aspect);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  border-radius: var(--radius-media);
+  background: var(--color-frame);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  @variant motion-reduce {
+    scroll-behavior: auto;
+  }
+}
+
+.track {
+  display: flex;
+  block-size: 100%;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* 이미지 · 영상 — 장을 꽉 채우는 틀 안에서 맞춘다 */
+.media {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  &[data-fit="cover"] {
+    object-fit: cover;
+  }
+}
+
+/* 사용자 슬라이드 — 애니메이션은 장의 [data-playing] 을 기준으로 */
+.custom {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* 영상 재생 · 일시정지 — 처음에는 가운데 크게, 재생을 시작하면 오른쪽 아래 작게 */
+.mediaToggle {
+  position: absolute;
+  inset-inline-end: 12px;
+  inset-block-end: 12px;
+  display: grid;
+  place-items: center;
+  inline-size: var(--gallery-media-control);
+  block-size: var(--gallery-media-control);
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-media-control);
+  color: var(--color-media-control-fg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+
+  & svg {
+    inline-size: 50%;
+    block-size: 50%;
+  }
+
+  &:hover {
+    background: var(--color-media-control-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &[data-size="big"] {
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    inline-size: var(--gallery-media-control-big);
+    block-size: var(--gallery-media-control-big);
+  }
+}
+
+/* fade — 한 칸에 겹쳐 두고 투명도만 바꾼다 */
+.gallery[data-mode="fade"] {
+  & .viewport {
+    overflow: hidden;
+    scroll-snap-type: none;
+  }
+
+  & .track {
+    display: grid;
+    grid-template: 100% / 100%;
+  }
+
+  & .slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--gallery-fade) var(--ease-standard),
+      visibility 0s linear var(--gallery-fade);
+  }
+
+  & .slide[data-active] {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+}
+
+/* ── 화살표 ────────────────────────────────────────────────────────── */
+.paddle {
+  position: absolute;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  display: none;
+  place-items: center;
+  inline-size: var(--gallery-paddle);
+  block-size: var(--gallery-paddle);
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-control);
+  color: var(--color-control-fg);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+
+  & svg {
+    inline-size: 45%;
+    block-size: 45%;
+  }
+
+  &:hover {
+    background: var(--color-control-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.36;
+    cursor: default;
+    background: var(--color-control);
+  }
+
+  /* 태블릿 이상에서만, 액자 밖에. 폰에서는 손가락으로 넘긴다 (점 · 키보드도 된다) */
+  @variant tablet {
+    display: grid;
+  }
+}
+
+.prev {
+  inset-inline-end: calc(100% + var(--gallery-paddle-gap));
+}
+
+.next {
+  inset-inline-start: calc(100% + var(--gallery-paddle-gap));
+}
+
+/* ── 설명 + 내려받기 (본문 레인) ───────────────────────────────────── */
+.caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center; /* 설명 첫 줄과 내려받기 원의 가운데를 맞춘다 */
+  column-gap: 16px;
+  min-block-size: var(--gallery-control);
+  inline-size: calc(100% - 2 * var(--lane-gutter));
+  max-inline-size: var(--lane-text);
+  margin-block-start: var(--gallery-caption-gap);
+}
+
+/* 모든 설명을 한 칸에 겹쳐 둔다 → 칸 높이는 가장 긴 설명. 넘겨도 아래 점이 들썩이지 않는다 */
+.captionStack {
+  display: grid;
+}
+
+.captionText {
+  @apply text-caption text-fg-muted;
+  grid-area: 1 / 1;
+  margin: 0;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--gallery-fade) var(--ease-standard),
+    visibility 0s linear var(--gallery-fade);
+
+  &[data-active] {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+}
+
+.download {
+  display: grid;
+  place-items: center;
+  inline-size: var(--gallery-control);
+  block-size: var(--gallery-control);
+  align-self: start;
+  /* 설명이 여러 줄이어도 첫 줄 가운데에 선다 */
+  margin-block-start: max(
+    0px,
+    calc(
+      (
+          var(--text-caption) * var(--text-caption--line-height) -
+            var(--gallery-control)
+        ) /
+        2
+    )
+  );
+  border-radius: 9999px;
+  background: var(--color-control);
+  color: var(--color-fg);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+
+  & svg {
+    inline-size: 62%;
+    block-size: 62%;
+  }
+
+  &:hover {
+    background: var(--color-control-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* ── 점 ────────────────────────────────────────────────────────────── */
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--gallery-dots-gap);
+}
+
+.dot {
+  display: grid;
+  place-items: center;
+  inline-size: var(--gallery-dot-hit);
+  block-size: var(--gallery-dot-hit);
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: none;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    inline-size: var(--gallery-dot);
+    block-size: var(--gallery-dot);
+    border-radius: 9999px;
+    background: var(--color-line); /* 뉴스룸과 같은 옅은 점 #d2d2d7 */
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  &:hover::before {
+    background: var(--color-line-strong);
+  }
+
+  &[aria-selected="true"]::before {
+    background: var(--color-fg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+}
+
+.counter {
+  @apply text-meta text-fg-muted;
+  margin: var(--gallery-dots-gap) 0 0;
+  font-variant-numeric: tabular-nums;
+}
