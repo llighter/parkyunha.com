@@ -1,14 +1,11 @@
 import { ReactNode } from "react";
 
 export default function BlogLayout({ children }: { children: ReactNode }) {
-  // 폴더 이름을 기반으로 MDX 메타데이터 가져오기
+  // lanes: 자식 블록은 기본으로 본문 레인, 그림 · 갤러리는 스스로 레인을 고른다
+  // article: prose 를 토큰(글자 크기 · 색)에 연결 — 다크는 토큰이 바꾼다
   return (
-    <div className="">
-      <section
-        className={`mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20`}
-      >
-        <div className="prose dark:prose-invert mx-auto max-w-full">{children}</div>
-      </section>
-    </div>
+    <section className="pb-section">
+      <div className="lanes article prose max-w-none">{children}</div>
+    </section>
   );
 }

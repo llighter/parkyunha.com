@@ -2,72 +2,17 @@ import type { MDXComponents } from "mdx/types";
 import { ComponentPropsWithoutRef } from "react";
 import { highlight } from "sugar-high";
 
-type HeadingProps = ComponentPropsWithoutRef<"h1">;
-type ParagraphProps = ComponentPropsWithoutRef<"p">;
-type BlockQuoteProps = ComponentPropsWithoutRef<"blockquote">;
-type ListProps = ComponentPropsWithoutRef<"ul">;
-type ListItemProps = ComponentPropsWithoutRef<"li">;
-
+/*
+  글 본문의 폭은 부모(.lanes)가 준다 — h1~h4 · p · ul · ol 은 기본 레인(본문)에 그대로 선다.
+  배경이 있는 블록(인용 · 코드)만 lane-panel: 본문 폭이되 폰에서는 좌우 여백까지 쓴다.
+*/
 const components = {
-  h1: (props: HeadingProps) => (
-    <h1
-      className="content-container"
-      {...props}
-    />
+  blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
+    <blockquote className="lane-panel" {...props} />
   ),
-  h2: (props: HeadingProps) => (
-    <h2
-      className="content-container"
-      {...props}
-    />
+  pre: (props: ComponentPropsWithoutRef<"pre">) => (
+    <pre className="lane-panel" {...props} />
   ),
-  h3: (props: HeadingProps) => (
-    <h3
-      className="content-container"
-      {...props}
-    />
-  ),
-  h4: (props: HeadingProps) => (
-    <h4
-      className="content-container"
-      {...props}
-    />
-  ),
-  p: (props: ParagraphProps) => (
-    <p
-      className="content-container"
-      {...props}
-    />
-  ),
-  blockquote: (props: BlockQuoteProps) => (
-    <blockquote
-      className="content-container-full"
-      {...props}
-    />
-  ),
-  ol: (props: ListProps) => (
-    <ol
-      className="content-container"
-      {...props}
-    />
-  ),
-  ul: (props: ListProps) => (
-    <ul
-      className="content-container"
-      {...props}
-    />
-  ),
-  li: (props: ListItemProps) => <li {...props} />,
-  pre: ({ children, ...props }: ComponentPropsWithoutRef<"pre">) => {
-    return (
-      <pre
-        className="content-container-full"
-        {...props}
-      >
-        {children}
-      </pre>
-    );
-  },
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
     const codeHTML = highlight(children as string);
     return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;

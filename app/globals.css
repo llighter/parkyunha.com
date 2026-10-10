@@ -3,6 +3,7 @@
 /* 디자인 토큰 → 레인 → 글 본문 순서. 값은 tokens.css 한 곳에서만 고친다 */
 @import './styles/tokens.css';
 @import './styles/layout.css';
+@import './styles/article.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
