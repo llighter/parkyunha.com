@@ -120,8 +120,8 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 ## 쓰는 법
 
 ```tsx
-// 글 본문 — 자식은 본문 레인, 크기와 색은 토큰, 블록은 화면에 들어오며 슥 올라온다
-<div className="lanes article prose max-w-none" data-reveal-children>{children}</div>
+// 글 본문 — 자식은 본문 레인, 크기와 색은 토큰. 글자는 움직이지 않고 그림 · 갤러리만 슥 올라온다
+<div className="lanes article prose max-w-none">{children}</div>
 
 // 그림
 <Figure lane="media" caption="설명">
@@ -201,9 +201,9 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 
 | 속성 | 뜻 |
 | --- | --- |
-| `data-reveal-children` | 직계 자식을 하나씩 등장시킨다 (글 본문) |
+| `data-reveal-children` | 직계 자식을 하나씩 등장시킨다 |
 | `data-reveal-children data-reveal-stagger` | + 함께 들어온 자식끼리 90ms 씩 차례로, 최대 450ms (카드 목록) |
-| `data-reveal` | 이 요소 하나만 |
+| `data-reveal` | 이 요소 하나만 (그림 · 갤러리 — `Figure` · `Gallery` 가 스스로 붙인다) |
 
 상태(`data-reveal-state`, JS 가 붙인다): 없음 → `pending`(첫 화면 아래에서 기다림: 투명 · 16/24px 아래) → `shown`(화면 아래 8% 선을 넘으면 0.9초 동안 오름) → `done`(규칙에서 빠져 요소 본래 스타일로).
 
@@ -211,7 +211,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 한 번만. End 키 · 앵커로 한 번에 건너뛴 블록은 움직임 없이 바로 보인다.
 - 숨은 블록 안 링크에 키보드 초점이 닿으면 즉시 보인다(`:focus-within`). 움직임 줄이기 · 인쇄에서는 언제나 보인다.
 - 목록 안의 목록은 목록 자신 대신 항목이 뜬다(두 번 겹쳐 움직이지 않게).
-- 지금 붙인 곳: 글 본문(`app/blog/(post)/layout.tsx`), `/blog` 카드 두 묶음, 홈 사진, works 그리드.
+- 지금 붙인 곳: 그림 · 갤러리(`Figure` · `Gallery`), `/blog` 카드 두 묶음, 홈 사진, works 그리드. 글 본문의 글자(문단 · 제목 · 목록 · 코드 · 인용)는 움직이지 않는다.
 - Spring 으로 읽으면: `data-reveal-*` 는 `@Transactional` 같은 선언이고, 일은 `RevealOnScroll`(루트 레이아웃의 어드바이스 하나)이 한다. 효과를 바꿀 때는 `motion.css` · `RevealOnScroll.tsx` 두 파일만.
 
 ### 움직임 토큰

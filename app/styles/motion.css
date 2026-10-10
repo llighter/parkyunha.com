@@ -2,8 +2,8 @@
    스크롤 등장 — 뉴스룸처럼 화면에 들어오는 블록을 슥 올린다
    ---------------------------------------------------------------------
    순수 CSS (Tailwind 문법 없음). 상태는 RevealOnScroll 이 붙인다.
-     data-reveal              이 요소 하나를 등장시킨다
-     data-reveal-children     직계 자식을 하나씩 등장시킨다 (글 본문, 카드 목록)
+     data-reveal              이 요소 하나를 등장시킨다 (그림 · 갤러리 — Figure · Gallery 가 붙인다)
+     data-reveal-children     직계 자식을 하나씩 등장시킨다 (카드 목록)
      data-reveal-stagger      + 같은 순간 들어온 자식끼리 차례로 (카드 목록)
      data-reveal-state        pending(숨김) → shown(오르는 중) → done   ← JS 가 붙인다
 

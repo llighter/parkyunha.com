@@ -148,6 +148,7 @@ export default function Gallery({
       style={style}
       data-mode={mode}
       data-visible={visible ? "" : undefined}
+      data-reveal
       role="group"
       aria-roledescription="갤러리"
       aria-label={label}

@@ -26,6 +26,7 @@ export interface FigureProps {
 /**
  * 그림 · 영상 한 장. 글 전체 폭(lane-full)을 차지하고, 안에서
  * 미디어는 lane 에, 설명은 본문 레인에 세운다.
+ * 화면에 들어오면 슥 올라온다 (data-reveal — RevealOnScroll).
  */
 export default function Figure({
   lane = "media",
@@ -38,7 +39,11 @@ export default function Figure({
     : undefined;
 
   return (
-    <figure className={`not-prose lane-full ${s.figure}`} data-lane={lane}>
+    <figure
+      className={`not-prose lane-full ${s.figure}`}
+      data-lane={lane}
+      data-reveal
+    >
       <div
         className={`${LANE_CLASS[lane]} ${s.media}`}
         data-fill={aspect ? "" : undefined}
