@@ -45,7 +45,11 @@ export default async function BlogPage() {
             {firstArticle && <Tile article={firstArticle} />}
 
             {mediumArticles.length > 0 && (
-              <div className={`grid gap-8 tablet:grid-cols-2`}>
+              <div
+                className={`grid gap-8 tablet:grid-cols-2`}
+                data-reveal-children
+                data-reveal-stagger
+              >
                 {mediumArticles.map((article, i) => (
                   <Tile key={i} article={article} />
                 ))}
@@ -53,7 +57,11 @@ export default async function BlogPage() {
             )}
 
             {smallArticles.length > 0 && (
-              <div className={`grid gap-8 tablet:grid-cols-2 desktop:grid-cols-3`}>
+              <div
+                className={`grid gap-8 tablet:grid-cols-2 desktop:grid-cols-3`}
+                data-reveal-children
+                data-reveal-stagger
+              >
                 {smallArticles.map((article, i) => (
                   <Tile key={i} article={article} />
                 ))}

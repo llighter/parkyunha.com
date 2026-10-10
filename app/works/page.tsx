@@ -46,7 +46,11 @@ export default function WorksPage() {
         </div>
 
         {/* 작업물 그리드 */}
-        <div className="mt-10 grid grid-cols-2 gap-4 desktop:grid-cols-3">
+        <div
+          className="mt-10 grid grid-cols-2 gap-4 desktop:grid-cols-3"
+          data-reveal-children
+          data-reveal-stagger
+        >
           {placeholderItems.map((item) => (
             <div
               key={item.id}

@@ -4,6 +4,7 @@ import "./font/pretendard.css";
 import Footer from "./components/footer";
 import Sidebar from "./components/sidebar";
 import ThemeProvider from "./components/themeProvider";
+import RevealOnScroll from "./components/Reveal/RevealOnScroll";
 import { Nunito_Sans } from "next/font/google";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
             <main>{children}</main>
             <Footer />
           </div>
+          <RevealOnScroll />
         </ThemeProvider>
       </body>
     </html>

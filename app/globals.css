@@ -4,6 +4,7 @@
 @import './styles/tokens.css';
 @import './styles/layout.css';
 @import './styles/article.css';
+@import './styles/motion.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

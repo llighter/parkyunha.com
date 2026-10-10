@@ -41,7 +41,11 @@ export default function Home() {
             {` 있습니다.`}
           </p>
         </div>
-        <div className="my-8 columns-2 gap-4 desktop:columns-3">
+        <div
+          className="my-8 columns-2 gap-4 desktop:columns-3"
+          data-reveal-children
+          data-reveal-stagger
+        >
           <div className="relative mb-4 h-40">
             <Image
               alt="Me and my younger brother at the Han River in Seoul, South Korea"
