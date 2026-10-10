@@ -51,12 +51,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="h-full scroll-smooth" suppressHydrationWarning>
-      <body
-        className={`${nunitoSans.variable} flex h-full flex-col font-sans antialiased bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100`}
-      >
+    // 글꼴 변수는 <html> 에 둔다 — :root 의 --font-sans 가 이 변수를 읽기 때문 (body 에 두면 스택 전체가 무효)
+    <html
+      lang="ko"
+      className={`${nunitoSans.variable} h-full scroll-smooth`}
+      suppressHydrationWarning
+    >
+      <body className="flex h-full flex-col bg-canvas font-sans text-fg antialiased">
         <ThemeProvider>
-          <div className="wrapper grid min-h-screen grid-rows-[auto_1fr_auto]">
+          <div className="wrapper grid min-h-screen grid-cols-1 grid-rows-[auto_1fr_auto]">
             <Sidebar />
             <main>{children}</main>
             <Footer />
