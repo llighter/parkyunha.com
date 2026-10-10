@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20">
+    <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20">
       <div className="content-container">
         <h2 className="my-8 text-[24px] font-bold">
           페이지를 찾을 수 없습니다

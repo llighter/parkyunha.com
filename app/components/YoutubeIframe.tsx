@@ -11,12 +11,12 @@ export default function YoutubeIframe({
 }) {
   // AppleImage에서 사용하는 max-width 설정을 inline 여부에 따라 적용
   const classNames = inline
-    ? `tablet:max-w-[576px] laptop:max-w-[653px]`
-    : `tablet:max-w-(--breakpoint-content-tablet) laptop:max-w-(--breakpoint-content-laptop)`;
+    ? `tablet:max-w-[576px] desktop:max-w-[653px]`
+    : `tablet:max-w-(--lane-media) desktop:max-w-(--lane-media)`;
 
   return (
     <figure
-      className={`mx-auto my-8 max-w-[414px] tablet:my-9 laptop:my-11 ${classNames}`}
+      className={`mx-auto my-8 max-w-[414px] tablet:my-9 desktop:my-11 ${classNames}`}
     >
       <div className="component-content">
         <div className="iframe-sharesheet">
@@ -35,7 +35,7 @@ export default function YoutubeIframe({
           </div>
 
           {caption && (
-            <div className="iframe-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
+            <div className="iframe-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] desktop:mt-4 desktop:w-[653px]">
               <div className="iframe-caption break-all">{caption}</div>
             </div>
           )}

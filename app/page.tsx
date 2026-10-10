@@ -18,7 +18,7 @@ function Badge(props: BadgeProps) {
 export default function Home() {
   return (
     <section
-      className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
+      className={`mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20`}
     >
       <div className="content-container">
         <div className={`@container`}>
@@ -41,7 +41,7 @@ export default function Home() {
             {` 있습니다.`}
           </p>
         </div>
-        <div className="my-8 columns-2 gap-4 laptop:columns-3">
+        <div className="my-8 columns-2 gap-4 desktop:columns-3">
           <div className="relative mb-4 h-40">
             <Image
               alt="Me and my younger brother at the Han River in Seoul, South Korea"
@@ -52,26 +52,26 @@ export default function Home() {
               className="rounded-lg object-cover"
             />
           </div>
-          <div className="relative mb-4 h-80 laptop:mb-0">
+          <div className="relative mb-4 h-80 desktop:mb-0">
             <Image
               alt="Me at Osaka Castle in Osaka, Japan"
               src="/images/home/osaka-castle.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
-              className="rounded-lg object-cover laptop:object-center"
+              className="rounded-lg object-cover desktop:object-center"
             />
           </div>
-          <div className="relative h-40 laptop:mb-4 laptop:h-80">
+          <div className="relative h-40 desktop:mb-4 desktop:h-80">
             <Image
               alt="high five with the Glico sign"
               src="/images/home/hi-five.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
-              className="rounded-lg object-cover object-top laptop:object-center"
+              className="rounded-lg object-cover object-top desktop:object-center"
             />
           </div>
-          <div className="relative mb-4 h-40 laptop:mb-0">
+          <div className="relative mb-4 h-40 desktop:mb-0">
             <Image
               alt="A picture I drew characterizing Eclipse and Java"
               src="/images/home/eclipse.jpeg"

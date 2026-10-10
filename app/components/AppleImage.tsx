@@ -12,12 +12,12 @@ export default function AppleImage({
   inline?: boolean;
 }) {
   const classNames = inline
-    ? `tablet:max-w-[576px] laptop:max-w-[653px]`
-    : `tablet:max-w-(--breakpoint-content-tablet) laptop:my-11 laptop:max-w-(--breakpoint-content-laptop)`;
+    ? `tablet:max-w-[576px] desktop:max-w-[653px]`
+    : `tablet:max-w-(--lane-media) desktop:my-11 desktop:max-w-(--lane-media)`;
 
   return (
     <figure
-      className={`mx-auto my-8 max-w-[414px] tablet:my-9 laptop:my-11 ${classNames}`}
+      className={`mx-auto my-8 max-w-[414px] tablet:my-9 desktop:my-11 ${classNames}`}
     >
       <div className="component-content">
         <div className="image-sharesheet">
@@ -27,11 +27,11 @@ export default function AppleImage({
               <Image
                 src={src}
                 alt={alt}
-                className={`h-auto w-full phone:rounded-xl`}
+                className={`h-auto w-full phone-lg:rounded-xl`}
               />
             </picture>
           </div>
-          <div className="image-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
+          <div className="image-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] desktop:mt-4 desktop:w-[653px]">
             <div className="image-caption break-all">{caption}</div>
           </div>
         </div>

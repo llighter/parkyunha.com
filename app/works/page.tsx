@@ -19,7 +19,7 @@ const placeholderItems = Array.from({ length: 6 }, (_, i) => ({
 
 export default function WorksPage() {
   return (
-    <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20">
+    <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20">
       <div className="content-container">
         <div className="@container">
           <h2 className="my-8 text-[24px] font-bold @[576px]:text-[28px] @[653px]:text-[32px]">
@@ -46,7 +46,7 @@ export default function WorksPage() {
         </div>
 
         {/* 작업물 그리드 */}
-        <div className="mt-10 grid grid-cols-2 gap-4 laptop:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-4 desktop:grid-cols-3">
           {placeholderItems.map((item) => (
             <div
               key={item.id}

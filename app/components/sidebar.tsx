@@ -35,10 +35,10 @@ export default function NavBar() {
           <Logo className="h-20 w-36 animate-[fade-in-up_0.6s_ease-out_both] transition-transform duration-200 hover:scale-[1.02] dark:invert" />
         </div>
         <nav
-          className="relative flex scroll-pr-6 items-start overflow-hidden px-4 pb-0 laptop:flex-col laptop:overflow-auto laptop:px-0"
+          className="relative flex scroll-pr-6 items-start overflow-hidden px-4 pb-0 desktop:flex-col desktop:overflow-auto desktop:px-0"
           id="nav"
         >
-          <div className="relative my-2 flex flex-row items-center laptop:mt-0">
+          <div className="relative my-2 flex flex-row items-center desktop:mt-0">
             {navItems.map(({ name, path }, index) => {
               const isActive = path === pathname;
               return (

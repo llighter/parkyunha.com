@@ -153,7 +153,7 @@ function FeaturesSection() {
         <p className="mb-12 text-center text-lg text-neutral-600 dark:text-neutral-400">
           {t("subtitle")}
         </p>
-        <div className="grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3">
+        <div className="grid gap-8 tablet:grid-cols-2 desktop:grid-cols-3">
           {featureKeys.map(({ key, icon }) => (
             <div
               key={key}
@@ -187,7 +187,7 @@ function PlatformSection() {
         <p className="mb-12 text-center text-lg text-neutral-600 dark:text-neutral-400">
           {t("subtitle")}
         </p>
-        <div className="grid gap-6 tablet:grid-cols-2 laptop:grid-cols-4">
+        <div className="grid gap-6 tablet:grid-cols-2 desktop:grid-cols-4">
           {platforms.map(({ key, displayName, requirement, icon }) => (
             <div
               key={key}

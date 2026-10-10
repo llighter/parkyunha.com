@@ -13,7 +13,7 @@ const projectLinks = [{ name: "StudyCard", path: "/studycard" }];
 export default function Footer() {
   return (
     <footer className="mx-auto w-full border-t border-neutral-200 dark:border-neutral-800">
-      <div className="mx-auto w-87.5 max-w-5xl px-5 pt-10 laptop:px-0">
+      <div className="mx-auto w-87.5 max-w-5xl px-5 pt-10 desktop:px-0">
         <div className="flex flex-col gap-10 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
             <Logo className="h-20 w-32 dark:invert" />

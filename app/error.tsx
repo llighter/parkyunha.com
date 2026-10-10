@@ -7,7 +7,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20">
+    <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20">
       <div className="content-container">
         <h2 className="my-8 text-[24px] font-bold">문제가 발생했습니다</h2>
         <p className="prose prose-neutral dark:prose-invert mb-4">

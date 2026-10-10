@@ -28,11 +28,9 @@ export default async function BlogPage() {
 
   return (
     <section
-      className={`mt-0 h-full overflow-hidden bg-zinc-100 dark:bg-neutral-900 pb-10 tablet:pb-16 laptop:pb-20`}
+      className={`mt-0 h-full overflow-hidden bg-zinc-100 pb-10 tablet:pb-16 desktop:pb-20 dark:bg-neutral-900`}
     >
-      <div
-        className={`mx-auto my-8 w-87.5 max-w-[366px] tablet:max-w-[576px] laptop:max-w-[653px]`}
-      >
+      <div className={`lane-text my-8`}>
         <div className={`@container`}>
           <h2
             className={`text-[24px] font-bold @[576px]:text-[28px] @[653px]:text-[32px]`}
@@ -41,9 +39,7 @@ export default async function BlogPage() {
           </h2>
         </div>
       </div>
-      <div
-        className={`mx-auto w-87.5 max-w-[366px] tablet:w-full tablet:max-w-(--breakpoint-content-tablet) laptop:max-w-(--breakpoint-content-laptop)`}
-      >
+      <div className={`lane-text tablet:lane-media`}>
         <div>
           <div className={`grid gap-8`}>
             {firstArticle && <Tile article={firstArticle} />}
@@ -57,7 +53,7 @@ export default async function BlogPage() {
             )}
 
             {smallArticles.length > 0 && (
-              <div className={`grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3`}>
+              <div className={`grid gap-8 tablet:grid-cols-2 desktop:grid-cols-3`}>
                 {smallArticles.map((article, i) => (
                   <Tile key={i} article={article} />
                 ))}

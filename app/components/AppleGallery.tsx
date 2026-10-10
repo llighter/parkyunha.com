@@ -114,7 +114,7 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
 
   return (
     <div
-      className="not-prose gallery my-8 me-auto ms-auto w-full max-w-[414px] tablet:my-9 tablet:max-w-[850px] tablet:px-[79px] laptop:my-11 laptop:box-border laptop:w-auto laptop:max-w-[1228px] laptop:px-[124px]"
+      className="not-prose gallery my-8 me-auto ms-auto w-full max-w-[414px] tablet:my-9 tablet:max-w-[850px] tablet:px-[79px] desktop:my-11 desktop:box-border desktop:w-auto desktop:max-w-[1228px] desktop:px-[124px]"
       role="region"
       aria-roledescription="carousel"
       aria-label="이미지 갤러리"
@@ -205,12 +205,12 @@ export default function AppleGallery({ images }: { images: GalleryImage[] }) {
                           loading={index === 0 ? "eager" : "lazy"}
                           priority={index === 0}
                           sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 692px, 980px"
-                          className={`h-auto w-full object-contain phone:rounded-xl`}
+                          className={`h-auto w-full object-contain phone-lg:rounded-xl`}
                         />
                       </picture>
                     </div>
                     <div
-                      className={`gallery-caption mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]`}
+                      className={`gallery-caption mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] desktop:mt-4 desktop:w-[653px]`}
                       aria-live={index === currentIndex ? "polite" : undefined}
                     >
                       <div className="image-caption break-all">
