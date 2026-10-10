@@ -15,7 +15,6 @@
 | `scripts/check-layout-tokens.mjs` | CSS 와 `lib/layout.ts` 의 숫자가 같은지 검사 |
 | `app/components/Figure/` | 그림 · 영상 한 장 |
 | `app/components/Gallery/` | 갤러리 — `Gallery.tsx` · `useGallery.ts` · `GalleryVideo.tsx` · `slide.tsx` · `Gallery.module.css` |
-| `app/components/Gallery/CardCascade.*` | 카드 목록 애니메이션 (갤러리 사용자 슬라이드의 예) |
 | `app/components/Reveal/RevealOnScroll.tsx` | 스크롤 등장 — 루트 레이아웃에 하나 |
 
 ## 4층 토큰
@@ -25,7 +24,7 @@
 | 1 원시 | `--ref-gray-0 … 1000`, `--ref-blue-*`, `--ref-cinnabar-500` | 값 그 자체. 컴포넌트에서 쓰지 않는다 | `application.yml` 의 상수 |
 | 2 역할 | `--color-*`, `--text-*`, `--spacing-*`, `--radius-*`, `--ease-*` | 의미. 컴포넌트는 여기에만 기댄다. 다크는 이 층만 바꾼다 | 인터페이스 (DIP) |
 | 3 레이아웃 · 움직임 | `--lane-*`, `--reveal-*` | 화면 폭 · 사용자 설정마다 값이 바뀌는 것 | 프로파일별 설정값 |
-| 4 부품 | `--gallery-*`, `--cascade-*` | 부품 하나의 손잡이. 부품 CSS 모듈 맨 위에만 | `@ConfigurationProperties` |
+| 4 부품 | `--gallery-*` | 부품 하나의 손잡이. 부품 CSS 모듈 맨 위에만 | `@ConfigurationProperties` |
 
 역할 토큰을 `@theme static` 에 두는 이유
 - `static`: 유틸리티가 쓰이지 않아도 CSS 변수로 늘 나온다 → CSS 모듈이 `var(--color-fg)` 로 읽을 수 있다.
@@ -75,7 +74,7 @@ Tailwind 는 남긴다. 다만 **억지로 쓰지 않는다**. 두 쪽 모두 �
 | 어디 | 무엇 | 예 |
 | --- | --- | --- |
 | 유틸리티 (`className`) | 간격 · 정렬 · 레인 · 글자 역할 · 색 역할 — 한 요소에 몇 개로 끝나는 것 | `lane-text text-display mt-5` |
-| CSS 모듈 (`부품.module.css`) | 상태(`[data-active]` · `[data-playing]`) · 전환 · keyframes · 컨테이너 쿼리 · 부품 토큰 | `Gallery`, `CardCascade` |
+| CSS 모듈 (`부품.module.css`) | 상태(`[data-active]` · `[data-playing]`) · 전환 · keyframes · 컨테이너 쿼리 · 부품 토큰 | `Gallery`, `Figure` |
 | 전역 CSS (`app/styles/*.css`) | 마크업을 못 고치는 곳 · 페이지 전체에 걸친 규칙 · 값 그 자체 | `article.css`(MDX 본문), `motion.css`, `tokens.css` |
 
 CSS 로 넘기는 신호
@@ -131,14 +130,13 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 <Figure lane="text" caption="설명">…</Figure>        // 태블릿부터 본문 폭, 폰에서는 꽉
 <Figure lane="media" aspect="16:9"><iframe … /></Figure>
 
-// 갤러리 — 사진 · 영상 · 사용자 슬라이드를 섞어 쓴다
+// 갤러리 — 사진 · 영상을 섞어 쓴다
 <Gallery
   label="도메인 설정 과정"
   aspect="16:9"                                   // 기본. "21:9" "3:2" "4:3" "1:1" "4:5" "9:16" 또는 "7:3"
   items={[
     { src: img1, alt: "…", caption: "…" },
     { type: "video", src: "/videos/intro.mp4", poster: "/videos/intro.jpg", alt: "소개 영상", caption: "…" },
-    { type: "custom", alt: "최근 글 카드가 차례로 떠오른다", content: <CardCascade cards={posts} /> },
   ]}
 />
 // fit: "contain" | "cover"   transition: "auto" | "slide" | "fade"   loop: 기본 true
@@ -197,17 +195,6 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 자동 재생은 `muted` + `playsInline` + 보일 때 `play()` — iOS 도 허용하는 조합. 막히면 재생 단추로 바뀐다.
 - 한 장짜리 갤러리 = 화살표 · 점 없는 단독 영상(설명 · 내려받기는 그대로).
 
-### 카드 목록 애니메이션 — `CardCascade`
-
-```tsx
-<CardCascade cards={[{ eyebrow: "블로그", title: "나만의 도메인 만들기", meta: "2023. 7. 12.", image: "/images/hero/entrance.jpeg" }, …]} />
-```
-
-- 서버 컴포넌트, CSS 만으로 움직인다. 장이 보이는 동안(`[data-playing]`) 카드가 아래에서 차례로 떠오르고(1.1초) 머물렀다(4.4초) 위로 사라지기를 6초마다 되풀이한다. 카드마다 90ms 씩 늦게.
-- 멈춘 동안(다른 장 · 화면 밖 · 움직임 줄이기 · JS 전)에도 카드는 제자리에 보인다.
-- 액자 모양에 맞춰 3 × 2(가로) · 2 × 2(정사각 · 폰) · 2 × 3(세로). 간격 · 글자는 `cqmin`(액자 짧은 변의 1%)이라 액자와 함께 자란다.
-- 직접 만드는 사용자 슬라이드도 같은 방식: 움직임은 `[data-playing] .x { animation: … }`, JS 가 필요하면 `useSlide().playing`.
-
 ## 움직임
 
 ### 스크롤 등장
@@ -231,11 +218,10 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 
 | 토큰 | 값 | 쓰임 |
 | --- | --- | --- |
-| `--ease-reveal` | `cubic-bezier(0.2, 0.7, 0.2, 1)` | 빠르게 출발해 부드럽게 선다 — 스크롤 등장 · 카드 |
+| `--ease-reveal` | `cubic-bezier(0.2, 0.7, 0.2, 1)` | 빠르게 출발해 부드럽게 선다 — 스크롤 등장 |
 | `--reveal-distance` | 16px · 24px(태블릿 이상) | 오르는 거리 |
 | `--reveal-duration` | 900ms | 오르는 시간 |
 | `--reveal-stagger` | 90ms | 함께 들어온 카드 사이 |
-| `--cascade-cycle` | 6s | 카드 애니메이션 한 바퀴 (부품 토큰) |
 | `--duration-fast` · `--duration-slow` | 150ms · 500ms | 상태 전환 · 갤러리 겹쳐 바꾸기 |
 
 움직임 줄이기 설정이면 시간 · 거리가 모두 0 — 토큰 한 곳에서 꺼진다.
