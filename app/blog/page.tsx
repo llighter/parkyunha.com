@@ -31,13 +31,7 @@ export default async function BlogPage() {
       className={`mt-0 h-full overflow-hidden bg-zinc-100 pb-10 tablet:pb-16 desktop:pb-20 dark:bg-neutral-900`}
     >
       <div className={`lane-text my-8`}>
-        <div className={`@container`}>
-          <h2
-            className={`text-[24px] font-bold @[576px]:text-[28px] @[653px]:text-[32px]`}
-          >
-            &nbsp;블로그 글 읽기
-          </h2>
-        </div>
+        <h2 className="text-title">&nbsp;블로그 글 읽기</h2>
       </div>
       <div className={`lane-text tablet:lane-media`}>
         <div>
@@ -76,13 +70,13 @@ export default async function BlogPage() {
 
 function Tile({ article }: { article: BlogPost }) {
   return (
-    <div className={`relative isolate @container`}>
+    <div className={`@container relative isolate`}>
       <div
-        className={`group flex h-full flex-col overflow-hidden rounded-2xl @[692px]:flex-row`}
+        className={`group flex h-full flex-col overflow-hidden rounded-2xl @media-tablet:flex-row`}
       >
         {/* shrink-0 is Silver Bullet!! */}
         <div
-          className={`shrink-0 overflow-hidden @[692px]:w-[453px] @[980px]:w-[643px]`}
+          className={`shrink-0 overflow-hidden @media-tablet:w-[453px] @media-desktop:w-[643px]`}
         >
           <Image
             src={article.metadata.image || "/default-image.jpg"}
@@ -90,16 +84,16 @@ function Tile({ article }: { article: BlogPost }) {
             width={400}
             height={400}
             sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 50vw, 33vw"
-            className={`aspect-1.77 h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
+            className={`aspect-video h-auto w-full max-w-full object-cover transition-transform duration-300 group-hover:scale-105`}
           />
         </div>
-        <div className={`flex grow flex-col justify-between bg-white dark:bg-neutral-800 p-6`}>
-          <div className={`space-y-[4px] @[474px]:space-y-[8px]`}>
-            <p className={`text-[12px] font-bold text-gray-600 dark:text-neutral-400`}>
+        <div className={`flex grow flex-col justify-between bg-card p-6`}>
+          <div className={`space-y-[4px] @tile-md:space-y-[8px]`}>
+            <p className={`text-eyebrow text-fg-muted`}>
               {article.metadata.category}
             </p>
             <p
-              className={`mt-2 break-keep text-[19px] font-semibold @[305px]:leading-6 @[474px]:text-[24px] @[474px]:leading-8 @[692px]:text-[21px] @[980px]:text-[32px] @[980px]:font-bold @[980px]:leading-10`}
+              className={`mt-2 text-[19px] font-semibold break-keep @tile-sm:leading-6 @tile-md:text-[24px] @tile-md:leading-8 @media-tablet:text-[21px] @media-desktop:text-[32px] @media-desktop:leading-10 @media-desktop:font-bold`}
             >
               <Link href={`/blog/${article.slug}`}>
                 <span
@@ -110,7 +104,7 @@ function Tile({ article }: { article: BlogPost }) {
               </Link>
             </p>
           </div>
-          <p className={`mt-2 text-[14px] font-medium text-gray-500 dark:text-neutral-400`}>
+          <p className={`mt-2 text-meta text-fg-muted`}>
             {formatDate(article.metadata.publishedAt)}
           </p>
         </div>

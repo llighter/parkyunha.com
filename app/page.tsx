@@ -21,13 +21,9 @@ export default function Home() {
       className={`mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20`}
     >
       <div className="content-container">
-        <div className={`@container`}>
-          <h2
-            className={`my-8 text-[24px] font-bold @[576px]:text-[28px] @[653px]:text-[32px]`}
-          >
-            &nbsp;안녕하세요, <b>박윤하</b>입니다.
-          </h2>
-        </div>
+        <h2 className="my-8 text-title">
+          &nbsp;안녕하세요, <b>박윤하</b>입니다.
+        </h2>
         <div className="prose prose-neutral dark:prose-invert">
           <p>
             {`안녕하세요. `}
