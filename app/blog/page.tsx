@@ -28,7 +28,7 @@ export default async function BlogPage() {
 
   return (
     <section
-      className={`mt-0 h-full overflow-hidden bg-zinc-100 pb-10 tablet:pb-16 desktop:pb-20 dark:bg-neutral-900`}
+      className={`mt-0 h-full overflow-hidden bg-surface pb-10 tablet:pb-16 desktop:pb-20`}
     >
       <div className={`lane-text my-8`}>
         <h2 className="text-title">&nbsp;블로그 글 읽기</h2>
