@@ -8,24 +8,24 @@ function AppNav() {
   const t = useTranslations("nav");
 
   return (
-    <header className="border-b border-neutral-200 dark:border-neutral-800">
+    <header className="border-b border-line">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link
           href="/studycard"
-          className="text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
+          className="text-lg font-bold tracking-tight text-fg"
         >
           StudyCard
         </Link>
         <div className="flex items-center gap-6 text-sm">
           <Link
             href="/studycard#features"
-            className="hidden text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 tablet:inline"
+            className="hidden text-fg-muted transition-colors hover:text-fg tablet:inline"
           >
             {t("features")}
           </Link>
           <Link
             href="/studycard/privacy"
-            className="hidden text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 tablet:inline"
+            className="hidden text-fg-muted transition-colors hover:text-fg tablet:inline"
           >
             {t("privacy")}
           </Link>

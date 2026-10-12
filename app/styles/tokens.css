@@ -37,6 +37,10 @@
   --ref-blue-400: #2997ff;
   --ref-blue-focus: #0071e3;
 
+  /* 초록 — 상태(확인 표시)만 */
+  --ref-green-600: #16a34a;
+  --ref-green-400: #4ade80;
+
   /* 인주 — 낙관(주문 R · 백문 SB) 전용 */
   --ref-cinnabar-500: #b4382a;
 }
@@ -77,6 +81,9 @@
   ); /* 사진 · 영상 위에 뜨는 버튼 — 테마와 무관 */
   --color-media-control-hover: rgb(0 0 0 / 0.66);
   --color-media-control-fg: var(--ref-gray-0);
+  --color-positive: var(
+    --ref-green-600
+  ); /* 확인 표시(✓) 같은 상태 — 버튼 · 링크에는 쓰지 않는다 */
 
   /* 브랜드 */
   --color-seal: var(
@@ -220,6 +227,7 @@
   --color-control: var(--ref-gray-700);
   --color-control-hover: var(--ref-gray-600);
   --color-control-fg: var(--ref-gray-300);
+  --color-positive: var(--ref-green-400);
 }
 
 @media (prefers-reduced-motion: reduce) {
