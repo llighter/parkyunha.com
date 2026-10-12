@@ -10,7 +10,8 @@ const localePattern = new RegExp(
   `^/(${locales.filter((l) => l !== "ko").join("|")})(/|$)`,
 );
 
-export default function middleware(request: NextRequest) {
+// Next 16: middleware.ts → proxy.ts (이름만 — 하는 일은 같다)
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const localeMatch = pathname.match(localePattern);

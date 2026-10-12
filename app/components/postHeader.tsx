@@ -22,7 +22,7 @@ export default function PostHeader({
             "@type": "BlogPosting",
             headline: metadata.title,
             datePublished: metadata.publishedAt,
-            dateModified: metadata.publishedAt,
+            dateModified: metadata.updatedAt ?? metadata.publishedAt,
             description: metadata.summary,
             // 대표 이미지가 없으면 사이트 OG 이미지 (app/opengraph-image.png) — 제목이 들어간 글별 OG 는 나중 일
             image: metadata.image
