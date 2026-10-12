@@ -24,9 +24,10 @@ export default function PostHeader({
             datePublished: metadata.publishedAt,
             dateModified: metadata.publishedAt,
             description: metadata.summary,
+            // 대표 이미지가 없으면 사이트 OG 이미지 (app/opengraph-image.png) — 제목이 들어간 글별 OG 는 나중 일
             image: metadata.image
               ? `${SITE_URL}${metadata.image}`
-              : `${SITE_URL}/og?title=${metadata.title}`,
+              : `${SITE_URL}/opengraph-image.png`,
             url: `${SITE_URL}/blog/${slug}`,
             author: {
               "@type": "Person",
