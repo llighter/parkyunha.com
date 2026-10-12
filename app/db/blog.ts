@@ -44,7 +44,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   const folders = getMDXFolders(BLOG_DIR);
 
   const posts = await Promise.all(
-    folders.map((folder) => getMetadataFromMDX(folder))
+    folders.map((folder) => getMetadataFromMDX(folder)),
   );
 
   return posts

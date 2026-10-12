@@ -3,8 +3,7 @@ name: FEATURE REQUEST
 about: 프로그램 변경을 요청한다.
 title: "\U0001F6E0 "
 labels: enhancement
-assignees: ''
-
+assignees: ""
 ---
 
 **이 기능요청🌟이 어떤 문제와 연관이 있나요? 설명해주세요.**

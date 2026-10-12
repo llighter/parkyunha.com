@@ -3,6 +3,7 @@
 Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs/design-system.md`, 값은 `app/styles/tokens.css` 한 곳.
 
 ## 디자인 시스템
+
 - 색 · 글자 · 간격 · 모서리는 역할 토큰으로 — `bg-canvas` `text-fg-muted` `text-display` `my-media` `rounded-media`. `--ref-*` 와 팔레트 클래스(`gray-500` · `neutral-400` …)는 쓰지 않는다.
 - `dark:` 대신 역할 토큰. 다크는 `.dark` 범위에서 토큰 값만 바뀐다.
 - 폭은 레인으로 — 부모 `.lanes`, 블록은 `lane-text` · `lane-panel` · `lane-media` · `lane-wide` · `lane-full`. 폭 숫자를 직접 쓰지 않는다.
@@ -14,10 +15,12 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs
 - 스크롤 등장은 `data-reveal-children` · `data-reveal-stagger` · `data-reveal` 속성만 붙인다 (일은 `RevealOnScroll` 하나가 한다).
 
 ## 확인
+
 - `npx tsc --noEmit` · `npm run lint` · `node scripts/check-layout-tokens.mjs` · `npm run build`
 - 화면은 폭 390 · 768 · 1280, 밝게 · 어둡게. 확인용 서버는 `npm run start -- -p 3100` (3000 은 개발 서버용으로 비워 둔다).
 
 ## 작업 방식
+
 - main 에 바로 커밋하지 않는다. 브랜치에서 하고, 한 커밋 = 한 가지 일.
 - 커밋 · 푸시 · 파일 삭제 · 패키지 설치는 하기 전에 묻는다.
 - 커밋 메시지는 한국어 한 줄, 필요하면 본문.
