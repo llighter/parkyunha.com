@@ -48,7 +48,7 @@ export default function NavBar() {
                   className={`relative animate-[fade-in-up_0.5s_ease-out_both] rounded-md px-3 py-2 text-sm transition-colors duration-200 ${
                     isActive
                       ? "font-semibold text-stone-900 dark:text-neutral-100"
-                      : "text-stone-400 hover:bg-stone-50 hover:text-stone-700 dark:text-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
+                      : "text-fg-muted hover:bg-surface hover:text-fg" // 대비 4.5:1 이상 (stone-400 은 2.6:1 이었다)
                   }`}
                   style={{ animationDelay: `${100 + index * 80}ms` }}
                 >

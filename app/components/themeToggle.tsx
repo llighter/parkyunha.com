@@ -73,27 +73,31 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="flex items-center gap-1 rounded-md px-2 py-2 text-stone-400 dark:text-neutral-500"
+        className="flex items-center gap-1 rounded-md px-2 py-2 text-fg-muted"
         aria-label="테마 전환"
       >
         <span className="inline-block h-4 w-4" />
-        <span className="text-[11px]">&nbsp;</span>
+        <span className="hidden text-[11px] tablet:inline">&nbsp;</span>
       </button>
     );
   }
 
-  const current = themeConfig[theme as keyof typeof themeConfig] ?? themeConfig.system;
+  const current =
+    themeConfig[theme as keyof typeof themeConfig] ?? themeConfig.system;
   const Icon = current.icon;
 
   return (
     <button
       onClick={() => setTheme(current.next)}
-      className="flex items-center gap-1 rounded-md px-2 py-2 text-stone-400 transition-colors duration-200 hover:bg-stone-50 hover:text-stone-700 dark:text-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
+      className="flex items-center gap-1 rounded-md px-2 py-2 text-fg-muted transition-colors duration-200 hover:bg-surface hover:text-fg"
       aria-label={`현재 테마: ${current.label}. 클릭하여 변경`}
       title={current.label}
     >
       <Icon className="h-4 w-4" />
-      <span className="text-[11px] font-medium">{current.label}</span>
+      {/* 폰(735 미만)에서는 아이콘만 — 라벨이 줄바꿈되며 내비가 두 줄이 되던 것 */}
+      <span className="hidden text-[11px] font-medium tablet:inline">
+        {current.label}
+      </span>
     </button>
   );
 }
