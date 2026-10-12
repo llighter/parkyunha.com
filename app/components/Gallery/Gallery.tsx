@@ -11,7 +11,6 @@ import {
 } from "react";
 import { BREAKPOINT, aspectOf, laneSizes, type Aspect } from "@/lib/layout";
 import GalleryVideo, { type VideoSource } from "./GalleryVideo";
-import { SlideContext } from "./slide";
 import {
   keyToIndex,
   useGallery,
@@ -24,12 +23,12 @@ import s from "./Gallery.module.css";
 type Fit = "contain" | "cover";
 
 interface SlideBase {
-  /** 화면 읽기용 설명 — 이미지 alt, 영상 · 사용자 슬라이드의 이름 */
+  /** 화면 읽기용 설명 — 이미지 alt, 영상의 이름 */
   alt: string;
   caption?: ReactNode;
   /** 이 장만 다르게 맞출 때 (기본은 갤러리의 fit) */
   fit?: Fit;
-  /** 내려받을 원본 주소. 이미지 · 영상은 기본 src, false 면 버튼을 숨긴다 */
+  /** 내려받을 원본 주소. 기본은 src, false 면 버튼을 숨긴다 */
   download?: string | false;
   /** 내려받을 때 파일 이름 */
   downloadName?: string;
@@ -53,16 +52,7 @@ export interface VideoSlide extends SlideBase {
   loop?: boolean;
 }
 
-export interface CustomSlide extends SlideBase {
-  type: "custom";
-  /**
-   * 장 안에 그릴 것 (카드 목록 애니메이션 같은 것).
-   * 지금 보이는지는 장 요소의 [data-playing] 속성(CSS)이나 useSlide() 훅(JS)으로 읽는다.
-   */
-  content: ReactNode;
-}
-
-export type GalleryItem = ImageSlide | VideoSlide | CustomSlide;
+export type GalleryItem = ImageSlide | VideoSlide;
 
 export interface GalleryProps {
   items: GalleryItem[];
@@ -86,7 +76,7 @@ const MAX_DOTS = 10;
 const SIZES = laneSizes("media");
 const FADE_QUERY = `(hover: hover) and (pointer: fine) and (min-width: ${BREAKPOINT.tablet}px)`;
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
-const KIND = { image: "이미지", video: "영상", custom: "슬라이드" } as const;
+const KIND = { image: "이미지", video: "영상" } as const;
 
 export default function Gallery({
   items,
@@ -167,12 +157,6 @@ export default function Gallery({
             {items.map((item, i) => {
               const active = i === index;
               const near = Math.abs(i - index) <= 1;
-              const state = {
-                active,
-                visible,
-                reducedMotion,
-                playing: active && visible && !reducedMotion,
-              };
               return (
                 <div
                   key={i}
@@ -184,19 +168,16 @@ export default function Gallery({
                   aria-describedby={item.caption ? id("caption", i) : undefined}
                   inert={!active}
                   data-active={active ? "" : undefined}
-                  data-playing={state.playing ? "" : undefined}
                   data-kind={item.type ?? "image"}
                 >
-                  <SlideContext.Provider value={state}>
-                    <SlideView
-                      item={item}
-                      fit={item.fit ?? fit}
-                      near={near}
-                      active={active}
-                      visible={visible}
-                      reducedMotion={reducedMotion}
-                    />
-                  </SlideContext.Provider>
+                  <SlideView
+                    item={item}
+                    fit={item.fit ?? fit}
+                    near={near}
+                    active={active}
+                    visible={visible}
+                    reducedMotion={reducedMotion}
+                  />
                 </div>
               );
             })}
@@ -325,12 +306,6 @@ function SlideView({
           preload={near}
         />
       );
-    case "custom":
-      return (
-        <div className={s.custom} role="img" aria-label={item.alt}>
-          {item.content}
-        </div>
-      );
     default:
       return (
         <Image
@@ -350,7 +325,6 @@ function SlideView({
 function downloadOf(item: GalleryItem): string | null {
   if (item.download === false) return null;
   if (item.download) return item.download;
-  if (item.type === "custom") return null;
   return typeof item.src === "string" ? item.src : item.src.src;
 }
 

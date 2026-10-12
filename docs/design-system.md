@@ -14,7 +14,7 @@
 | `lib/layout.ts` | JS 가 쓰는 숫자 사본 (`next/image` 의 `sizes`, `matchMedia`) · 비율 프리셋 `ASPECT` |
 | `scripts/check-layout-tokens.mjs` | CSS 와 `lib/layout.ts` 의 숫자가 같은지 검사 |
 | `app/components/Figure/` | 그림 · 영상 한 장 |
-| `app/components/Gallery/` | 갤러리 — `Gallery.tsx` · `useGallery.ts` · `GalleryVideo.tsx` · `slide.tsx` · `Gallery.module.css` |
+| `app/components/Gallery/` | 갤러리 — `Gallery.tsx` · `useGallery.ts` · `GalleryVideo.tsx` · `Gallery.module.css` |
 | `app/components/Reveal/RevealOnScroll.tsx` | 스크롤 등장 — 루트 레이아웃에 하나 |
 
 ## 4층 토큰
@@ -74,7 +74,7 @@ Tailwind 는 남긴다. 다만 **억지로 쓰지 않는다**. 두 쪽 모두 �
 | 어디 | 무엇 | 예 |
 | --- | --- | --- |
 | 유틸리티 (`className`) | 간격 · 정렬 · 레인 · 글자 역할 · 색 역할 — 한 요소에 몇 개로 끝나는 것 | `lane-text text-display mt-5` |
-| CSS 모듈 (`부품.module.css`) | 상태(`[data-active]` · `[data-playing]`) · 전환 · keyframes · 컨테이너 쿼리 · 부품 토큰 | `Gallery`, `Figure` |
+| CSS 모듈 (`부품.module.css`) | 상태(`[data-active]` · `[data-mode]`) · 전환 · keyframes · 컨테이너 쿼리 · 부품 토큰 | `Gallery`, `Figure` |
 | 전역 CSS (`app/styles/*.css`) | 마크업을 못 고치는 곳 · 페이지 전체에 걸친 규칙 · 값 그 자체 | `article.css`(MDX 본문), `motion.css`, `tokens.css` |
 
 CSS 로 넘기는 신호
@@ -189,11 +189,11 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 | --- | --- | --- |
 | (생략) 이미지 | `src`, `alt` | `next/image` fill · `sizes` 는 레인에서. 지금 장 ±1 만 먼저 불러온다. 내려받기 = 원본 |
 | `"video"` | `src`(mp4), `alt` | 보이는 장이고 갤러리가 화면 안일 때만 소리 없이 반복 재생, 벗어나면 멈춤. 사용자가 멈추면 장을 오가도 멈춘 채. 움직임 줄이기면 큰 재생 단추. `sources` 로 webm 을 앞에, `poster`, `autoPlay` · `loop` 끄기. 내려받기 = mp4 |
-| `"custom"` | `alt`, `content` | 아무 React 노드. 화면 읽기에는 `alt` 하나(role="img"). 지금 보이는가는 CSS `[data-playing]` · JS `useSlide()`. 내려받기 없음(`download` 를 주면 생긴다) |
 
 - 영상 파일은 `/public` (같은 도메인)에 둔다. H.264 mp4 하나면 대부분의 브라우저가 재생한다. 브라우저는 소스를 앞에서부터 보고 재생할 수 있는 첫 것을 고르니, 용량을 줄이거나 H.264 가 빠진 브라우저(오픈소스 Chromium 등)까지 챙기려면 `sources` 로 webm 을 앞에 둔다.
 - 자동 재생은 `muted` + `playsInline` + 보일 때 `play()` — iOS 도 허용하는 조합. 막히면 재생 단추로 바뀐다.
 - 한 장짜리 갤러리 = 화살표 · 점 없는 단독 영상(설명 · 내려받기는 그대로).
+- 사진 · 영상 말고 다른 것(애니메이션 등)이 필요해지면 `type` 을 하나 더하고 `SlideView` 에 갈래를 더한다. 쓰는 곳이 없어 뺀 ‘사용자 슬라이드’ 틀(`type: "custom"` · `useSlide()` · `[data-playing]`)은 커밋 `4027223` 에 남아 있다.
 
 ## 움직임
 

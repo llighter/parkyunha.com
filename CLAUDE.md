@@ -10,7 +10,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs
 - 클래스 이름을 조립하지 않는다 (`` `lane-${x}` `` ✗ — Tailwind 가 찾지 못한다).
 - Tailwind 는 쓰되 억지로 쓰지 않는다. 상태(`[data-*]`) · keyframes · 컨테이너 쿼리 · 부품 토큰은 CSS 모듈, MDX 본문과 페이지 전체 규칙은 `app/styles/*.css`. 한 요소의 클래스가 한 줄을 넘거나 같은 임의값이 두 번 넘게 나오면 CSS 로 옮긴다.
 - 움직임은 토큰(`--ease-reveal` · `--reveal-*` · `--duration-*`)으로. 움직임 줄이기 설정을 지킨다.
-- 그림은 `Figure`, 갤러리는 `Gallery`(사진 · 영상 · 사용자 슬라이드, `aspect` 프리셋). `AppleImage` · `HeroImage` · `YoutubeIframe` · `AppleGallery` 는 기존 글을 위한 감싸개.
+- 그림은 `Figure`, 갤러리는 `Gallery`(사진 · 영상, `aspect` 프리셋). `AppleImage` · `HeroImage` · `YoutubeIframe` · `AppleGallery` 는 기존 글을 위한 감싸개.
 - 스크롤 등장은 `data-reveal-children` · `data-reveal-stagger` · `data-reveal` 속성만 붙인다 (일은 `RevealOnScroll` 하나가 한다).
 
 ## 확인

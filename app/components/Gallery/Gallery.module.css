@@ -117,13 +117,6 @@
   }
 }
 
-/* 사용자 슬라이드 — 애니메이션은 장의 [data-playing] 을 기준으로 */
-.custom {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
 /* 영상 재생 · 일시정지 — 처음에는 가운데 크게, 재생을 시작하면 오른쪽 아래 작게 */
 .mediaToggle {
   position: absolute;
