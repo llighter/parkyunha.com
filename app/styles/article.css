@@ -11,6 +11,25 @@
    나중에 prose 를 걷어낼 때는 이 파일만 고쳐 쓰면 된다.
    ===================================================================== */
 
+/* prose 를 어디서 쓰든 색은 토큰 — prose-neutral · dark:prose-invert 가 필요 없다 (다크는 토큰이 바꾼다).
+   층 밖 규칙이라 utilities 층의 prose 보다 힘이 세다. 아래 .article.prose 는 같은 값을 다시 쓴다(안전망). */
+.prose {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: var(--color-fg);
+  --tw-prose-lead: var(--color-fg-muted);
+  --tw-prose-links: var(--color-fg);
+  --tw-prose-bold: var(--color-fg);
+  --tw-prose-counters: var(--color-fg-muted);
+  --tw-prose-bullets: var(--color-fg-subtle);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-fg);
+  --tw-prose-quote-borders: var(--color-line);
+  --tw-prose-captions: var(--color-fg-muted);
+  --tw-prose-code: var(--color-fg);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+}
+
 @utility article {
   &.prose {
     font-size: var(--text-body);

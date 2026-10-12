@@ -12,7 +12,7 @@ const projectLinks = [{ name: "StudyCard", path: "/studycard" }];
 
 export default function Footer() {
   return (
-    <footer className="mx-auto w-full border-t border-neutral-200 dark:border-neutral-800">
+    <footer className="mx-auto w-full border-t border-line">
       <div className="mx-auto w-87.5 max-w-5xl px-5 pt-10 desktop:px-0">
         <div className="flex flex-col gap-10 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
@@ -23,21 +23,19 @@ export default function Footer() {
             >
               <Signature />
             </Link>
-            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+            <p className="mt-1 text-sm text-fg-muted">
               Dreaming to be a Developer and Entrepreneur.
             </p>
           </div>
           <div className="flex gap-16 text-sm">
             <div>
-              <h3 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100">
-                Navigate
-              </h3>
+              <h3 className="mb-3 font-semibold text-fg">Navigate</h3>
               <ul className="space-y-2">
                 {navLinks.map(({ name, path }) => (
                   <li key={path}>
                     <Link
                       href={path}
-                      className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                      className="text-fg-muted transition-colors hover:text-fg"
                     >
                       {name}
                     </Link>
@@ -46,15 +44,13 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100">
-                Project
-              </h3>
+              <h3 className="mb-3 font-semibold text-fg">Project</h3>
               <ul className="space-y-2">
                 {projectLinks.map(({ name, path }) => (
                   <li key={path}>
                     <Link
                       href={path}
-                      className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                      className="text-fg-muted transition-colors hover:text-fg"
                     >
                       {name}
                     </Link>
@@ -64,7 +60,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-neutral-200 py-6 text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
+        <div className="mt-10 border-t border-line py-6 text-sm text-fg-muted">
           &copy; {new Date().getFullYear()} Park Yunha
         </div>
       </div>
