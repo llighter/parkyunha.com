@@ -5,13 +5,15 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs
 ## 디자인 시스템
 
 - 색 · 글자 · 간격 · 모서리는 역할 토큰으로 — `bg-canvas` `text-fg-muted` `text-display` `my-media` `rounded-media`. `--ref-*` 와 팔레트 클래스(`gray-500` · `neutral-400` …)는 쓰지 않는다.
-- `dark:` 대신 역할 토큰. 다크는 `.dark` 범위에서 토큰 값만 바뀐다.
+- `dark:` 는 색에 쓰지 않는다 — 다크는 `.dark` 범위에서 토큰 값만 바뀐다. 기본 팔레트는 지워져 있어(`--color-*: initial`) `gray-500` 같은 클래스는 CSS 가 생기지 않는다. `dark:` 는 모양이 바뀌는 곳(숨김 · 보임, 그림 반전)에만.
 - 폭은 레인으로 — 부모 `.lanes`, 블록은 `lane-text` · `lane-panel` · `lane-media` · `lane-wide` · `lane-full`. 폭 숫자를 직접 쓰지 않는다.
 - 브레이크포인트 `phone-lg` 415 · `tablet` 735 · `desktop` 1069 (`app/globals.css` 의 `@theme`). 바꾸면 `lib/layout.ts` 도 같이 고치고 `node scripts/check-layout-tokens.mjs`.
 - 클래스 이름을 조립하지 않는다 (`` `lane-${x}` `` ✗ — Tailwind 가 찾지 못한다).
 - Tailwind 는 쓰되 억지로 쓰지 않는다. 상태(`[data-*]`) · keyframes · 컨테이너 쿼리 · 부품 토큰은 CSS 모듈, MDX 본문과 페이지 전체 규칙은 `app/styles/*.css`. 한 요소의 클래스가 한 줄을 넘거나 같은 임의값이 두 번 넘게 나오면 CSS 로 옮긴다.
 - 움직임은 토큰(`--ease-reveal` · `--reveal-*` · `--duration-*`)으로. 움직임 줄이기 설정을 지킨다.
-- 그림은 `Figure`, 갤러리는 `Gallery`(사진 · 영상, `aspect` 프리셋). `AppleImage` · `HeroImage` · `YoutubeIframe` · `AppleGallery` 는 기존 글을 위한 감싸개.
+- 그림은 `Figure`, 갤러리는 `Gallery`(사진 · 영상, `aspect` 프리셋, 내려받기 없음). `AppleImage` · `HeroImage` · `YoutubeIframe` · `AppleGallery` 는 기존 글을 위한 감싸개.
+- 브랜드는 `app/components/brand/` — 헤더 `Logo`(워드마크), 푸터 `Signature`(워드마크 + 낙관). 치수는 `brand.module.css` 의 `--brand-cap`. 낙관 글꼴 윤곽은 손대지 않는다(EBS 라이선스).
+- 글 metadata: `hidden: true` 면 목록 · sitemap 에서 빠진다, `updatedAt` 이 있으면 dateModified 로.
 - 스크롤 등장은 `data-reveal-children` · `data-reveal-stagger` · `data-reveal` 속성만 붙인다 (일은 `RevealOnScroll` 하나가 한다).
 
 ## 확인
