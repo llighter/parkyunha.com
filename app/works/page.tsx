@@ -20,7 +20,7 @@ const placeholderItems = Array.from({ length: 6 }, (_, i) => ({
 export default function WorksPage() {
   return (
     <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20">
-      <div className="content-container">
+      <div className="lane-text">
         <h2 className="my-8 text-title">&nbsp;Works</h2>
         <div className="prose">
           <p>사진, 영상, 그리고 만들어가는 것들을 기록합니다.</p>

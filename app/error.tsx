@@ -8,7 +8,7 @@ export default function Error({
 }) {
   return (
     <section className="mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20">
-      <div className="content-container">
+      <div className="lane-text">
         <h2 className="my-8 text-title">문제가 발생했습니다</h2>
         <p className="prose mb-4">페이지를 불러오는 중 오류가 발생했습니다.</p>
         <button

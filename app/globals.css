@@ -1,10 +1,10 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* 디자인 토큰 → 레인 → 글 본문 순서. 값은 tokens.css 한 곳에서만 고친다 */
-@import './styles/tokens.css';
-@import './styles/layout.css';
-@import './styles/article.css';
-@import './styles/motion.css';
+@import "./styles/tokens.css";
+@import "./styles/layout.css";
+@import "./styles/article.css";
+@import "./styles/motion.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -28,12 +28,6 @@
   --container-text-desktop: 653px; /* 데스크톱 본문 653.33 */
   --container-media-tablet: 692px;
   --container-media-desktop: 980px;
-
-  /* 옛 값 — 다른 페이지를 옮긴 뒤 지운다 */
-  --width-87_5: 87.5%;
-  --inset-45\%: 45%;
-  --inset-43\%: 43%;
-  --aspect-1_77: 1.77;
 }
 
 @keyframes fade-in-up {

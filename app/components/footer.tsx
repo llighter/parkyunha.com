@@ -13,7 +13,8 @@ const projectLinks = [{ name: "StudyCard", path: "/studycard" }];
 export default function Footer() {
   return (
     <footer className="mx-auto w-full border-t border-line">
-      <div className="mx-auto w-87.5 max-w-5xl px-5 pt-10 desktop:px-0">
+      {/* 헤더와 같은 본문 레인에 선다 (전에는 1024px 선 하나가 따로 있었다) */}
+      <div className="lane-text pt-10">
         <div className="flex flex-col gap-10 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
             <Link

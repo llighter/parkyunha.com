@@ -30,7 +30,7 @@ export default function NavBar() {
 
   return (
     <aside>
-      <div className="content-container mb-2">
+      <div className="lane-text mb-2">
         <div>
           <Logo className="h-20 animate-[fade-in-up_0.6s_ease-out_both] transition-transform duration-200 hover:scale-[1.02]" />
         </div>

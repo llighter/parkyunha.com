@@ -47,6 +47,10 @@
 
 /* ── 2층 · 역할 (밝은 화면 · 폰 기준값) ─────────────────────────────── */
 @theme static {
+  /* Tailwind 기본 팔레트(gray-500 · neutral-400 · white …)를 지운다 → 컴포넌트는 아래 역할 이름만 쓸 수 있다.
+     팔레트 클래스를 쓰면 CSS 가 생기지 않아 바로 드러난다. */
+  --color-*: initial;
+
   /* 바탕 */
   --color-canvas: var(--ref-gray-0); /* 페이지 바탕 */
   --color-surface: var(--ref-gray-50); /* 바탕 위의 면 — 목록 페이지 바탕 */

@@ -20,7 +20,7 @@ export default function Home() {
     <section
       className={`mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20`}
     >
-      <div className="content-container">
+      <div className="lane-text">
         <h2 className="my-8 text-title">
           &nbsp;안녕하세요, <b>박윤하</b>입니다.
         </h2>

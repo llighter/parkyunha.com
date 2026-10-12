@@ -53,12 +53,3 @@
   max-inline-size: none;
   margin-inline: 0;
 }
-
-/* 옛 이름 — 다른 페이지를 옮기는 동안만 남긴다 */
-@utility content-container {
-  @apply lane-text;
-}
-
-@utility content-container-full {
-  @apply lane-panel;
-}

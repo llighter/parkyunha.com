@@ -48,7 +48,7 @@ export default async function ProjectPage({
   const st = await getTranslations("studycard");
 
   return (
-    <div className="content-container py-8 tablet:py-12">
+    <div className="lane-text py-8 tablet:py-12">
       <h1 className="mb-2 text-2xl font-bold text-fg">{t("title")}</h1>
       <p className="mb-8 text-fg-muted">{t("description")}</p>
       <div className="flex flex-col gap-4">
