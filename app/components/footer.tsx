@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "./Logo";
+import { Signature } from "./brand/Signature";
 
 const navLinks = [
   { name: "home", path: "/" },
@@ -16,7 +16,13 @@ export default function Footer() {
       <div className="mx-auto w-87.5 max-w-5xl px-5 pt-10 desktop:px-0">
         <div className="flex flex-col gap-10 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
-            <Logo className="h-20 w-32 dark:invert" />
+            <Link
+              href="/"
+              aria-label="PARK YUNHA — 홈"
+              className="flex h-20 items-center"
+            >
+              <Signature />
+            </Link>
             <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
               Dreaming to be a Developer and Entrepreneur.
             </p>

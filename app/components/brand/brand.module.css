@@ -1,0 +1,55 @@
+@reference "../../globals.css";
+
+/* =====================================================================
+   브랜드 — 워드마크 · 서명(워드마크 + 낙관). 로고 키트 2판의 규칙을 CSS 로.
+   ---------------------------------------------------------------------
+   치수는 대문자 높이 --brand-cap 하나에서 나온다:
+     워드마크 높이 = cap × 1.09 (오버슈트)   도장 = cap × 2   사이 = cap × 1
+   - 워드마크는 currentColor → 글자색 토큰(fg)을 따른다. 다크에서 invert 하지 않는다.
+   - 낙관은 밝은 배경에서 주문(붉은 글자 + 테두리), 어두운 배경에서 백문(붉은 바탕에 흰 글자).
+     주문은 종이 바탕이 있어야 살아나므로 다크에서는 백문으로 바꾼다 — 색이 아니라 모양이 바뀌는
+     것이라 토큰이 아닌 .dark 범위로 고른다 (CSS 모듈이 .dark 를 지역 이름으로 바꾸지 않게 :global).
+   - 서명은 대문자 24px 이상에서만 (작은 헤더는 워드마크만).
+   ===================================================================== */
+
+.logo {
+  --brand-cap: 16px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-fg);
+}
+
+.wordmark {
+  block-size: calc(var(--brand-cap) * 1.09);
+  inline-size: auto;
+}
+
+.signature {
+  --brand-cap: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--brand-cap);
+  color: var(--color-fg);
+}
+
+.seal {
+  inline-size: calc(var(--brand-cap) * 2);
+  block-size: calc(var(--brand-cap) * 2);
+  flex: none;
+}
+
+.sealJu {
+  display: block;
+}
+
+.sealBaek {
+  display: none;
+}
+
+:global(.dark) .sealJu {
+  display: none;
+}
+
+:global(.dark) .sealBaek {
+  display: block;
+}
