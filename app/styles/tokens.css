@@ -69,7 +69,7 @@
   --color-focus: var(--ref-blue-focus); /* 포커스 링 */
   --color-control: var(
     --ref-gray-50
-  ); /* 둥근 버튼 — 갤러리 화살표 · 내려받기 */
+  ); /* 둥근 버튼 — 갤러리 화살표 · 영상 단추 */
   --color-control-hover: var(--ref-gray-100);
   --color-control-fg: var(--ref-gray-500);
   --color-media-control: rgb(

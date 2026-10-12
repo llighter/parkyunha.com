@@ -1,7 +1,7 @@
 @reference "../../globals.css";
 
 /* =====================================================================
-   갤러리 — 본문보다 넓은 액자 + 화살표 · 설명 · 내려받기 · 점
+   갤러리 — 본문보다 넓은 액자 + 화살표 · 설명 · 점
    ---------------------------------------------------------------------
    부모는 lane-full(글 전체 폭). 안에서 폭을 다시 고른다.
      액자   100% − 2 × 화살표 자리, 최대 --lane-media
@@ -31,8 +31,8 @@
   --gallery-paddle: 44px; /* 화살표 지름 (터치 최소 44) */
   --gallery-paddle-gap: 12px; /* 액자 ~ 화살표 */
   --gallery-paddle-edge: 16px; /* 화살표 ~ 화면 끝 (최소) */
-  --gallery-control: 24px; /* 내려받기 지름 */
   --gallery-caption-gap: 12px; /* 액자 ~ 설명 줄 */
+  --gallery-caption-min: 24px; /* 설명 줄 최소 높이 — 뉴스룸 실측, 한 줄 설명이어도 점 자리가 같다 */
   --gallery-dot: 8px;
   --gallery-dot-hit: 24px; /* 점 누름 영역 (WCAG 2.2 최소 24) — 점 간격도 24 */
   --gallery-dots-gap: 9px; /* 설명 줄 ~ 점 누름 영역 (점 중심까지 21) */
@@ -239,13 +239,11 @@
   inset-inline-start: calc(100% + var(--gallery-paddle-gap));
 }
 
-/* ── 설명 + 내려받기 (본문 레인) ───────────────────────────────────── */
+/* ── 설명 (본문 레인) ─────────────────────────────────────────────── */
 .caption {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center; /* 설명 첫 줄과 내려받기 원의 가운데를 맞춘다 */
-  column-gap: 16px;
-  min-block-size: var(--gallery-control);
+  align-items: center;
+  min-block-size: var(--gallery-caption-min);
   inline-size: calc(100% - 2 * var(--lane-gutter));
   max-inline-size: var(--lane-text);
   margin-block-start: var(--gallery-caption-gap);
@@ -272,43 +270,6 @@
     opacity: 1;
     visibility: visible;
     transition-delay: 0s;
-  }
-}
-
-.download {
-  display: grid;
-  place-items: center;
-  inline-size: var(--gallery-control);
-  block-size: var(--gallery-control);
-  align-self: start;
-  /* 설명이 여러 줄이어도 첫 줄 가운데에 선다 */
-  margin-block-start: max(
-    0px,
-    calc(
-      (
-          var(--text-caption) * var(--text-caption--line-height) -
-            var(--gallery-control)
-        ) /
-        2
-    )
-  );
-  border-radius: 9999px;
-  background: var(--color-control);
-  color: var(--color-fg);
-  transition: background-color var(--duration-fast) var(--ease-standard);
-
-  & svg {
-    inline-size: 62%;
-    block-size: 62%;
-  }
-
-  &:hover {
-    background: var(--color-control-hover);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
   }
 }
 

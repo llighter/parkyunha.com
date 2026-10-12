@@ -28,10 +28,6 @@ interface SlideBase {
   caption?: ReactNode;
   /** 이 장만 다르게 맞출 때 (기본은 갤러리의 fit) */
   fit?: Fit;
-  /** 내려받을 원본 주소. 기본은 src, false 면 버튼을 숨긴다 */
-  download?: string | false;
-  /** 내려받을 때 파일 이름 */
-  downloadName?: string;
 }
 
 export interface ImageSlide extends SlideBase {
@@ -76,7 +72,6 @@ const MAX_DOTS = 10;
 const SIZES = laneSizes("media");
 const FADE_QUERY = `(hover: hover) and (pointer: fine) and (min-width: ${BREAKPOINT.tablet}px)`;
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
-const KIND = { image: "이미지", video: "영상" } as const;
 
 export default function Gallery({
   items,
@@ -111,8 +106,6 @@ export default function Gallery({
   const hasDots = many && count <= MAX_DOTS;
   const atStart = !loop && index === 0;
   const atEnd = !loop && index === count - 1;
-  const current = items[index];
-  const href = downloadOf(current);
   const hasCaption = items.some((item) => item.caption);
   const id = (part: string, i: number) => `${uid}-${part}-${i}`;
   const trackId = `${uid}-track`;
@@ -210,7 +203,7 @@ export default function Gallery({
         )}
       </div>
 
-      {(hasCaption || href) && (
+      {hasCaption && (
         <div className={s.caption}>
           <div className={s.captionStack}>
             {items.map((item, i) => (
@@ -225,17 +218,6 @@ export default function Gallery({
               </p>
             ))}
           </div>
-          {href && (
-            <a
-              className={s.download}
-              href={href}
-              download={current.downloadName ?? ""}
-              aria-label={`${index + 1}번째 ${KIND[current.type ?? "image"]} 원본 내려받기`}
-              title="원본 내려받기"
-            >
-              <DownloadIcon />
-            </a>
-          )}
         </div>
       )}
 
@@ -322,12 +304,6 @@ function SlideView({
   }
 }
 
-function downloadOf(item: GalleryItem): string | null {
-  if (item.download === false) return null;
-  if (item.download) return item.download;
-  return typeof item.src === "string" ? item.src : item.src.src;
-}
-
 function plainText(item: GalleryItem) {
   return typeof item.caption === "string" ? item.caption : item.alt;
 }
@@ -344,21 +320,6 @@ function Chevron({ direction }: { direction: "left" | "right" }) {
         fill="none"
         stroke="currentColor"
         strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function DownloadIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        d="M12 5v13.5M6.5 13 12 18.5l5.5-5.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
