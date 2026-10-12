@@ -12,7 +12,7 @@ const MAX_STEPS = 5;
  *
  * - 화면 아래에 있는 대상만 숨겼다가(pending), 화면에 들어오면 올린다(shown). 한 번만.
  * - 다 올라오면 done — motion.css 규칙이 빠져 요소 본래의 스타일(호버 이동 · 투명도 유틸리티 등)로 돌아간다.
- * - 첫 화면 · 이미 지나온 위쪽 블록은 그대로 둔다. 한 번에 건너뛴 블록은 움직임 없이 바로 보인다.
+ * - 첫 화면 · 이미 지나온 위쪽 블록은 그대로 둔다. 한 번에 건너뛴 블록은 움직임 없이 바로 보인다(스크롤에서 확인).
  * - 같은 순간 함께 들어온 카드(data-reveal-stagger)는 --reveal-stagger 만큼씩 늦게 — 들어오는 묶음(보통 한 줄)마다 차례로 뜬다.
  * - 움직임 줄이기 설정이면 아무것도 하지 않는다.
  * - 페이지를 옮길 때마다(pathname) 새 대상을 다시 찾는다.
@@ -38,15 +38,6 @@ export default function RevealOnScroll() {
           );
         if (entering.length === 0) return;
 
-        // 건너뛴 블록(앵커 · End 키로 한 번에 지나친 위쪽)은 움직임 없이 바로 보이게
-        // — 다시 올라갈 때 위에서 내려오는 블록이 아래에서 솟는 어색함이 없다
-        document
-          .querySelectorAll<HTMLElement>('[data-reveal-state="pending"]')
-          .forEach((el) => {
-            if (el.getBoundingClientRect().bottom > 0) return;
-            el.dataset.revealState = "done";
-            observer.unobserve(el);
-          });
         // 같은 부모 안에서 이번에 함께 들어온 순서 — 다음에 들어오는 줄은 다시 0 부터
         const order = new Map<Element, number>();
         const batch: HTMLElement[] = [];
@@ -80,6 +71,26 @@ export default function RevealOnScroll() {
       { rootMargin: "0px 0px -8% 0px" },
     );
 
+    // 건너뛴 블록(앵커 · End 키 · 빠른 스크롤로 한 번에 지나친 위쪽)은 움직임 없이 바로 보이게
+    // — 다시 올라갈 때 위에서 내려오는 블록이 아래에서 솟는 어색함이 없다.
+    // IntersectionObserver 는 화면과 한 번도 겹치지 않고 지나친 요소를 알려 주지 않으므로
+    // 스크롤에서 직접 본다 (프레임마다 한 번, 기다리는 블록만).
+    let frame = 0;
+    const sweep = () => {
+      frame = 0;
+      document
+        .querySelectorAll<HTMLElement>('[data-reveal-state="pending"]')
+        .forEach((el) => {
+          if (el.getBoundingClientRect().bottom > 0) return;
+          el.dataset.revealState = "done";
+          observer.unobserve(el);
+        });
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(sweep);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     const fold = window.innerHeight * 0.92;
     document.querySelectorAll<HTMLElement>(TARGETS).forEach((el) => {
       // 목록 안의 목록: 목록 자신은 그대로 두고 항목이 뜬다 (두 번 겹쳐 움직이지 않게)
@@ -93,7 +104,11 @@ export default function RevealOnScroll() {
       observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, [pathname]);
 
   return null;
