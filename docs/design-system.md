@@ -17,6 +17,11 @@
 | `app/components/Gallery/`                  | 갤러리 — `Gallery.tsx` · `useGallery.ts` · `GalleryVideo.tsx` · `Gallery.module.css`                                     |
 | `app/components/Reveal/RevealOnScroll.tsx` | 스크롤 등장 — 루트 레이아웃에 하나                                                                                       |
 | `app/components/brand/`                    | 워드마크 `Wordmark` · 낙관 `Seal` · 서명 `Signature` · `brand.module.css` (치수는 대문자 높이 `--brand-cap` 하나에서)    |
+| `app/components/sidebar.tsx`               | 머리 — 한 줄 띠(워드마크 · 내비 · 테마 단추), 모양은 `sidebar.module.css`                                                |
+| `app/components/themeToggle.tsx`           | 테마 단추 → 메뉴(라이트 · 다크 · 시스템), 모양은 `themeToggle.module.css`                                                |
+| `app/components/Carousel/`                 | 가로 캐러셀 — `Carousel.tsx` · `Carousel.module.css`                                                                     |
+| `app/components/BlogTile.tsx`              | 블로그 타일 — /blog · 홈 최신 · 홈 시리즈 캐러셀                                                                         |
+| `app/components/ProjectCard.tsx`           | 프로젝트 카드 — /project · 홈 (데이터는 `lib/projects.ts`)                                                               |
 
 ## 4층 토큰
 
@@ -26,6 +31,8 @@
 | 2 역할              | `--color-*`, `--text-*`, `--spacing-*`, `--radius-*`, `--ease-*` | 의미. 컴포넌트는 여기에만 기댄다. 다크는 이 층만 바꾼다 | 인터페이스 (DIP)           |
 | 3 레이아웃 · 움직임 | `--lane-*`, `--reveal-*`                                         | 화면 폭 · 사용자 설정마다 값이 바뀌는 것                | 프로파일별 설정값          |
 | 4 부품              | `--gallery-*`                                                    | 부품 하나의 손잡이. 부품 CSS 모듈 맨 위에만             | `@ConfigurationProperties` |
+
+부품 둘 이상이 같은 값을 쓰면 `tokens.css :root` 로 올린다 — 점 · 화살표 크기(`--gallery-dot` · `--gallery-dot-hit` · `--gallery-paddle`)는 갤러리 · 캐러셀이 함께 써서 `:root` 에 있다(이름은 처음 쓴 갤러리를 따랐다).
 
 역할 토큰을 `@theme static` 에 두는 이유
 
@@ -108,6 +115,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 폭은 “부모를 채우되(100%) 레인을 넘지 않게(`max-inline-size`)”. `min()` 으로 쓰면 긴 코드 한 줄이 페이지 폭을 밀어낸다.
 - 그림 · 갤러리처럼 레인을 넘나드는 부품은 `lane-full` 을 차지하고 안에서 다시 고른다(사진은 media, 설명은 text). 그래서 설명의 왼쪽 선이 본문과 언제나 맞는다.
 - 레인은 변형과 함께 쓸 수 있다: `lane-text tablet:lane-media`.
+- 시작선은 둘 — 글 · 소개 · 섹션 제목은 `lane-text`, 머리 · 푸터 띠와 카드 목록 · 캐러셀은 `lane-text tablet:lane-media`(폰에서는 본문 레인과 같은 선).
 
 ## 브레이크포인트 · 컨테이너 크기
 
@@ -202,6 +210,28 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 한 장짜리 갤러리 = 화살표 · 점 없는 단독 영상(설명은 그대로).
 - 사진 · 영상 말고 다른 것(애니메이션 등)이 필요해지면 `type` 을 하나 더하고 `SlideView` 에 갈래를 더한다. 쓰는 곳이 없어 뺀 ‘사용자 슬라이드’ 틀(`type: "custom"` · `useSlide()` · `[data-playing]`)은 커밋 `4027223` 에 남아 있다.
 
+## 머리 · 테마 · 푸터
+
+- 머리(`sidebar.tsx`)는 한 줄 띠 — 왼쪽 워드마크, 이어서 내비, 오른쪽 테마 단추, 아래 1px `line`. 태블릿부터 높이 72 한 줄, 폰은 두 줄(워드마크 · 테마 단추 56 / 내비 44, 넘치면 가로로 밀림). 폭은 `lane-text tablet:lane-media`.
+- 내비는 `blog · works · project` — 홈은 워드마크가 맡아 `home` 항목이 없다. 지금 쪽은 `aria-current="page"` + 굵게 `fg`, 나머지 `fg-muted`. 글(`/blog/…`)에서는 blog, `/en/project` 에서는 project 가 지금 쪽. 알약 배경 · 등장 애니메이션은 없다. `/studycard` 는 머리를 숨긴다.
+- 테마 단추(`themeToggle.tsx`)는 아이콘 하나(지름 40 · 아이콘 20)가 지금 값을 보여 준다 — 해 · 달 · 반원(시스템). 누르면 메뉴(`role="menu"` · `menuitemradio`, 지금 값에 체크). ↑ ↓ · Home · End 로 옮기고, 바깥을 누르거나 Esc 로 닫는다(Esc · 고른 뒤에는 단추로 초점). 메뉴는 그림자 없이 `line` 테두리 + `canvas` 바탕.
+- 푸터는 머리와 같은 띠(`lane-text tablet:lane-media`). Navigate 에도 `home` 은 없다.
+
+## 캐러셀
+
+```tsx
+<Carousel label="시리즈 개발 도구 팁" itemName="글" surface>
+  {posts.map((post) => <BlogTile key={post.slug} article={post} sizes="…" />)}
+</Carousel>
+<Carousel label="사진" itemName="사진" variant="photo">…</Carousel>
+```
+
+- 가로 스크롤 + `scroll-snap`. 트랙은 화면 끝까지 차고 첫 카드는 레인 왼쪽 선에서 시작한다 — 다음 카드가 살짝 보이고 양옆은 레인 바깥으로 이어진다.
+- 한 번에 보이는 장수: `card` 폰 1(본문 폭) · 태블릿 2 · 데스크톱 3, `photo` 폰 화면의 62.5% · 3 · 4.
+- 아래 왼쪽 점(탭 목록 — ← → · Home · End), 오른쪽 이전 · 다음 단추 44px. 갤러리와 같은 토큰이지만 끝에서 처음으로 이어지지 않고(끝 단추는 `aria-disabled`), 폰에서도 단추가 보인다. `surface` 띠 위에서는 단추 바탕이 `control-hover`.
+- 카드 글자는 그림 아래 — 카드는 `BlogTile` 그대로. 사진 위에 글을 얹지 않는다.
+- 바뀔 때 '글 2 / 3' 을 읽어 준다. 초점 갈 곳이 없는 사진 트랙은 트랙에 초점이 가서 ← → 로 스크롤한다. 스크롤 등장은 트랙 하나에(`data-reveal`).
+
 ## 움직임
 
 ### 스크롤 등장
@@ -248,7 +278,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 
 | 자리               | 부품                                                                                | 값                                                                                          |
 | ------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| 헤더               | `Logo`(링크 + `Wordmark`)                                                           | 대문자 16px, 글자색 `fg`. 상자 높이 80 은 옛 로고와 같아 내비 자리가 그대로                 |
+| 헤더               | `Logo`(링크 + `Wordmark`)                                                           | 대문자 16px, 글자색 `fg`. 머리 띠의 왼쪽 — 폰 56 줄 · 태블릿부터 72 줄의 가운데             |
 | 푸터               | `Signature`(워드마크 + 낙관)                                                        | 대문자 24 · 도장 48 · 사이 24. 밝은 배경 주문(글자 + 테두리), 다크 백문(바탕에 글자를 비움) |
 | 파비콘 · 앱 아이콘 | `app/favicon.ico` · `icon.svg` · `apple-icon.png` · `manifest.ts` + `public/icons/` | 백문 작은 판 — 먹색 바탕 흰 글자                                                            |
 | 링크 미리보기      | `app/opengraph-image.png`                                                           | 1200 × 630 밝은 판 — 모든 페이지 공통. 제목 들어간 글별 OG 는 나중 일                       |
@@ -260,5 +290,6 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 ## 남은 일
 
 1. (선택) prose 를 글 전용 CSS 로 — `article.css` 한 파일만 고쳐 쓰면 된다.
-2. 페이지 머리 한 종류(`PageHeader`) — 지금은 섹션 제목이 `&nbsp;` 들여쓰기로 선을 맞춘다.
+2. 페이지 머리 한 종류(`PageHeader`) — 홈은 `&nbsp;` 들여쓰기를 걷었고, /blog · works 섹션 제목이 아직 `&nbsp;` 로 선을 맞춘다.
 3. 글별 OG 이미지(제목 + 낙관) — `opengraph-image.tsx` 로 그리면 된다.
+4. 시리즈 쪽 — 지금 홈의 '시리즈 모두 보기' 는 /blog 로 간다.
