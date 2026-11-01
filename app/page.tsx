@@ -27,7 +27,7 @@ const PHOTOS = [
   { src: "/images/home/seoul.jpeg", alt: "비행기에서 내려다본 서울" },
   {
     src: "/images/home/me-at-home.jpg",
-    alt: "오사카 호텔에서 내려다본 도시 풍경",
+    alt: "어두운 방, 책상 앞에서 휴대폰 화면을 들여다보는 모습 (흑백)",
   },
 ];
 
