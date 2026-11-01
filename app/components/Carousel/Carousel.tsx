@@ -128,6 +128,7 @@ export default function Carousel({
     <section
       className={s.carousel}
       data-variant={variant}
+      data-count={count}
       data-surface={surface || undefined}
       aria-roledescription="캐러셀"
       aria-label={label}
