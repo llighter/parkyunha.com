@@ -161,6 +161,11 @@
   --reveal-duration: 900ms;
   --reveal-stagger: 90ms; /* 카드 목록: 같은 순간 들어온 카드끼리 이만큼씩 늦게 */
 
+  /* 둥근 단추 · 점 — 갤러리 · 캐러셀이 함께 쓴다 (이름은 처음 쓴 갤러리를 따랐다) */
+  --gallery-paddle: 44px; /* 화살표 지름 (터치 최소 44) */
+  --gallery-dot: 8px;
+  --gallery-dot-hit: 24px; /* 점 누름 영역 (WCAG 2.2 최소 24) — 점 간격도 24 */
+
   /* 레인 — 폰 (< 735) */
   --lane-gutter: 6.25%; /* 본문 좌우 여백 → 본문은 화면의 87.5% */
   --lane-text: 366px; /* 본문 */
