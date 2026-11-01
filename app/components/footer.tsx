@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Signature } from "./brand/Signature";
 
+/** 홈은 서명(워드마크)이 맡는다 — 머리와 같이 home 은 뺀다 */
 const navLinks = [
-  { name: "home", path: "/" },
   { name: "blog", path: "/blog" },
   { name: "works", path: "/works" },
   { name: "project", path: "/project" },
@@ -13,8 +13,8 @@ const projectLinks = [{ name: "StudyCard", path: "/studycard" }];
 export default function Footer() {
   return (
     <footer className="mx-auto w-full border-t border-line">
-      {/* 헤더와 같은 본문 레인에 선다 (전에는 1024px 선 하나가 따로 있었다) */}
-      <div className="lane-text pt-10">
+      {/* 머리와 같은 띠 — 폰은 본문 레인, 태블릿부터 미디어 레인 */}
+      <div className="lane-text pt-10 tablet:lane-media">
         <div className="flex flex-col gap-10 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
             <Link
