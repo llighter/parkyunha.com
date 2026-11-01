@@ -12,6 +12,7 @@ const navItems = [
   { name: "blog", path: "/blog" },
   { name: "works", path: "/works" },
   { name: "project", path: "/project" },
+  { name: "about", path: "/about" },
 ];
 
 const APP_ROUTES = ["/studycard"];

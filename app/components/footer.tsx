@@ -6,6 +6,7 @@ const navLinks = [
   { name: "blog", path: "/blog" },
   { name: "works", path: "/works" },
   { name: "project", path: "/project" },
+  { name: "about", path: "/about" },
 ];
 
 const projectLinks = [{ name: "StudyCard", path: "/studycard" }];
