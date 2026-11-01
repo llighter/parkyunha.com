@@ -52,7 +52,7 @@ export default function WorksPage() {
               key={item.id}
               className="flex aspect-square items-center justify-center rounded-xl border-2 border-dashed border-line bg-surface"
             >
-              <p className="text-sm text-fg-subtle">{item.id}</p>
+              <p className="text-sm text-fg-muted">{item.id}</p>
             </div>
           ))}
         </div>

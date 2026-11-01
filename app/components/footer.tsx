@@ -19,7 +19,7 @@ export default function Footer() {
           <div>
             <Link
               href="/"
-              aria-label="PARK YUNHA — 홈"
+              aria-label="Park Yunha — 홈"
               className="flex h-20 items-center"
             >
               <Signature />

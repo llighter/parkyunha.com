@@ -50,7 +50,7 @@
   --sh-sign: #89ddff;
   --sh-string: #9ece6a;
   --sh-keyword: #bb9af7;
-  --sh-comment: #565f89;
+  --sh-comment: #848dba; /* 코드 바탕(#1e2939) 위 4.5:1 — 예전 #565f89 는 2.4:1 */
   --sh-jsxliterals: #7aa2f7;
   --sh-property: #73daca;
   --sh-entity: #e0af68;

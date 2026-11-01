@@ -7,7 +7,7 @@ import type { SVGProps } from "react";
  * title 이 null 이면 장식(aria-hidden) — 감싸는 링크가 이름을 맡는다.
  */
 export function Wordmark({
-  title = "PARK YUNHA",
+  title = "Park Yunha",
   ...props
 }: Omit<SVGProps<SVGSVGElement>, "title"> & { title?: string | null }) {
   return (

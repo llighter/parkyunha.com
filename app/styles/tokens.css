@@ -223,7 +223,9 @@
   --color-frame: var(--ref-gray-900);
 
   --color-fg: var(--ref-gray-50);
-  --color-fg-muted: var(--ref-gray-400);
+  --color-fg-muted: var(
+    --ref-gray-300
+  ); /* 카드(#2c2c2e) 위에서도 4.5:1 이상 — 5.4:1 (#86868b 는 3.85:1 이었다) */
   --color-fg-subtle: var(--ref-gray-500);
 
   --color-line: var(--ref-gray-600);
