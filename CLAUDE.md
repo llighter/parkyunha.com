@@ -12,7 +12,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs
 - Tailwind 는 쓰되 억지로 쓰지 않는다. 상태(`[data-*]`) · keyframes · 컨테이너 쿼리 · 부품 토큰은 CSS 모듈, MDX 본문과 페이지 전체 규칙은 `app/styles/*.css`. 한 요소의 클래스가 한 줄을 넘거나 같은 임의값이 두 번 넘게 나오면 CSS 로 옮긴다.
 - 움직임은 토큰(`--ease-reveal` · `--reveal-*` · `--duration-*`)으로. 움직임 줄이기 설정을 지킨다.
 - 그림은 `Figure`, 갤러리는 `Gallery`(사진 · 영상, `aspect` 프리셋, 내려받기 없음). `AppleImage` · `HeroImage` · `YoutubeIframe` · `AppleGallery` 는 기존 글을 위한 감싸개.
-- 브랜드는 `app/components/brand/` — 헤더 `Logo`(워드마크), 푸터 `Signature`(워드마크 + 낙관). 치수는 `brand.module.css` 의 `--brand-cap`. 낙관 글꼴 윤곽은 손대지 않는다(EBS 라이선스).
+- 브랜드는 `app/components/brand/` — 헤더 `Logo`(워드마크), 푸터 `Signature`(워드마크 + 낙관). 치수는 `brand.module.css` 의 `--brand-cap`, 낙관 색은 `--color-seal`(평소엔 먹색 — 흑백). 낙관 글꼴 윤곽은 손대지 않는다(EBS 라이선스).
 - 글 metadata: `hidden: true` 면 목록 · sitemap 에서 빠진다, `updatedAt` 이 있으면 dateModified 로.
 - 스크롤 등장은 `data-reveal-children` · `data-reveal-stagger` · `data-reveal` 속성만 붙인다 (일은 `RevealOnScroll` 하나가 한다).
 

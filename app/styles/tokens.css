@@ -41,7 +41,7 @@
   --ref-green-600: #16a34a;
   --ref-green-400: #4ade80;
 
-  /* 인주 — 낙관(주문 R · 백문 SB) 전용 */
+  /* 인주 — 낙관의 전통 색. 평소에는 쓰지 않는다(낙관은 먹색, --color-seal) — 인쇄물 · 특별한 자리용으로 값만 남긴다 */
   --ref-cinnabar-500: #b4382a;
 }
 
@@ -91,8 +91,8 @@
 
   /* 브랜드 */
   --color-seal: var(
-    --ref-cinnabar-500
-  ); /* 낙관에만 — 버튼 · 링크 강조색으로 쓰지 않는다 */
+    --ref-gray-800
+  ); /* 낙관 — 평소에는 먹색(흑백, 글자색과 같은 값). 버튼 · 링크 강조색으로 쓰지 않는다 */
 
   /* 글꼴 — 라틴은 Avenir Next(Apple 기기) / Nunito Sans, 한글은 Pretendard */
   --font-sans:
@@ -232,6 +232,8 @@
   --color-control-hover: var(--ref-gray-600);
   --color-control-fg: var(--ref-gray-300);
   --color-positive: var(--ref-green-400);
+
+  --color-seal: var(--ref-gray-50);
 }
 
 @media (prefers-reduced-motion: reduce) {
