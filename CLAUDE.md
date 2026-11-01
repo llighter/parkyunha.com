@@ -13,6 +13,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs
 - 움직임은 토큰(`--ease-reveal` · `--reveal-*` · `--duration-*`)으로. 움직임 줄이기 설정을 지킨다.
 - 그림은 `Figure`, 갤러리는 `Gallery`(사진 · 영상, `aspect` 프리셋, 내려받기 없음). `AppleImage` · `HeroImage` · `YoutubeIframe` · `AppleGallery` 는 기존 글을 위한 감싸개.
 - 머리(`sidebar.tsx`)는 한 줄 띠 — 워드마크 · 내비(home 없음) · 테마 메뉴, 폭은 `lane-text tablet:lane-media`. 푸터도 같은 띠.
+- 쪽 머리는 `PageHeader`(h1 `text-title` + 소개 한 줄) — 제목 앞에 `&nbsp;` 를 넣어 선을 맞추지 않는다. 시리즈 쪽은 `/blog/series/[key]`(`SERIES` 에 있는 키만).
 - 카드 여러 장을 가로로 넘길 때는 `Carousel`(카드는 `BlogTile` — 그림 아래 글). 점 · 화살표 크기는 `tokens.css :root` 의 `--gallery-dot` · `--gallery-dot-hit` · `--gallery-paddle`.
 - 브랜드는 `app/components/brand/` — 헤더 `Logo`(워드마크), 푸터 `Signature`(워드마크 + 낙관). 치수는 `brand.module.css` 의 `--brand-cap`, 낙관 색은 `--color-seal`(평소엔 먹색 — 흑백). 낙관 글꼴 윤곽은 손대지 않는다(EBS 라이선스).
 - 글 metadata: `type`(필수 — `"note"` · `"deep-dive"`, 표시 이름은 `lib/constants.ts` 의 `POST_TYPES`, 없으면 빌드가 멈춘다), `series`(같은 값의 글을 홈 시리즈 줄이 모은다 — 이름 · 설명은 `SERIES`), `hidden: true` 면 목록 · sitemap 에서 빠진다, `updatedAt` 이 있으면 dateModified 로. `category` 는 남아 있지만 화면은 `type` 을 쓴다.
