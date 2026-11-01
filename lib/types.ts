@@ -1,7 +1,14 @@
+/** 글 유형 — 표시 이름은 lib/constants.ts 의 POST_TYPES */
+export type PostType = "note" | "deep-dive";
+
 export type BlogMetadata = {
   title: string;
   publishedAt: string;
   category: string;
+  /** 글 유형 (필수) */
+  type: PostType;
+  /** 시리즈 키 — 같은 값의 글을 한 줄로 모은다. 이름은 lib/constants.ts 의 SERIES */
+  series?: string;
   summary: string;
   image?: string;
   imageDescription?: string;

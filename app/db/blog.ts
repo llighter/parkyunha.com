@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { POST_TYPES } from "@/lib/constants";
 import type { BlogPost } from "@/lib/types";
 
 const BLOG_DIR = path.join(process.cwd(), "app/blog/(post)");
@@ -38,6 +39,17 @@ async function getMetadataFromMDX(folder: string): Promise<BlogPost | null> {
 }
 
 /**
+ * type 은 필수 — MDX 의 metadata 는 타입 검사를 받지 않으므로 여기서 막는다 (빌드가 멈춘다)
+ */
+function assertPostType(post: BlogPost) {
+  if (!Object.hasOwn(POST_TYPES, post.metadata.type)) {
+    throw new Error(
+      `${post.slug}: metadata.type 은 ${Object.keys(POST_TYPES).join(" · ")} 중 하나여야 한다 (지금 ${post.metadata.type})`,
+    );
+  }
+}
+
+/**
  * 전체 블로그 글 목록 가져오기
  */
 export async function getBlogPosts(): Promise<BlogPost[]> {
@@ -47,8 +59,10 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     folders.map((folder) => getMetadataFromMDX(folder)),
   );
 
-  return posts
-    .filter((post): post is BlogPost => post !== null) // null 제거
+  const loaded = posts.filter((post): post is BlogPost => post !== null); // null 제거
+  loaded.forEach(assertPostType); // 숨긴 글도 검사한다
+
+  return loaded
     .filter((post) => !post.metadata.hidden) // 테스트 · 초안은 목록 · sitemap 에서 뺀다
     .sort((a, b) => {
       return (
@@ -56,4 +70,12 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         new Date(a.metadata.publishedAt).getTime()
       );
     });
+}
+
+/**
+ * 시리즈 하나의 글 — 최근 순 (getBlogPosts 와 같은 순서, 숨긴 글 제외)
+ */
+export async function getSeriesPosts(series: string): Promise<BlogPost[]> {
+  const posts = await getBlogPosts();
+  return posts.filter((post) => post.metadata.series === series);
 }
