@@ -1,0 +1,180 @@
+@reference "../../globals.css";
+
+/* =====================================================================
+   가로 캐러셀 — 카드 여러 장을 가로로 넘긴다 (홈 시리즈 · 사진)
+   ---------------------------------------------------------------------
+   - 트랙은 화면 끝까지 차고, 첫 카드는 레인 왼쪽 선에서 시작한다. 양옆은 레인 바깥으로 이어진다.
+     폰은 본문 레인(lane-text), 태블릿부터 미디어 레인(lane-media) 기준.
+   - 한 번에 보이는 장수: 폰 1장(사진은 화면의 62.5%), 태블릿 2장 · 데스크톱 3장(사진 3 · 4장).
+   - 가로 스크롤 + scroll-snap — 폰은 손가락, 키보드는 카드 Tab · 트랙 ← →, 점과 이전 · 다음 단추.
+   - 점 · 화살표는 갤러리와 같은 토큰(--gallery-dot · --gallery-dot-hit · --gallery-paddle · color-control).
+     갤러리와 달리 끝에서 처음으로 이어지지 않고, 폰에서도 단추가 보인다.
+   ===================================================================== */
+
+.carousel {
+  --_gap: 16px;
+  container-type: inline-size;
+
+  @variant tablet {
+    --_gap: 24px;
+  }
+}
+
+/* ── 트랙 ──────────────────────────────────────────────────────────── */
+.track {
+  /* 레인 왼쪽 선까지의 거리 (% 는 캐러셀 폭 = 화면 폭) */
+  --_inset: calc(
+    (100% - min(100% - 2 * var(--lane-gutter), var(--lane-text))) / 2
+  );
+
+  display: flex;
+  gap: var(--_gap);
+  padding-inline: var(--_inset);
+  scroll-padding-inline: var(--_inset);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @variant tablet {
+    --_inset: max(0px, (100% - var(--lane-media)) / 2);
+  }
+}
+
+/* 한 장 — 폭(%)은 트랙의 안쪽 폭 = 레인 폭에 대한 비율 */
+.item {
+  display: grid; /* 카드가 줄 높이를 채워 이웃 카드와 키가 같다 */
+  flex: 0 0 100%;
+  min-inline-size: 0;
+  scroll-snap-align: start;
+
+  @variant tablet {
+    flex-basis: calc((100% - var(--_gap)) / 2);
+  }
+
+  @variant desktop {
+    flex-basis: calc((100% - 2 * var(--_gap)) / 3);
+  }
+}
+
+.carousel[data-variant="photo"] .item {
+  flex-basis: 62.5cqi;
+
+  @variant tablet {
+    flex-basis: calc((100% - 2 * var(--_gap)) / 3);
+  }
+
+  @variant desktop {
+    flex-basis: calc((100% - 3 * var(--_gap)) / 4);
+  }
+}
+
+/* ── 조작부 — 왼쪽 점, 오른쪽 이전 · 다음 ─────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block-start: 20px;
+}
+
+.dots {
+  display: flex;
+}
+
+.dot {
+  display: grid;
+  place-items: center;
+  inline-size: var(--gallery-dot-hit);
+  block-size: var(--gallery-dot-hit);
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: none;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    inline-size: var(--gallery-dot);
+    block-size: var(--gallery-dot);
+    border-radius: 9999px;
+    background: var(--color-line);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  &:hover::before {
+    background: var(--color-line-strong);
+  }
+
+  &[aria-selected="true"]::before {
+    background: var(--color-fg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+}
+
+.paddles {
+  display: flex;
+  gap: 12px;
+}
+
+.paddle {
+  display: grid;
+  place-items: center;
+  inline-size: var(--gallery-paddle);
+  block-size: var(--gallery-paddle);
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-control);
+  color: var(--color-control-fg);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+
+  & svg {
+    inline-size: 45%;
+    block-size: 45%;
+  }
+
+  &:hover {
+    background: var(--color-control-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.36;
+    cursor: default;
+    background: var(--color-control);
+  }
+}
+
+/* surface 띠 위 — control 이 바탕과 같은 값이라 한 단계 진하게 */
+.carousel[data-surface] .paddle {
+  background: var(--color-control-hover);
+
+  &:hover {
+    background: var(--color-line);
+  }
+
+  &[aria-disabled="true"] {
+    background: var(--color-control-hover);
+  }
+}
