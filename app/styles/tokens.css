@@ -147,8 +147,6 @@
     0.2,
     1
   ); /* 스크롤 등장 — 빠르게 떠서 천천히 멈춘다 */
-  --animate-fade-in-up: fade-in-up 0.5s ease-out both;
-  --animate-pill-in: pill-in 0.25s ease-out both;
 }
 
 /* ── 3층 · 레이아웃 + 반응형 값 ─────────────────────────────────────── */

@@ -1,0 +1,79 @@
+@reference "../globals.css";
+
+/* =====================================================================
+   머리 — 한 줄 띠: 왼쪽 워드마크, 이어서 내비, 오른쪽 테마 단추. 아래 1px 선.
+   ---------------------------------------------------------------------
+   폰(< 735)은 두 줄 — 워드마크 · 테마 단추(56) / 내비(44, 넘치면 가로로 밀린다).
+   태블릿부터 한 줄 72. 폭은 lane-text → tablet:lane-media (푸터와 같은 띠).
+   알약 배경 · 등장 애니메이션은 없다 — 첫 화면에는 움직임을 주지 않는다.
+   ===================================================================== */
+
+.bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "home actions"
+    "nav nav";
+  align-items: center;
+
+  @variant tablet {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "home nav actions";
+    column-gap: 40px;
+    block-size: 72px;
+  }
+}
+
+.home {
+  grid-area: home;
+  block-size: 56px;
+
+  @variant tablet {
+    block-size: auto;
+  }
+}
+
+.nav {
+  grid-area: nav;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  block-size: 44px;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @variant tablet {
+    block-size: auto;
+    gap: 28px;
+  }
+}
+
+.link {
+  @apply text-sm font-medium whitespace-nowrap text-fg-muted;
+  border-radius: 4px;
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    @apply text-fg;
+  }
+
+  /* 지금 쪽 — 굵게 · 본문색 (대비 4.5:1 이상은 나머지 fg-muted 도 지킨다) */
+  &[aria-current="page"] {
+    @apply font-semibold text-fg;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* 테마 단추의 둥근 바탕(40)이 레인 끝을 넘게 — 아이콘이 레인 오른쪽 선에 맞는다 */
+.actions {
+  grid-area: actions;
+  margin-inline-end: -10px;
+}
