@@ -1,0 +1,99 @@
+@reference "../globals.css";
+
+/* =====================================================================
+   테마 단추 → 메뉴 (라이트 · 다크 · 시스템)
+   - 단추는 아이콘 하나(지름 40, 아이콘 20) — 지금 값을 보여 준다(해 · 달 · 반원).
+   - 메뉴는 그림자 없이 선과 면으로 — 그림자 토큰은 없다(디자인 시스템).
+   ===================================================================== */
+
+.root {
+  position: relative;
+}
+
+.button {
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+
+  & svg {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+
+  &:hover,
+  &[aria-expanded="true"] {
+    background: var(--color-surface);
+    color: var(--color-fg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+.menu {
+  position: absolute;
+  inset-block-start: calc(100% + 8px);
+  inset-inline-end: 0;
+  z-index: 20;
+  min-inline-size: 176px;
+  padding: 6px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-canvas);
+}
+
+.item {
+  @apply text-sm text-fg;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  inline-size: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  & svg {
+    flex: none;
+    inline-size: 18px;
+    block-size: 18px;
+  }
+
+  &:hover {
+    background: var(--color-surface);
+  }
+
+  &:focus-visible {
+    background: var(--color-surface);
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+}
+
+.check {
+  margin-inline-start: auto;
+
+  & svg {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+
+  .item:not([aria-checked="true"]) & {
+    visibility: hidden;
+  }
+}

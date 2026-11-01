@@ -21,20 +21,18 @@
    ===================================================================== */
 
 .gallery {
-  /* 4층 · 부품 토큰 — 이 부품의 손잡이는 여기에만 */
+  /* 4층 · 부품 토큰 — 이 부품의 손잡이는 여기에만.
+     점 · 화살표 크기(--gallery-dot · --gallery-dot-hit · --gallery-paddle)는 캐러셀과 함께 쓰여 tokens.css :root 에 있다 */
   --gallery-aspect: 16 / 9; /* 액자 비율 — 뉴스룸 980 × 551 */
   --gallery-ratio: 1.7778; /* 가로 ÷ 세로 — 높이 상한 계산용 */
   --gallery-max-block: min(
     78svh,
     820px
   ); /* 액자 높이 상한 — 세로 비율이 화면을 넘지 않게 */
-  --gallery-paddle: 44px; /* 화살표 지름 (터치 최소 44) */
   --gallery-paddle-gap: 12px; /* 액자 ~ 화살표 */
   --gallery-paddle-edge: 16px; /* 화살표 ~ 화면 끝 (최소) */
   --gallery-caption-gap: 12px; /* 액자 ~ 설명 줄 */
   --gallery-caption-min: 24px; /* 설명 줄 최소 높이 — 뉴스룸 실측, 한 줄 설명이어도 점 자리가 같다 */
-  --gallery-dot: 8px;
-  --gallery-dot-hit: 24px; /* 점 누름 영역 (WCAG 2.2 최소 24) — 점 간격도 24 */
   --gallery-dots-gap: 9px; /* 설명 줄 ~ 점 누름 영역 (점 중심까지 21) */
   --gallery-fade: var(--duration-slow);
   --gallery-media-control: 36px; /* 영상 재생 · 일시정지 */

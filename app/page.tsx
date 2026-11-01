@@ -1,10 +1,48 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
+import { getTranslations } from "next-intl/server";
+import { getBlogPosts, getSeriesPosts } from "@/app/db/blog";
+import BlogTile from "@/app/components/BlogTile";
+import Carousel from "@/app/components/Carousel/Carousel";
+import { ProjectCard } from "@/app/components/ProjectCard";
+import { SERIES, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
+import { projects } from "@/lib/projects";
 
-interface BadgeProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
+/** 홈 시리즈 줄에 싣는 시리즈 */
+const HOME_SERIES = "dev-tools";
 
-function Badge(props: BadgeProps) {
+/** 지금 홈의 사진 6장 — 원본 그대로, next/image 가 폭에 맞춰 줄인다 */
+const PHOTOS = [
+  { src: "/images/home/han-river.jpeg", alt: "서울 한강에서 동생과 함께" },
+  { src: "/images/home/osaka-castle.jpeg", alt: "일본 오사카성 앞에서" },
+  {
+    src: "/images/home/hi-five.jpeg",
+    alt: "글리코 간판과 하이파이브",
+    className: "object-top",
+  },
+  {
+    src: "/images/home/eclipse.jpeg",
+    alt: "Eclipse 와 Java 를 캐릭터로 그린 그림",
+  },
+  { src: "/images/home/seoul.jpeg", alt: "비행기에서 내려다본 서울" },
+  {
+    src: "/images/home/me-at-home.jpg",
+    alt: "오사카 호텔에서 내려다본 도시 풍경",
+  },
+];
+
+const SOCIALS = [
+  { name: "YouTube", href: SOCIAL_LINKS.youtube },
+  { name: "Instagram", href: SOCIAL_LINKS.instagram },
+  { name: "X", href: SOCIAL_LINKS.x },
+  { name: "GitHub", href: SOCIAL_LINKS.github },
+];
+
+/** 구역 끝 알약 링크 — 바탕은 놓이는 면과 반대로(surface 위 canvas, canvas 위 surface) */
+const PILL =
+  "rounded-full px-[22px] py-3 text-sm font-semibold text-fg transition-colors hover:bg-line";
+
+function Badge(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
       {...props}
@@ -15,15 +53,26 @@ function Badge(props: BadgeProps) {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  // 최신은 시리즈 줄에 나오는 글을 빼고 최근 3편 — 첫 편은 큰 타일
+  const latest = (await getBlogPosts())
+    .filter((post) => !post.metadata.series)
+    .slice(0, 3);
+  const [lead, ...rest] = latest;
+  const series = SERIES[HOME_SERIES];
+  const seriesPosts = await getSeriesPosts(HOME_SERIES);
+
+  // 홈은 로케일 경로 밖(한국어)이라 로케일을 정해 문구를 가져온다
+  const t = await getTranslations({ locale: "ko", namespace: "project" });
+  const st = await getTranslations({ locale: "ko", namespace: "studycard" });
+
   return (
-    <section
-      className={`mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20`}
-    >
-      <div className="lane-text">
-        <h2 className="my-8 text-title">
-          &nbsp;안녕하세요, <b>박윤하</b>입니다.
-        </h2>
+    <>
+      {/* 소개 */}
+      <section className="lane-text pt-2 pb-section tablet:pt-6 desktop:pt-10">
+        <h1 className="my-8 text-title break-keep">
+          안녕하세요, 박윤하입니다.
+        </h1>
         <div className="prose">
           <p>
             {`안녕하세요. `}
@@ -36,109 +85,142 @@ export default function Home() {
             <Link href="/project">앱을 만들고</Link>
             {` 있습니다.`}
           </p>
-        </div>
-        <div
-          className="my-8 columns-2 gap-4 desktop:columns-3"
-          data-reveal-children
-          data-reveal-stagger
-        >
-          <div className="relative mb-4 h-40">
-            <Image
-              alt="Me and my younger brother at the Han River in Seoul, South Korea"
-              src="/images/home/han-river.jpeg"
-              fill
-              sizes="(max-width: 768px) 213px, 33vw"
-              priority
-              className="rounded-lg object-cover"
-            />
-          </div>
-          <div className="relative mb-4 h-80 desktop:mb-0">
-            <Image
-              alt="Me at Osaka Castle in Osaka, Japan"
-              src="/images/home/osaka-castle.jpeg"
-              fill
-              sizes="(max-width: 768px) 213px, 33vw"
-              priority
-              className="rounded-lg object-cover desktop:object-center"
-            />
-          </div>
-          <div className="relative h-40 desktop:mb-4 desktop:h-80">
-            <Image
-              alt="high five with the Glico sign"
-              src="/images/home/hi-five.jpeg"
-              fill
-              sizes="(max-width: 768px) 213px, 33vw"
-              className="rounded-lg object-cover object-top desktop:object-center"
-            />
-          </div>
-          <div className="relative mb-4 h-40 desktop:mb-0">
-            <Image
-              alt="A picture I drew characterizing Eclipse and Java"
-              src="/images/home/eclipse.jpeg"
-              fill
-              sizes="(max-width: 768px) 213px, 33vw"
-              className="rounded-lg object-cover"
-            />
-          </div>
-          <div className="relative mb-4 h-40">
-            <Image
-              alt="Seoul seen from above an airplane"
-              src="/images/home/seoul.jpeg"
-              fill
-              sizes="(max-width: 768px) 213px, 33vw"
-              className="rounded-lg object-cover"
-            />
-          </div>
-          <div className="relative h-80">
-            <Image
-              alt="City view from Hotel Monterey Grasmere Osaka"
-              src="/images/home/me-at-home.jpg"
-              fill
-              sizes="(max-width: 768px) 213px, 33vw"
-              className="rounded-lg object-cover"
-            />
-          </div>
-        </div>
-        <div className="prose">
           <p>
             {`스스로 만들어낸 결과를 다듬어서 여러 사람과 공유하는 것을 좋아합니다. 글이나 영상 혹은 나만의 프로덕트를 꾸준히 만들어 가는것이 목표입니다.`}
           </p>
         </div>
-        <div className="mt-6 flex gap-4">
-          <a
-            href={SOCIAL_LINKS.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-fg-muted transition-colors hover:text-fg"
-          >
-            YouTube
-          </a>
-          <a
-            href={SOCIAL_LINKS.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-fg-muted transition-colors hover:text-fg"
-          >
-            Instagram
-          </a>
-          <a
-            href={SOCIAL_LINKS.x}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-fg-muted transition-colors hover:text-fg"
-          >
-            X
-          </a>
-          <a
-            href={SOCIAL_LINKS.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-fg-muted transition-colors hover:text-fg"
-          >
-            GitHub
-          </a>
+        <div className="mt-6 flex flex-wrap gap-4">
+          {SOCIALS.map(({ name, href }) => (
+            <a
+              key={name}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-fg-muted transition-colors hover:text-fg"
+            >
+              {name}
+            </a>
+          ))}
         </div>
+      </section>
+
+      {/* 글 — 최신 · 시리즈는 한 surface 띠 위에 */}
+      <div className="bg-surface pb-section">
+        <section aria-labelledby="home-latest">
+          <div className="lane-text py-8">
+            <h2 id="home-latest" className="text-title">
+              최신
+            </h2>
+          </div>
+          <div className="lane-text flex flex-col gap-8 tablet:lane-media">
+            {lead && (
+              <BlogTile
+                article={lead}
+                sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 453px, 643px"
+              />
+            )}
+            {rest.length > 0 && (
+              <div
+                className="grid gap-8 tablet:grid-cols-2"
+                data-reveal-children
+                data-reveal-stagger
+              >
+                {rest.map((post) => (
+                  <BlogTile
+                    key={post.slug}
+                    article={post}
+                    sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 334px, 474px"
+                  />
+                ))}
+              </div>
+            )}
+            <Link
+              href="/blog"
+              className="self-center text-body font-medium text-fg underline decoration-1 underline-offset-[0.2em]"
+            >
+              모든 글 보기
+            </Link>
+          </div>
+        </section>
+
+        {series && seriesPosts.length > 0 && (
+          <section aria-labelledby="home-series" className="mt-8">
+            <div className="lane-text pt-8 pb-6">
+              <h2 id="home-series" className="text-title break-keep">
+                시리즈 · {series.name}
+              </h2>
+              <p className="mt-2 text-body break-keep text-fg-muted">
+                {series.description}
+              </p>
+            </div>
+            <Carousel label={`시리즈 ${series.name}`} itemName="글" surface>
+              {seriesPosts.map((post) => (
+                <BlogTile
+                  key={post.slug}
+                  article={post}
+                  sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 334px, 311px"
+                />
+              ))}
+            </Carousel>
+            {/* 시리즈 쪽이 아직 없어 /blog 로 */}
+            <div className="mt-6 flex justify-center">
+              <Link href="/blog" className={`${PILL} bg-canvas`}>
+                시리즈 모두 보기
+              </Link>
+            </div>
+          </section>
+        )}
       </div>
-    </section>
+
+      {/* 사진 */}
+      <section aria-labelledby="home-photos" className="pb-section">
+        <div className="lane-text pt-8 pb-6">
+          <h2 id="home-photos" className="text-title">
+            사진
+          </h2>
+        </div>
+        <Carousel label="사진" itemName="사진" variant="photo">
+          {PHOTOS.map(({ src, alt, className }) => (
+            <div
+              key={src}
+              className="relative aspect-[4/5] overflow-hidden rounded-media"
+            >
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                sizes="(max-width: 734px) 62.5vw, (max-width: 1068px) 215px, 227px"
+                className={`object-cover ${className ?? ""}`}
+              />
+            </div>
+          ))}
+        </Carousel>
+        <div className="mt-6 flex justify-center">
+          <Link href="/works" className={`${PILL} bg-surface`}>
+            works 에서 더 보기
+          </Link>
+        </div>
+      </section>
+
+      {/* 프로젝트 — 날짜순 피드가 아닌 고정 자리 */}
+      <section aria-labelledby="home-project" className="pb-section">
+        <div className="lane-text py-8">
+          <h2 id="home-project" className="text-title">
+            프로젝트
+          </h2>
+        </div>
+        <div className="lane-text flex flex-col gap-4">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.name}
+              project={project}
+              tagline={st("tagline")}
+              statusLabel={t("comingSoon")}
+              headingLevel={3}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
