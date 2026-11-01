@@ -10,6 +10,8 @@ export const metadata = {
   summary: "This is my first blog post.",
   image: "/images/hero/hello-world.jpeg",
   imageDescription: "테스트 용 블로그 글",
+  hidden: true, // 테스트 글 — 목록 · sitemap · 검색 색인에서 뺀다
+  robots: { index: false, follow: false },
 };
 
 <PostHeader metadata={metadata} slug="hello-world" />

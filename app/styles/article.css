@@ -1,0 +1,83 @@
+/* =====================================================================
+   글 본문 — Tailwind Typography(prose)를 토큰에 연결한다 (1단계)
+   ---------------------------------------------------------------------
+   prose 의 여백 규칙은 당분간 쓰되, 색 · 크기는 토큰에서 받는다.
+   → dark:prose-invert 가 필요 없다 (다크는 토큰이 바꾼다).
+
+   왜 &.prose 인가
+     prose 와 article 은 둘 다 utilities 층의 클래스 하나(명시도 0,1,0)라
+     어느 쪽이 이길지는 Tailwind 가 정하는 출력 순서에 달려 있다 (실제로 뒤집힌 적이 있다).
+     .article.prose (0,2,0) 로 써서 순서와 상관없이 언제나 이기게 한다.
+   나중에 prose 를 걷어낼 때는 이 파일만 고쳐 쓰면 된다.
+   ===================================================================== */
+
+/* prose 를 어디서 쓰든 색은 토큰 — prose-neutral · dark:prose-invert 가 필요 없다 (다크는 토큰이 바꾼다).
+   층 밖 규칙이라 utilities 층의 prose 보다 힘이 세다. 아래 .article.prose 는 같은 값을 다시 쓴다(안전망). */
+.prose {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: var(--color-fg);
+  --tw-prose-lead: var(--color-fg-muted);
+  --tw-prose-links: var(--color-fg);
+  --tw-prose-bold: var(--color-fg);
+  --tw-prose-counters: var(--color-fg-muted);
+  --tw-prose-bullets: var(--color-fg-subtle);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-fg);
+  --tw-prose-quote-borders: var(--color-line);
+  --tw-prose-captions: var(--color-fg-muted);
+  --tw-prose-code: var(--color-fg);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+}
+
+@utility article {
+  &.prose {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    color: var(--color-fg);
+    word-break: keep-all; /* 한글: 낱말 가운데서 줄을 바꾸지 않는다 */
+    overflow-wrap: anywhere; /* 긴 URL 은 어디서든 끊는다 */
+
+    --tw-prose-body: var(--color-fg);
+    --tw-prose-headings: var(--color-fg);
+    --tw-prose-lead: var(--color-fg-muted);
+    --tw-prose-links: var(--color-fg); /* 글 속 링크 = 본문색 + 밑줄 */
+    --tw-prose-bold: var(--color-fg);
+    --tw-prose-counters: var(--color-fg-muted);
+    --tw-prose-bullets: var(--color-fg-subtle);
+    --tw-prose-hr: var(--color-line);
+    --tw-prose-quotes: var(--color-fg);
+    --tw-prose-quote-borders: var(--color-line);
+    --tw-prose-captions: var(--color-fg-muted);
+    --tw-prose-code: var(--color-fg);
+    --tw-prose-th-borders: var(--color-line);
+    --tw-prose-td-borders: var(--color-line);
+
+    /* prose 처럼 not-prose 안쪽은 건드리지 않는다 */
+    & :where(p):not(:where(.not-prose, .not-prose *)) {
+      margin-block: 1lh; /* 문단 사이 = 한 줄 (뉴스룸 한국어 29px) */
+    }
+
+    & :where(a):not(:where(.not-prose, .not-prose *)) {
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+
+      &:hover {
+        text-decoration-thickness: 2px;
+      }
+    }
+
+    & :where(h2):not(:where(.not-prose, .not-prose *)) {
+      font-size: var(--text-heading);
+      line-height: var(--text-heading--line-height);
+      font-weight: var(--text-heading--font-weight);
+    }
+
+    & :where(h3):not(:where(.not-prose, .not-prose *)) {
+      font-size: var(--text-subheading);
+      line-height: var(--text-subheading--line-height);
+      font-weight: var(--text-subheading--font-weight);
+    }
+  }
+}

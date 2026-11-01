@@ -44,11 +44,12 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   const folders = getMDXFolders(BLOG_DIR);
 
   const posts = await Promise.all(
-    folders.map((folder) => getMetadataFromMDX(folder))
+    folders.map((folder) => getMetadataFromMDX(folder)),
   );
 
   return posts
     .filter((post): post is BlogPost => post !== null) // null 제거
+    .filter((post) => !post.metadata.hidden) // 테스트 · 초안은 목록 · sitemap 에서 뺀다
     .sort((a, b) => {
       return (
         new Date(b.metadata.publishedAt).getTime() -

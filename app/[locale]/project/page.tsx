@@ -48,19 +48,15 @@ export default async function ProjectPage({
   const st = await getTranslations("studycard");
 
   return (
-    <div className="content-container py-8 tablet:py-12">
-      <h1 className="mb-2 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-        {t("title")}
-      </h1>
-      <p className="mb-8 text-neutral-600 dark:text-neutral-400">
-        {t("description")}
-      </p>
+    <div className="lane-text py-8 tablet:py-12">
+      <h1 className="mb-2 text-2xl font-bold text-fg">{t("title")}</h1>
+      <p className="mb-8 text-fg-muted">{t("description")}</p>
       <div className="flex flex-col gap-4">
         {projects.map((project) => (
           <Link
             key={project.name}
             href={project.href}
-            className="group flex gap-5 rounded-2xl border border-neutral-200 p-6 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
+            className="group flex gap-5 rounded-2xl border border-line p-6 transition-colors hover:bg-surface"
           >
             <Image
               src={project.icon}
@@ -71,24 +67,19 @@ export default async function ProjectPage({
             />
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h2 className="text-lg font-semibold text-neutral-900 group-hover:text-blue-600 dark:text-neutral-100 dark:group-hover:text-blue-400">
+                <h2 className="text-lg font-semibold text-fg group-hover:text-accent">
                   {project.name}
                 </h2>
                 {project.status === "coming-soon" && (
-                  <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
+                  <span className="rounded-full bg-surface px-2 py-0.5 text-xs text-fg-muted">
                     {t("comingSoon")}
                   </span>
                 )}
               </div>
-              <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-                {st("tagline")}
-              </p>
+              <p className="mt-1 text-sm text-fg-muted">{st("tagline")}</p>
               <div className="mt-2 flex gap-2">
                 {project.platforms.map((platform) => (
-                  <span
-                    key={platform}
-                    className="text-xs text-neutral-400 dark:text-neutral-500"
-                  >
+                  <span key={platform} className="text-xs text-fg-subtle">
                     {platform}
                   </span>
                 ))}

@@ -28,14 +28,12 @@ export default function PrivacyPage({
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-16 tablet:py-24">
-      <h1 className="mb-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100 tablet:text-4xl">
+      <h1 className="mb-2 text-3xl font-bold text-fg tablet:text-4xl">
         {t("title")}
       </h1>
-      <p className="mb-12 text-sm text-neutral-500 dark:text-neutral-400">
-        {t("lastUpdated")}
-      </p>
+      <p className="mb-12 text-sm text-fg-muted">{t("lastUpdated")}</p>
 
-      <div className="space-y-10 text-neutral-700 dark:text-neutral-300 [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-neutral-900 [&_h2]:dark:text-neutral-100 [&_li]:ml-5 [&_li]:list-disc [&_p]:leading-relaxed">
+      <div className="space-y-10 text-fg [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_p]:leading-relaxed">
         <section>
           <h2>{t("collection.title")}</h2>
           <p>{t("collection.description")}</p>
@@ -77,7 +75,7 @@ export default function PrivacyPage({
               link: (chunks) => (
                 <a
                   href="https://github.com/llighter/StudyCard11"
-                  className="text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:decoration-blue-700 dark:hover:text-blue-300"
+                  className="text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

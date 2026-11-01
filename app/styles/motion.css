@@ -1,0 +1,51 @@
+/* =====================================================================
+   스크롤 등장 — 뉴스룸처럼 화면에 들어오는 블록을 슥 올린다
+   ---------------------------------------------------------------------
+   순수 CSS (Tailwind 문법 없음). 상태는 RevealOnScroll 이 붙인다.
+     data-reveal              이 요소 하나를 등장시킨다 (그림 · 갤러리 — Figure · Gallery 가 붙인다)
+     data-reveal-children     직계 자식을 하나씩 등장시킨다 (카드 목록)
+     data-reveal-stagger      + 같은 순간 들어온 자식끼리 차례로 (카드 목록)
+     data-reveal-state        pending(숨김) → shown(오르는 중) → done   ← JS 가 붙인다
+
+   - 서버 HTML 에는 상태가 없다 → JS 가 없거나 늦어도 내용은 그대로 보인다.
+   - 첫 화면에 이미 보이는 블록은 건드리지 않는다 (깜박임 · 기다림 없음).
+   - 움직임 줄이기 · 인쇄에서는 언제나 보인다.
+   - 이 규칙들은 층(@layer) 밖이라 Tailwind 유틸리티보다 힘이 세다 → 숨김이 확실하다.
+     대신 다 오르면 done 으로 바꿔 규칙에서 빠진다 (요소 본래의 호버 이동 · 투명도로 돌아간다).
+   ===================================================================== */
+
+[data-reveal-state="pending"] {
+  opacity: 0;
+  translate: 0 var(--reveal-distance);
+}
+
+[data-reveal-state="shown"] {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity var(--reveal-duration) var(--ease-reveal) var(--reveal-delay, 0ms),
+    translate var(--reveal-duration) var(--ease-reveal) var(--reveal-delay, 0ms);
+}
+
+/* 키보드로 숨은 블록 안의 링크에 닿으면 바로 보인다 (초점이 보이지 않는 순간이 없게) */
+[data-reveal-state="pending"]:focus-within {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal-state="pending"],
+  [data-reveal-state="shown"] {
+    opacity: 1;
+    translate: 0 0;
+    transition: none;
+  }
+}
+
+@media print {
+  [data-reveal-state="pending"],
+  [data-reveal-state="shown"] {
+    opacity: 1 !important;
+    translate: 0 0 !important;
+  }
+}

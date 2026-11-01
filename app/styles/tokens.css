@@ -1,0 +1,246 @@
+/* =====================================================================
+   parkyunha.com · 디자인 토큰
+   ---------------------------------------------------------------------
+   층            이름            하는 일                   Spring에 빗대면
+   1 원시        --ref-*         값 그 자체 (팔레트)       application.yml 의 상수
+   2 역할        --color-* 등    의미 — 컴포넌트는 여기만   인터페이스 (DIP)
+   3 레이아웃    --lane-*        화면 폭별 레인 폭          프로파일별 설정값
+   4 부품        --gallery-* 등  부품 하나의 손잡이         @ConfigurationProperties (각 부품 CSS 안)
+
+   규칙
+   - 컴포넌트는 2·3층만 쓴다. --ref-* 를 직접 쓰지 않는다.
+   - 다크 모드와 반응형은 "토큰 값"을 바꿔서 처리한다.
+     → 컴포넌트 className 에 dark: · tablet: 분기를 늘어놓지 않는다.
+   - 2층은 @theme static 에 둔다. Tailwind 가 유틸리티(bg-canvas, text-display,
+     my-media …)를 만들고, CSS 모듈에서 var() 로 읽을 수 있게 늘 변수로 내보낸다.
+   ===================================================================== */
+
+/* ── 1층 · 원시 ─────────────────────────────────────────────────────── */
+:root {
+  /* 무채색 — 숫자가 클수록 어둡다 */
+  --ref-gray-0: #ffffff;
+  --ref-gray-25: #fafafc;
+  --ref-gray-50: #f5f5f7;
+  --ref-gray-100: #e8e8ed;
+  --ref-gray-200: #d2d2d7;
+  --ref-gray-300: #a1a1a6;
+  --ref-gray-400: #86868b;
+  --ref-gray-500: #6e6e73;
+  --ref-gray-600: #424245;
+  --ref-gray-700: #2c2c2e;
+  --ref-gray-800: #1d1d1f;
+  --ref-gray-900: #161617;
+  --ref-gray-1000: #000000;
+
+  /* 파랑 — 링크와 포커스 */
+  --ref-blue-500: #0066cc;
+  --ref-blue-400: #2997ff;
+  --ref-blue-focus: #0071e3;
+
+  /* 초록 — 상태(확인 표시)만 */
+  --ref-green-600: #16a34a;
+  --ref-green-400: #4ade80;
+
+  /* 인주 — 낙관의 전통 색. 평소에는 쓰지 않는다(낙관은 먹색, --color-seal) — 인쇄물 · 특별한 자리용으로 값만 남긴다 */
+  --ref-cinnabar-500: #b4382a;
+}
+
+/* ── 2층 · 역할 (밝은 화면 · 폰 기준값) ─────────────────────────────── */
+@theme static {
+  /* Tailwind 기본 팔레트(gray-500 · neutral-400 · white …)를 지운다 → 컴포넌트는 아래 역할 이름만 쓸 수 있다.
+     팔레트 클래스를 쓰면 CSS 가 생기지 않아 바로 드러난다. */
+  --color-*: initial;
+
+  /* 바탕 */
+  --color-canvas: var(--ref-gray-0); /* 페이지 바탕 */
+  --color-surface: var(--ref-gray-50); /* 바탕 위의 면 — 목록 페이지 바탕 */
+  --color-card: var(--ref-gray-0); /* 면 위에 뜨는 카드 — 블로그 타일 */
+  --color-frame: var(
+    --ref-gray-25
+  ); /* 미디어 액자 — 갤러리처럼 이미지 둘레가 비는 곳 (뉴스룸 #fafafc) */
+
+  /* 글자 */
+  --color-fg: var(--ref-gray-800);
+  --color-fg-muted: var(--ref-gray-500); /* 캡션 · 날짜 · 분류 (4.5:1 이상) */
+  --color-fg-subtle: var(
+    --ref-gray-400
+  ); /* 비활성 점 · 보조 아이콘 — 글 본문에는 쓰지 않는다 */
+
+  /* 선 */
+  --color-line: var(--ref-gray-200);
+  --color-line-strong: var(--ref-gray-400);
+
+  /* 상호작용 */
+  --color-accent: var(
+    --ref-blue-500
+  ); /* 강조 링크 (글 속 링크는 본문색 + 밑줄) */
+  --color-focus: var(--ref-blue-focus); /* 포커스 링 */
+  --color-control: var(
+    --ref-gray-50
+  ); /* 둥근 버튼 — 갤러리 화살표 · 영상 단추 */
+  --color-control-hover: var(--ref-gray-100);
+  --color-control-fg: var(--ref-gray-500);
+  --color-media-control: rgb(
+    0 0 0 / 0.5
+  ); /* 사진 · 영상 위에 뜨는 버튼 — 테마와 무관 */
+  --color-media-control-hover: rgb(0 0 0 / 0.66);
+  --color-media-control-fg: var(--ref-gray-0);
+  --color-positive: var(
+    --ref-green-600
+  ); /* 확인 표시(✓) 같은 상태 — 버튼 · 링크에는 쓰지 않는다 */
+
+  /* 브랜드 */
+  --color-seal: var(
+    --ref-gray-800
+  ); /* 낙관 — 평소에는 먹색(흑백, 글자색과 같은 값). 버튼 · 링크 강조색으로 쓰지 않는다 */
+
+  /* 글꼴 — 라틴은 Avenir Next(Apple 기기) / Nunito Sans, 한글은 Pretendard */
+  --font-sans:
+    "Avenir Next", Avenir, var(--font-nunito-sans), "Pretendard Variable",
+    ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* 글자 역할 — 폰 값. 태블릿 · 데스크톱 값은 아래 :root 에서 바뀐다 */
+  --text-display: 32px; /* 글 제목 */
+  --text-display--line-height: 1.21875;
+  --text-display--font-weight: 800;
+  --text-title: 24px; /* 페이지 섹션 제목 ('블로그 글 읽기') */
+  --text-title--line-height: 1.25;
+  --text-title--font-weight: 700;
+  --text-lead: 21px; /* 글 요약 */
+  --text-lead--line-height: 1.2858;
+  --text-lead--font-weight: 700;
+  --text-heading: 24px; /* 글 속 h2 */
+  --text-heading--line-height: 1.3333;
+  --text-heading--font-weight: 700;
+  --text-subheading: 20px; /* 글 속 h3 */
+  --text-subheading--line-height: 1.4;
+  --text-subheading--font-weight: 700;
+  --text-body: 17px; /* 본문 — 뉴스룸 한국어 17/29 */
+  --text-body--line-height: 1.7059;
+  --text-caption: 14px; /* 이미지 설명 — 뉴스룸 한국어 14px 세미볼드 */
+  --text-caption--line-height: 1.4286;
+  --text-caption--font-weight: 600;
+  --text-eyebrow: 12px; /* 분류 */
+  --text-eyebrow--line-height: 1.3333;
+  --text-eyebrow--font-weight: 700;
+  --text-meta: 14px; /* 날짜 · 쪽 번호 */
+  --text-meta--line-height: 1.4286;
+  --text-meta--font-weight: 600;
+
+  /* 간격 역할 — my-media, mt-caption, pb-section 처럼 쓴다 */
+  --spacing-media: 32px; /* 미디어 블록 위아래 */
+  --spacing-caption: 12px; /* 미디어 ~ 설명 */
+  --spacing-section: 40px; /* 페이지 끝 여백 */
+
+  /* 모서리 */
+  --radius-media: 0px; /* 미디어가 화면을 꽉 채우는 동안은 0, ≥415 에서 9px (뉴스룸 액자) */
+  --radius-card: 16px;
+
+  /* 움직임 */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-reveal: cubic-bezier(
+    0.2,
+    0.7,
+    0.2,
+    1
+  ); /* 스크롤 등장 — 빠르게 떠서 천천히 멈춘다 */
+  --animate-fade-in-up: fade-in-up 0.5s ease-out both;
+  --animate-pill-in: pill-in 0.25s ease-out both;
+}
+
+/* ── 3층 · 레이아웃 + 반응형 값 ─────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  --duration-fast: 150ms;
+  --duration-slow: 500ms;
+
+  /* 스크롤 등장 — 화면에 들어오는 블록을 슥 올린다 (motion.css) */
+  --reveal-distance: 16px;
+  --reveal-duration: 900ms;
+  --reveal-stagger: 90ms; /* 카드 목록: 같은 순간 들어온 카드끼리 이만큼씩 늦게 */
+
+  /* 레인 — 폰 (< 735) */
+  --lane-gutter: 6.25%; /* 본문 좌우 여백 → 본문은 화면의 87.5% */
+  --lane-text: 366px; /* 본문 */
+  --lane-media: 414px; /* 미디어 — 화면이 이보다 좁으면 꽉 채운다 */
+  --lane-wide: var(--lane-media); /* 넓은 블록 — 폰에서는 미디어와 같다 */
+
+  @variant phone-lg {
+    /* ≥ 415 — 미디어 좌우에 바탕이 보이기 시작한다 */
+    --radius-media: 9px;
+  }
+
+  @variant tablet {
+    /* ≥ 735 */
+    --lane-media: 692px;
+    --lane-text: calc(var(--lane-media) * 10 / 12); /* 576.67 — 12단 중 10단 */
+    --lane-wide: 850px; /* 692 + 2 × 79 */
+
+    --text-display: 42px;
+    --text-display--line-height: 1.2;
+    --text-title: 28px;
+    --text-title--line-height: 1.2143;
+
+    --spacing-media: 36px;
+    --spacing-section: 64px;
+
+    --reveal-distance: 24px;
+  }
+
+  @variant desktop {
+    /* ≥ 1069 */
+    --lane-media: 980px;
+    --lane-text: calc(var(--lane-media) * 8 / 12); /* 653.33 — 12단 중 8단 */
+    --lane-wide: 1228px; /* 980 + 2 × 124 */
+
+    --text-display: 48px;
+    --text-display--line-height: 1.1875;
+    --text-title: 32px;
+    --text-title--line-height: 1.1875;
+    --text-lead: 24px;
+    --text-lead--line-height: 1.25;
+
+    --spacing-media: 44px;
+    --spacing-caption: 16px;
+    --spacing-section: 80px;
+  }
+}
+
+/* ── 다크 — 2층 역할만 다시 정한다 ──────────────────────────────────── */
+.dark {
+  color-scheme: dark;
+
+  --color-canvas: var(--ref-gray-1000);
+  --color-surface: var(--ref-gray-800);
+  --color-card: var(--ref-gray-700);
+  --color-frame: var(--ref-gray-900);
+
+  --color-fg: var(--ref-gray-50);
+  --color-fg-muted: var(--ref-gray-400);
+  --color-fg-subtle: var(--ref-gray-500);
+
+  --color-line: var(--ref-gray-600);
+  --color-line-strong: var(--ref-gray-500);
+
+  --color-accent: var(--ref-blue-400);
+  --color-focus: var(--ref-blue-400);
+  --color-control: var(--ref-gray-700);
+  --color-control-hover: var(--ref-gray-600);
+  --color-control-fg: var(--ref-gray-300);
+  --color-positive: var(--ref-green-400);
+
+  --color-seal: var(--ref-gray-50);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-slow: 0ms;
+    --reveal-duration: 0ms;
+    --reveal-distance: 0px;
+  }
+}

@@ -1,0 +1,55 @@
+/* =====================================================================
+   레인 — 블록을 세로로 쌓되, 블록마다 "어느 폭에 설지"만 고른다
+   ---------------------------------------------------------------------
+                폰 (<735)            태블릿 (≥735)   데스크톱 (≥1069)
+   text         87.5% · 최대 366     576.67 (10/12)  653.33 (8/12)
+   panel        본문 폭, 폰에서는 좌우 여백까지 (코드 · 인용처럼 배경 있는 블록)
+   media        100% · 최대 414      692             980
+   wide         = media              850             1228
+   full         화면 끝까지
+
+   - 폭은 토큰(--lane-*)이 브레이크포인트마다 바꾼다 → 클래스에 tablet:/desktop: 이 없다.
+   - 폭은 "부모를 채우되(100%) 레인을 넘지 않게(max-inline-size)" — 어떤 부모 안에서도 넘치지 않고,
+     긴 코드 한 줄 같은 내용이 페이지 폭을 밀어내지도 못한다 (min() 으로 쓰면 밀어낸다).
+   - 레인을 넘나드는 부품(그림 · 갤러리)은 lane-full 을 차지하고 안에서 레인을 다시 고른다.
+     → 설명(캡션)이 어느 그림 폭에서든 본문 왼쪽 선에 정확히 맞는다.
+   ===================================================================== */
+
+@utility lanes {
+  /* 자식은 기본으로 본문 레인. 명시도 0 이라 lane-* 와 부품 클래스가 언제나 이긴다 */
+  :where(&) > * {
+    inline-size: calc(100% - 2 * var(--lane-gutter));
+    max-inline-size: var(--lane-text);
+    margin-inline: auto;
+  }
+}
+
+@utility lane-text {
+  inline-size: calc(100% - 2 * var(--lane-gutter));
+  max-inline-size: var(--lane-text);
+  margin-inline: auto;
+}
+
+@utility lane-panel {
+  inline-size: 100%;
+  max-inline-size: var(--lane-text);
+  margin-inline: auto;
+}
+
+@utility lane-media {
+  inline-size: 100%;
+  max-inline-size: var(--lane-media);
+  margin-inline: auto;
+}
+
+@utility lane-wide {
+  inline-size: 100%;
+  max-inline-size: var(--lane-wide);
+  margin-inline: auto;
+}
+
+@utility lane-full {
+  inline-size: 100%;
+  max-inline-size: none;
+  margin-inline: 0;
+}

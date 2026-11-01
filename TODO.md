@@ -125,14 +125,14 @@
 
 ## 기술 스택
 
-| 항목 | 버전 |
-|---|---|
-| Next.js | 16.1.6 |
-| React | 19.2.4 |
-| TypeScript | 5.8.3 |
-| Tailwind CSS | 4.1.11 |
-| ESLint | 9.x (flat config) |
-| Node.js | 24.1.0 |
-| next-intl | 4.8.3 |
-| next-themes | 0.4.6 |
-| MDX | 3.1.0 |
+| 항목         | 버전              |
+| ------------ | ----------------- |
+| Next.js      | 16.1.6            |
+| React        | 19.2.4            |
+| TypeScript   | 5.8.3             |
+| Tailwind CSS | 4.1.11            |
+| ESLint       | 9.x (flat config) |
+| Node.js      | 24.1.0            |
+| next-intl    | 4.8.3             |
+| next-themes  | 0.4.6             |
+| MDX          | 3.1.0             |

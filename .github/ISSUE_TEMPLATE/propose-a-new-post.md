@@ -1,16 +1,16 @@
 ---
 name: PROPOSE A NEW POST
 about: 새로운 글을 작성하기 위한 티켓 발행
-title: 'content: <Add your title>'
+title: "content: <Add your title>"
 labels: content proposal
-assignees: ''
-
+assignees: ""
 ---
 
 **Author**: @[Author's GitHub username.]
 **Reviewer**: [Leave blank. I will assign a reviewer.]
 
 **Target publish date:** <yyyy-mm-dd>
+
 - [ ] Check this box if this is a hard deadline.
 
 **Process**

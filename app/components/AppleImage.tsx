@@ -1,5 +1,8 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
+import Figure from "./Figure/Figure";
+import { laneSizes } from "@/lib/layout";
 
+/** 글 속 이미지 한 장. inline 이면 본문 폭, 아니면 미디어 폭 */
 export default function AppleImage({
   src,
   alt,
@@ -11,31 +14,10 @@ export default function AppleImage({
   caption: string;
   inline?: boolean;
 }) {
-  const classNames = inline
-    ? `tablet:max-w-[576px] laptop:max-w-[653px]`
-    : `tablet:max-w-(--breakpoint-content-tablet) laptop:my-11 laptop:max-w-(--breakpoint-content-laptop)`;
-
+  const lane = inline ? "text" : "media";
   return (
-    <figure
-      className={`mx-auto my-8 max-w-[414px] tablet:my-9 laptop:my-11 ${classNames}`}
-    >
-      <div className="component-content">
-        <div className="image-sharesheet">
-          <div className="image-asset">
-            {/* FIXME: my-0 은 상위에 prose가 적용되어 있는 것을 무시하기 위해 추가하였음 */}
-            <picture className="my-0">
-              <Image
-                src={src}
-                alt={alt}
-                className={`h-auto w-full phone:rounded-xl`}
-              />
-            </picture>
-          </div>
-          <div className="image-description mx-auto mt-3 w-87.5 text-xs font-extrabold text-gray-500 dark:text-neutral-400 tablet:w-[576px] laptop:mt-4 laptop:w-[653px]">
-            <div className="image-caption break-all">{caption}</div>
-          </div>
-        </div>
-      </div>
-    </figure>
+    <Figure lane={lane} caption={caption}>
+      <Image src={src} alt={alt} sizes={laneSizes(lane)} />
+    </Figure>
   );
 }

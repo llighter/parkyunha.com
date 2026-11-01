@@ -1,0 +1,43 @@
+@reference "../../globals.css";
+
+.figure {
+  margin-block: var(--spacing-media);
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  /* 안쪽 부품이 자기 폭으로 반응하도록 (예: 영상 컨트롤) */
+  container: figure / inline-size;
+
+  .figure[data-lane="full"] & {
+    border-radius: 0;
+  }
+
+  & :where(img, video) {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  /* 비율 고정 — 자식이 액자를 꽉 채운다 */
+  &[data-fill] {
+    aspect-ratio: var(--figure-aspect);
+
+    & > :where(img, video, iframe) {
+      position: absolute;
+      inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      border: 0;
+    }
+  }
+}
+
+.caption {
+  @apply text-caption text-fg-muted;
+  margin-block-start: var(--spacing-caption);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}

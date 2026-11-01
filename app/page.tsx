@@ -10,7 +10,7 @@ function Badge(props: BadgeProps) {
       {...props}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center rounded-sm border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
+      className="inline-flex items-center rounded-sm border border-line bg-surface p-1 text-sm leading-4 text-fg no-underline"
     />
   );
 }
@@ -18,17 +18,13 @@ function Badge(props: BadgeProps) {
 export default function Home() {
   return (
     <section
-      className={`mt-0 overflow-hidden pb-10 tablet:pb-16 laptop:pb-20`}
+      className={`mt-0 overflow-hidden pb-10 tablet:pb-16 desktop:pb-20`}
     >
-      <div className="content-container">
-        <div className={`@container`}>
-          <h2
-            className={`my-8 text-[24px] font-bold @[576px]:text-[28px] @[653px]:text-[32px]`}
-          >
-            &nbsp;안녕하세요, <b>박윤하</b>입니다.
-          </h2>
-        </div>
-        <div className="prose prose-neutral dark:prose-invert">
+      <div className="lane-text">
+        <h2 className="my-8 text-title">
+          &nbsp;안녕하세요, <b>박윤하</b>입니다.
+        </h2>
+        <div className="prose">
           <p>
             {`안녕하세요. `}
             <span className="not-prose">
@@ -41,7 +37,11 @@ export default function Home() {
             {` 있습니다.`}
           </p>
         </div>
-        <div className="my-8 columns-2 gap-4 laptop:columns-3">
+        <div
+          className="my-8 columns-2 gap-4 desktop:columns-3"
+          data-reveal-children
+          data-reveal-stagger
+        >
           <div className="relative mb-4 h-40">
             <Image
               alt="Me and my younger brother at the Han River in Seoul, South Korea"
@@ -52,26 +52,26 @@ export default function Home() {
               className="rounded-lg object-cover"
             />
           </div>
-          <div className="relative mb-4 h-80 laptop:mb-0">
+          <div className="relative mb-4 h-80 desktop:mb-0">
             <Image
               alt="Me at Osaka Castle in Osaka, Japan"
               src="/images/home/osaka-castle.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
               priority
-              className="rounded-lg object-cover laptop:object-center"
+              className="rounded-lg object-cover desktop:object-center"
             />
           </div>
-          <div className="relative h-40 laptop:mb-4 laptop:h-80">
+          <div className="relative h-40 desktop:mb-4 desktop:h-80">
             <Image
               alt="high five with the Glico sign"
               src="/images/home/hi-five.jpeg"
               fill
               sizes="(max-width: 768px) 213px, 33vw"
-              className="rounded-lg object-cover object-top laptop:object-center"
+              className="rounded-lg object-cover object-top desktop:object-center"
             />
           </div>
-          <div className="relative mb-4 h-40 laptop:mb-0">
+          <div className="relative mb-4 h-40 desktop:mb-0">
             <Image
               alt="A picture I drew characterizing Eclipse and Java"
               src="/images/home/eclipse.jpeg"
@@ -99,7 +99,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="prose prose-neutral dark:prose-invert">
+        <div className="prose">
           <p>
             {`스스로 만들어낸 결과를 다듬어서 여러 사람과 공유하는 것을 좋아합니다. 글이나 영상 혹은 나만의 프로덕트를 꾸준히 만들어 가는것이 목표입니다.`}
           </p>
@@ -109,7 +109,7 @@ export default function Home() {
             href={SOCIAL_LINKS.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             YouTube
           </a>
@@ -117,7 +117,7 @@ export default function Home() {
             href={SOCIAL_LINKS.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             Instagram
           </a>
@@ -125,7 +125,7 @@ export default function Home() {
             href={SOCIAL_LINKS.x}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             X
           </a>
@@ -133,7 +133,7 @@ export default function Home() {
             href={SOCIAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             GitHub
           </a>
