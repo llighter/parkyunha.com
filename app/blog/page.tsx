@@ -1,6 +1,7 @@
 import { getBlogPosts } from "@/app/db/blog";
 import type { Metadata } from "next";
 import BlogTile from "@/app/components/BlogTile";
+import PageHeader from "@/app/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -27,9 +28,7 @@ export default async function BlogPage() {
     <section
       className={`mt-0 h-full overflow-hidden bg-surface pb-10 tablet:pb-16 desktop:pb-20`}
     >
-      <div className={`lane-text my-8`}>
-        <h2 className="text-title">&nbsp;블로그 글 읽기</h2>
-      </div>
+      <PageHeader title="블로그 글 읽기" />
       <div className={`lane-text tablet:lane-media`}>
         <div>
           <div className={`grid gap-8`}>
