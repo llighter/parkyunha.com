@@ -3,8 +3,9 @@
 /* =====================================================================
    가로 캐러셀 — 카드 여러 장을 가로로 넘긴다 (홈 시리즈 · 사진)
    ---------------------------------------------------------------------
-   - 트랙은 화면 끝까지 차고, 첫 카드는 레인 왼쪽 선에서 시작한다. 양옆은 레인 바깥으로 이어진다.
-     폰은 본문 레인(lane-text), 태블릿부터 미디어 레인(lane-media) 기준.
+   - 폰: 트랙은 화면 끝까지 차고, 첫 카드는 본문 레인(lane-text) 왼쪽 선에서 시작한다 — 다음 카드가 화면 끝에 살짝 보인다.
+   - 태블릿부터: 트랙을 미디어 레인(lane-media)에서 자른다 — 넓은 화면에서도 레인 밖으로 다음 장이 드러나지 않는다.
+   - 한 번에 다 보이면(넘길 곳이 없으면) 점 · 단추를 숨긴다 — 장수는 서버가 알아 CSS 로 고른다(data-count).
    - 한 번에 보이는 장수: 폰 1장(사진은 화면의 62.5%), 태블릿 2장 · 데스크톱 3장(사진 3 · 4장).
    - 가로 스크롤 + scroll-snap — 폰은 손가락, 키보드는 카드 Tab · 트랙 ← →, 점과 이전 · 다음 단추.
    - 점 · 화살표는 갤러리와 같은 토큰(--gallery-dot · --gallery-dot-hit · --gallery-paddle · color-control).
@@ -45,8 +46,12 @@
     outline-offset: 2px;
   }
 
+  /* 태블릿부터는 미디어 레인에서 자른다 (스크롤 상자가 곧 레인) */
   @variant tablet {
-    --_inset: max(0px, (100% - var(--lane-media)) / 2);
+    --_inset: 0px;
+    inline-size: 100%;
+    max-inline-size: var(--lane-media);
+    margin-inline: auto;
   }
 }
 
@@ -163,6 +168,22 @@
     opacity: 0.36;
     cursor: default;
     background: var(--color-control);
+  }
+}
+
+/* 한 번에 다 보이는 폭 — 넘길 곳이 없어 점 · 단추를 숨긴다 (card 태블릿 2 · 데스크톱 3장, photo 3 · 4장) */
+@variant tablet {
+  .carousel[data-variant="card"][data-count="2"] .controls,
+  .carousel[data-variant="photo"][data-count="2"] .controls,
+  .carousel[data-variant="photo"][data-count="3"] .controls {
+    display: none;
+  }
+}
+
+@variant desktop {
+  .carousel[data-variant="card"][data-count="3"] .controls,
+  .carousel[data-variant="photo"][data-count="4"] .controls {
+    display: none;
   }
 }
 
