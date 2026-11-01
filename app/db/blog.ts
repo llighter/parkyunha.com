@@ -79,3 +79,12 @@ export async function getSeriesPosts(series: string): Promise<BlogPost[]> {
   const posts = await getBlogPosts();
   return posts.filter((post) => post.metadata.series === series);
 }
+
+/**
+ * 글 하나의 metadata — 숨긴 글도 돌려준다(주소로는 열리므로). 없는 slug 면 null
+ */
+export async function getPost(slug: string): Promise<BlogPost | null> {
+  const post = await getMetadataFromMDX(slug);
+  if (post) assertPostType(post);
+  return post;
+}

@@ -24,7 +24,7 @@ export default function PostHeader({
             datePublished: metadata.publishedAt,
             dateModified: metadata.updatedAt ?? metadata.publishedAt,
             description: metadata.summary,
-            // 대표 이미지가 없으면 사이트 OG 이미지 (app/opengraph-image.png) — 제목이 들어간 글별 OG 는 나중 일
+            // 대표 이미지가 없으면 사이트 OG 이미지. 링크 미리보기(og:image)는 글 폴더의 opengraph-image.tsx 가 따로 맡는다
             image: metadata.image
               ? `${SITE_URL}${metadata.image}`
               : `${SITE_URL}/opengraph-image.png`,

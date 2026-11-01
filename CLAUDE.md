@@ -17,6 +17,8 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MDX. 설계서는 `docs
 - 카드 여러 장을 가로로 넘길 때는 `Carousel`(카드는 `BlogTile` — 그림 아래 글). 점 · 화살표 크기는 `tokens.css :root` 의 `--gallery-dot` · `--gallery-dot-hit` · `--gallery-paddle`.
 - 브랜드는 `app/components/brand/` — 헤더 `Logo`(워드마크), 푸터 `Signature`(워드마크 + 낙관). 치수는 `brand.module.css` 의 `--brand-cap`, 낙관 색은 `--color-seal`(평소엔 먹색 — 흑백). 낙관 글꼴 윤곽은 손대지 않는다(EBS 라이선스).
 - 글 metadata: `type`(필수 — `"note"` · `"deep-dive"`, 표시 이름은 `lib/constants.ts` 의 `POST_TYPES`, 없으면 빌드가 멈춘다), `series`(같은 값의 글을 홈 시리즈 줄이 모은다 — 이름 · 설명은 `SERIES`), `hidden: true` 면 목록 · sitemap 에서 빠진다, `updatedAt` 이 있으면 dateModified 로. `category` 는 남아 있지만 화면은 `type` 을 쓴다.
+- 새 글을 쓰면 글 폴더에 `opengraph-image.tsx` 도 둔다 — 다른 글의 것을 복사해 `alt`(제목)와 `postOgImage("<slug>")` 만 바꾼다. 링크 미리보기 그림은 `app/blog/og.tsx` 가 그린다.
+- 사진은 긴 변 2400px · JPEG 85 로 줄여서 넣는다(메타데이터 없이). 원본은 저장소 밖(사진 보관함 · NAS)에 둔다.
 - 스크롤 등장은 `data-reveal-children` · `data-reveal-stagger` · `data-reveal` 속성만 붙인다 (일은 `RevealOnScroll` 하나가 한다).
 
 ## 확인
