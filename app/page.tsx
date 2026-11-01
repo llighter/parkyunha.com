@@ -162,9 +162,11 @@ export default async function Home() {
                 />
               ))}
             </Carousel>
-            {/* 시리즈 쪽이 아직 없어 /blog 로 */}
             <div className="mt-6 flex justify-center">
-              <Link href="/blog" className={`${PILL} bg-canvas`}>
+              <Link
+                href={`/blog/series/${HOME_SERIES}`}
+                className={`${PILL} bg-canvas`}
+              >
                 시리즈 모두 보기
               </Link>
             </div>

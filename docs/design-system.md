@@ -22,6 +22,7 @@
 | `app/components/Carousel/`                 | 가로 캐러셀 — `Carousel.tsx` · `Carousel.module.css`                                                                     |
 | `app/components/BlogTile.tsx`              | 블로그 타일 — /blog · 홈 최신 · 홈 시리즈 캐러셀                                                                         |
 | `app/components/ProjectCard.tsx`           | 프로젝트 카드 — /project · 홈 (데이터는 `lib/projects.ts`)                                                               |
+| `app/components/PageHeader.tsx`            | 쪽 머리 — h1 제목(`text-title`) + 소개 한 줄. /blog · /works · /project · 시리즈 쪽                                      |
 
 ## 4층 토큰
 
@@ -161,7 +162,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 <div className="grid gap-8 tablet:grid-cols-2" data-reveal-children data-reveal-stagger>…</div>
 
 // 페이지 섹션과 타일
-<h2 className="text-title">블로그 글 읽기</h2>
+<PageHeader title="블로그 글 읽기" description="…" /> // 쪽 머리 — h1 text-title, 들여쓰기 없이
 <article className="@container">
   <p className="text-[19px] @tile-md:text-title">…</p>
 </article>
@@ -290,6 +291,4 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 ## 남은 일
 
 1. (선택) prose 를 글 전용 CSS 로 — `article.css` 한 파일만 고쳐 쓰면 된다.
-2. 페이지 머리 한 종류(`PageHeader`) — 홈은 `&nbsp;` 들여쓰기를 걷었고, /blog · works 섹션 제목이 아직 `&nbsp;` 로 선을 맞춘다.
-3. 글별 OG 이미지(제목 + 낙관) — `opengraph-image.tsx` 로 그리면 된다.
-4. 시리즈 쪽 — 지금 홈의 '시리즈 모두 보기' 는 /blog 로 간다.
+2. 글별 OG 이미지(제목 + 낙관) — `opengraph-image.tsx` 로 그리면 된다.
