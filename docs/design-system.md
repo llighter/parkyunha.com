@@ -22,7 +22,10 @@
 | `app/components/Carousel/`                 | 가로 캐러셀 — `Carousel.tsx` · `Carousel.module.css`                                                                     |
 | `app/components/BlogTile.tsx`              | 블로그 타일 — /blog · 홈 최신 · 홈 시리즈 캐러셀                                                                         |
 | `app/components/ProjectCard.tsx`           | 프로젝트 카드 — /project · 홈 (데이터는 `lib/projects.ts`)                                                               |
-| `app/components/PageHeader.tsx`            | 쪽 머리 — h1 제목(`text-title`) + 소개 한 줄. /blog · /works · /project · 시리즈 쪽                                      |
+| `app/components/PageHeader.tsx`            | 쪽 머리 — h1 제목(`text-title`) + 소개 한 줄. /blog · /works · /project · /about · 시리즈 쪽                             |
+| `app/components/Chip.tsx`                  | 칩 — 동그란 테두리 링크(채널). /works · /about                                                                           |
+| `app/components/LinkList.tsx`              | 링크 줄 — 이름 · 설명 · › 를 줄로, 위아래 1px 선 (`LinkList.module.css`). /about                                         |
+| `app/about/content.mdx`                    | 소개 쪽 글 — 한 줄 소개(`intro`) · 본문 · 링크 줄 설명. 카드 · 칩은 `app/about/page.tsx` 가 채운다                       |
 
 ## 4층 토큰
 
@@ -214,9 +217,9 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 ## 머리 · 테마 · 푸터
 
 - 머리(`sidebar.tsx`)는 한 줄 띠 — 왼쪽 워드마크, 이어서 내비, 오른쪽 테마 단추, 아래 1px `line`. 태블릿부터 높이 72 한 줄, 폰은 두 줄(워드마크 · 테마 단추 56 / 내비 44, 넘치면 가로로 밀림). 폭은 `lane-text tablet:lane-media`.
-- 내비는 `blog · works · project` — 홈은 워드마크가 맡아 `home` 항목이 없다. 지금 쪽은 `aria-current="page"` + 굵게 `fg`, 나머지 `fg-muted`. 글(`/blog/…`)에서는 blog, `/en/project` 에서는 project 가 지금 쪽. 알약 배경 · 등장 애니메이션은 없다. `/studycard` 는 머리를 숨긴다.
+- 내비는 `blog · works · project · about` — 홈은 워드마크가 맡아 `home` 항목이 없다. 지금 쪽은 `aria-current="page"` + 굵게 `fg`, 나머지 `fg-muted`. 글(`/blog/…`)에서는 blog, `/en/project` 에서는 project 가 지금 쪽. 알약 배경 · 등장 애니메이션은 없다. `/studycard` 는 머리를 숨긴다.
 - 테마 단추(`themeToggle.tsx`)는 아이콘 하나(지름 40 · 아이콘 20)가 지금 값을 보여 준다 — 해 · 달 · 반원(시스템). 누르면 메뉴(`role="menu"` · `menuitemradio`, 지금 값에 체크). ↑ ↓ · Home · End 로 옮기고, 바깥을 누르거나 Esc 로 닫는다(Esc · 고른 뒤에는 단추로 초점). 메뉴는 그림자 없이 `line` 테두리 + `canvas` 바탕.
-- 푸터는 머리와 같은 띠(`lane-text tablet:lane-media`). Navigate 에도 `home` 은 없다.
+- 푸터는 머리와 같은 띠(`lane-text tablet:lane-media`). Navigate 도 `blog · works · project · about` — `home` 은 없다.
 
 ## 캐러셀
 
