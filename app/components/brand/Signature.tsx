@@ -11,7 +11,7 @@ export function Signature({ className }: { className?: string }) {
     <span
       className={`${s.signature} ${className ?? ""}`}
       role="img"
-      aria-label="PARK YUNHA 박윤하인"
+      aria-label="Park Yunha 박윤하인"
       data-signature
     >
       <Wordmark className={s.wordmark} title={null} />

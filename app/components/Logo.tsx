@@ -7,7 +7,7 @@ export default function Logo({ className }: { className?: string }) {
   return (
     <Link
       href="/"
-      aria-label="PARK YUNHA — 홈"
+      aria-label="Park Yunha — 홈"
       className={`${s.logo} ${className ?? ""}`}
     >
       <Wordmark className={s.wordmark} title={null} />
