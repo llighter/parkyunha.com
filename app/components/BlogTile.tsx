@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { POST_TYPES } from "@/lib/constants";
 import type { BlogPost } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
@@ -38,7 +39,7 @@ export default function BlogTile({
         <div className={`flex grow flex-col justify-between bg-card p-6`}>
           <div className={`space-y-[4px] @tile-md:space-y-[8px]`}>
             <p className={`text-eyebrow text-fg-muted`}>
-              {article.metadata.category}
+              {POST_TYPES[article.metadata.type]}
             </p>
             <p
               className={`mt-2 text-[19px] font-semibold break-keep @tile-sm:leading-6 @tile-md:text-[24px] @tile-md:leading-8 @media-tablet:text-[21px] @media-desktop:text-[32px] @media-desktop:leading-10 @media-desktop:font-bold`}

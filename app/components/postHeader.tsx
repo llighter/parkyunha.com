@@ -1,7 +1,7 @@
 import CopyLinkButton from "@/app/components/copyLinkButton";
 import MailButton from "@/app/components/mailButton";
 import { formatDate } from "@/lib/utils";
-import { SITE_URL, SITE_NAME } from "@/lib/constants";
+import { POST_TYPES, SITE_URL, SITE_NAME } from "@/lib/constants";
 import type { BlogMetadata } from "@/lib/types";
 
 export default function PostHeader({
@@ -40,7 +40,7 @@ export default function PostHeader({
       <article id="article" className="not-prose pt-10">
         <header id="article-header">
           <p id="category-eyebrow" className="text-eyebrow text-fg-muted">
-            {metadata.category}
+            {POST_TYPES[metadata.type]}
           </p>
           <p id="date-eyebrow" className="mt-1 text-meta text-fg-muted">
             <time dateTime={metadata.publishedAt}>
