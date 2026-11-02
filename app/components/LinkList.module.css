@@ -1,0 +1,60 @@
+@reference "../globals.css";
+
+/* =====================================================================
+   링크 줄 — 쪽 안에서 다른 쪽으로 가는 길을 줄로 늘어놓는다 (소개 쪽 blog · works)
+   위아래 1px 선, 줄마다 이름(17px · 600) + 설명(14px fg-muted), 오른쪽 › 화살표.
+   ===================================================================== */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid var(--color-line);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 16px;
+  border-block-end: 1px solid var(--color-line);
+  color: var(--color-fg);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  & svg {
+    flex: none;
+    inline-size: 18px;
+    block-size: 18px;
+    color: var(--color-fg-muted);
+    transition: translate var(--duration-fast) var(--ease-standard);
+  }
+
+  &:hover svg {
+    translate: 2px 0;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-inline-size: 0;
+}
+
+.title {
+  @apply text-body font-semibold;
+  line-height: 1.4;
+}
+
+.description {
+  @apply text-sm text-fg-muted;
+  word-break: keep-all;
+}

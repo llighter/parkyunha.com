@@ -13,7 +13,7 @@ export default async function sitemap() {
 
   const seriesRoutes = Object.keys(SERIES).map((key) => `/blog/series/${key}`);
 
-  const staticRoutes = ["", "/blog", "/works", ...seriesRoutes].map(
+  const staticRoutes = ["", "/blog", "/works", "/about", ...seriesRoutes].map(
     (route) => ({
       url: `${SITE_URL}${route}`,
       lastModified: new Date().toISOString().split("T")[0],

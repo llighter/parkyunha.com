@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Chip from "@/app/components/Chip";
 import PageHeader from "@/app/components/PageHeader";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
@@ -29,15 +30,9 @@ export default function WorksPage() {
         {/* 소셜 링크 */}
         <div className="flex flex-wrap gap-3">
           {socialAccounts.map(({ name, href }) => (
-            <a
-              key={name}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-line px-4 py-2 text-sm text-fg-muted transition-colors hover:bg-surface hover:text-fg"
-            >
+            <Chip key={name} href={href}>
               {name}
-            </a>
+            </Chip>
           ))}
         </div>
 

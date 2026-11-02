@@ -1,0 +1,35 @@
+{/* 소개 쪽(/about) 글 — 여기만 고치면 된다. 초안: 캔버스 '02 소개' 보드 문구 그대로 (2026-11-02) */}
+{/* intro: 제목 'About' 아래 한 줄 소개이자 검색 · 공유 설명(description) */}
+{/* <StudyCard /> · <Channels /> 는 page.tsx 가 실제 부품(ProjectCard · 칩)으로 채운다. <SiteLinks items> 의 이름 · 설명은 여기서 고친다 */}
+
+export const intro =
+  "금융권에서 비대면 채널을 개발하고 운영합니다. 개인적으로는 앱을 만들고 있습니다.";
+
+## 하는 일
+
+금융권에서 비대면 채널 개발과 운영을 맡고 있습니다. 고객이 앱과 웹에서 만나는 화면부터, 그 뒤에서 여러 시스템을 잇는 연계까지 다룹니다.
+
+주로 Java · Spring 과 Oracle 로 일하고, 해 본 것은 [블로그](/blog)에 글로 남깁니다.
+
+## 만드는 것
+
+스스로 만들어낸 결과를 다듬어서 여러 사람과 공유하는 것을 좋아합니다. 글이나 영상 혹은 나만의 프로덕트를 꾸준히 만들어 가는 것이 목표입니다.
+
+<StudyCard />
+
+<SiteLinks
+  items={[
+    {
+      href: "/blog",
+      title: "blog",
+      description: "해 본 것을 글로 — Note · Deep Dive · 시리즈",
+    },
+    { href: "/works", title: "works", description: "사진과 영상" },
+  ]}
+/>
+
+## 채널
+
+새 글과 영상, 만드는 과정은 아래에 올립니다.
+
+<Channels />
