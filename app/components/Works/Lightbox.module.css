@@ -1,0 +1,163 @@
+@reference "../../globals.css";
+
+/* =====================================================================
+   라이트박스 — 앨범 사진을 크게 하나씩 (native <dialog> + scroll-snap 가로 트랙)
+   ---------------------------------------------------------------------
+   - 막은 화면 테마를 따른다: canvas 92% (밝게 흰 · 어둡게 검정) — 너머로 앨범 쪽이 옅게 보인다.
+   - 사진은 원래 비율 그대로(contain) · 모서리 0. 설명이 있으면 아래 caption.
+   - 닫기(오른쪽 위) · 이전 · 다음(태블릿부터 좌우 끝, 폰은 밀어서)은 가는 선 아이콘에 바탕 없는 44 누름 영역.
+   - 아래 가운데 mono 번호 '2 / 6'. 끝에서 이어지지 않는다.
+   ===================================================================== */
+
+.dialog {
+  /* 4층 · 부품 토큰 */
+  --lightbox-top: 56px; /* 사진 위 — 닫기 단추 자리 */
+  --lightbox-bottom: 60px; /* 사진 아래 — 번호 자리 */
+  --lightbox-side: 0px; /* 사진 좌우 — 폰은 화면 끝까지 */
+  --lightbox-caption: 32px; /* 사진 ~ 설명 한 줄(12 + 20) */
+  --lightbox-close-edge: 6px;
+  --lightbox-paddle-edge: 8px;
+  --lightbox-hit: 44px; /* 누름 영역 (터치 최소 44) */
+
+  @variant tablet {
+    --lightbox-side: 64px;
+    --lightbox-close-edge: 12px;
+    --lightbox-paddle-edge: 12px;
+  }
+
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--color-canvas) 92%, transparent);
+  color: var(--color-fg);
+
+  &::backdrop {
+    background: transparent;
+  }
+}
+
+/* 열려 있는 동안 뒤쪽은 스크롤되지 않는다 */
+:global(html):has(.dialog[open]) {
+  overflow: hidden;
+}
+
+/* ── 트랙 — 한 장이 화면 하나, 손가락 · 트랙패드로 넘긴다 ──────────── */
+.track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.slide {
+  flex: 0 0 100%;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  padding: var(--lightbox-top) var(--lightbox-side) var(--lightbox-bottom);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.image {
+  inline-size: auto;
+  block-size: auto;
+  max-inline-size: 100%;
+  max-block-size: calc(
+    100svh - var(--lightbox-top) - var(--lightbox-bottom) -
+      var(--lightbox-caption)
+  );
+}
+
+.caption {
+  inline-size: calc(100% - 2 * var(--lane-gutter));
+  max-inline-size: var(--lane-text);
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* ── 단추 — 가는 선, 바탕 없음 ─────────────────────────────────────── */
+.button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  inline-size: var(--lightbox-hit);
+  block-size: var(--lightbox-hit);
+  color: var(--color-fg);
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-fg-muted);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  & svg {
+    inline-size: 24px;
+    block-size: 24px;
+  }
+}
+
+.close {
+  inset-block-start: var(--lightbox-close-edge);
+  inset-inline-end: var(--lightbox-close-edge);
+}
+
+/* 이전 · 다음 — 태블릿부터. 폰은 밀어서 */
+.paddle {
+  display: none;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+
+  @variant tablet {
+    display: grid;
+  }
+
+  & svg {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+}
+
+.prev {
+  inset-inline-start: var(--lightbox-paddle-edge);
+}
+
+.next {
+  inset-inline-end: var(--lightbox-paddle-edge);
+}
+
+.counter {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 22px;
+  text-align: center;
+  pointer-events: none;
+}

@@ -45,6 +45,7 @@ export default async function AlbumPage({ params }: Params) {
         description={album.description}
       />
       <PhotoGrid
+        label={album.title}
         photos={album.photos.map(({ file, alt, caption, position }) => ({
           ...albumPhotoSource(album, file),
           alt,
