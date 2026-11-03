@@ -130,6 +130,20 @@
   --text-meta--line-height: 1.4286;
   --text-meta--font-weight: 600;
 
+  /* 사진 쪽(/works) — 사진이 주인공이라 가운데 · 보통 굵기 */
+  --text-showcase: 36px; /* 쪽 제목 */
+  --text-showcase--line-height: 1.15;
+  --text-showcase--font-weight: 400;
+  --text-showcase--letter-spacing: -0.01em;
+  --text-showcase-lead: 15px; /* 쪽 제목 아래 소개 한 줄 */
+  --text-showcase-lead--line-height: 1.6;
+  --text-showcase-card: 21px; /* 앨범 · 영상 카드 제목 */
+  --text-showcase-card--line-height: 1.3;
+  --text-showcase-card--font-weight: 400;
+  --text-mono: 13px; /* 날짜 · 장수 · 번호 — font-mono 와 함께 */
+  --text-mono--line-height: 16px;
+  --text-mono--font-weight: 400;
+
   /* 간격 역할 — my-media, mt-caption, pb-section 처럼 쓴다 */
   --spacing-media: 32px; /* 미디어 블록 위아래 */
   --spacing-caption: 12px; /* 미디어 ~ 설명 */
@@ -187,6 +201,7 @@
     --text-display--line-height: 1.2;
     --text-title: 28px;
     --text-title--line-height: 1.2143;
+    --text-showcase: 44px;
 
     --spacing-media: 36px;
     --spacing-section: 64px;
@@ -206,6 +221,8 @@
     --text-title--line-height: 1.1875;
     --text-lead: 24px;
     --text-lead--line-height: 1.25;
+    --text-showcase: 52px;
+    --text-showcase-card: 24px;
 
     --spacing-media: 44px;
     --spacing-caption: 16px;
