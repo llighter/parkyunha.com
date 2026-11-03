@@ -6,9 +6,22 @@ export default function WorksShell({ children }: { children: ReactNode }) {
   return <div className={`pb-section ${s.root}`}>{children}</div>;
 }
 
-/** 쪽 아래 글자 탭 줄(채널 · 다른 앨범) 자리 — 마지막 구역에서 72 아래 */
-export function WorksFoot({ children }: { children: ReactNode }) {
-  return <div className={`lane-text ${s.footTabs}`}>{children}</div>;
+/** 쪽 아래 글자 탭 줄 자리 — 허브 채널 줄은 마지막 구역에서 72, 앨범 쪽 '다른 앨범' 줄(album)은 56 아래 */
+export function WorksFoot({
+  album = false,
+  children,
+}: {
+  album?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={`lane-text ${s.footTabs}`}
+      data-album={album ? "" : undefined}
+    >
+      {children}
+    </div>
+  );
 }
 
 /** 카드 그리드 — 폰 1열(lane-text) · 태블릿 2열(lane-media) · 데스크톱 3열(lane-wide, 영상은 2열) */

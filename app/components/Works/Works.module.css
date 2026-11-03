@@ -16,7 +16,9 @@
   --works-card-gap-col: 16px;
   --works-card-title-gap: 16px; /* 그림 ~ 카드 제목 */
   --works-section-gap: 64px; /* 앨범 ~ 영상 구역 */
-  --works-tabs-gap: 72px; /* 마지막 구역 ~ 채널 · 다른 앨범 줄 */
+  --works-tabs-gap: 72px; /* 마지막 구역 ~ 채널 줄 */
+  --works-album-tabs-gap: 56px; /* 앨범 그리드 ~ 다른 앨범 줄 */
+  --works-grid-gap: 8px; /* 앨범 사진 사이 */
 
   @variant tablet {
     --works-header-top: 64px;
@@ -24,6 +26,7 @@
     --works-card-gap-row: 48px;
     --works-card-gap-col: 24px;
     --works-section-gap: 80px;
+    --works-grid-gap: 16px;
   }
 
   @variant desktop {
@@ -33,6 +36,7 @@
     --works-card-gap-col: 40px;
     --works-card-title-gap: 20px;
     --works-section-gap: 96px;
+    --works-grid-gap: 24px;
   }
 }
 
@@ -109,6 +113,10 @@
 
 .footTabs {
   margin-block-start: var(--works-tabs-gap);
+}
+
+.footTabs[data-album] {
+  margin-block-start: var(--works-album-tabs-gap);
 }
 
 /* ── 보기 거르기 — WorksView 가 data-view 만 바꾼다 ─────────────────── */
@@ -199,4 +207,23 @@
     inline-size: 28px;
     block-size: 28px;
   }
+}
+
+/* ── 앨범 사진 그리드 — 폰 화면 끝까지 1열 · 태블릿부터 2열, 3:4 · 모서리 0 ── */
+.grid {
+  display: grid;
+  gap: var(--works-grid-gap);
+
+  @variant tablet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cell {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-surface);
 }
