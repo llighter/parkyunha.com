@@ -22,10 +22,13 @@
 | `app/components/Carousel/`                 | 가로 캐러셀 — `Carousel.tsx` · `Carousel.module.css`                                                                     |
 | `app/components/BlogTile.tsx`              | 블로그 타일 — /blog · 홈 최신 · 홈 시리즈 캐러셀                                                                         |
 | `app/components/ProjectCard.tsx`           | 프로젝트 카드 — /project · 홈 (데이터는 `lib/projects.ts`)                                                               |
-| `app/components/PageHeader.tsx`            | 쪽 머리 — h1 제목(`text-title`) + 소개 한 줄. /blog · /works · /project · /about · 시리즈 쪽                             |
-| `app/components/Chip.tsx`                  | 칩 — 동그란 테두리 링크(채널). /works · /about                                                                           |
+| `app/components/PageHeader.tsx`            | 쪽 머리 — h1 제목(`text-title`) + 소개 한 줄. /blog · /project · /about · 시리즈 쪽 (사진 쪽은 `WorksHeader`)            |
+| `app/components/Chip.tsx`                  | 칩 — 동그란 테두리 링크(채널). /about                                                                                    |
 | `app/components/LinkList.tsx`              | 링크 줄 — 이름 · 설명 · › 를 줄로, 위아래 1px 선 (`LinkList.module.css`). /about                                         |
 | `app/about/content.mdx`                    | 소개 쪽 글 — 한 줄 소개(`intro`) · 본문 · 링크 줄 설명. 카드 · 칩은 `app/about/page.tsx` 가 채운다                       |
+| `app/components/Works/`                    | 사진 쪽 — `WorksHeader` · `TextTabs` · `WorksView` · `WorkCards` · `PhotoGrid` · `Lightbox` · `PhotoImage` (+ CSS 모듈)  |
+| `lib/works.ts`                             | 앨범 · 영상 데이터 — /works 카드 순서 · 앨범 쪽 · 라이트박스                                                             |
+| `photos/<앨범>/<이름>.jpg`                 | 사진 마스터(긴 변 2400 · JPEG 85 · 메타데이터 없이) — 크기별 파일은 `scripts/build-photos.mjs` 가 `public/photos/` 에    |
 
 ## 4층 토큰
 
@@ -34,7 +37,7 @@
 | 1 원시              | `--ref-gray-0 … 1000`, `--ref-blue-*`, `--ref-cinnabar-500`      | 값 그 자체. 컴포넌트에서 쓰지 않는다                    | `application.yml` 의 상수  |
 | 2 역할              | `--color-*`, `--text-*`, `--spacing-*`, `--radius-*`, `--ease-*` | 의미. 컴포넌트는 여기에만 기댄다. 다크는 이 층만 바꾼다 | 인터페이스 (DIP)           |
 | 3 레이아웃 · 움직임 | `--lane-*`, `--reveal-*`                                         | 화면 폭 · 사용자 설정마다 값이 바뀌는 것                | 프로파일별 설정값          |
-| 4 부품              | `--gallery-*`                                                    | 부품 하나의 손잡이. 부품 CSS 모듈 맨 위에만             | `@ConfigurationProperties` |
+| 4 부품              | `--gallery-*` · `--works-*` · `--lightbox-*`                     | 부품 하나의 손잡이. 부품 CSS 모듈 맨 위에만             | `@ConfigurationProperties` |
 
 부품 둘 이상이 같은 값을 쓰면 `tokens.css :root` 로 올린다 — 점 · 화살표 크기(`--gallery-dot` · `--gallery-dot-hit` · `--gallery-paddle`)는 갤러리 · 캐러셀이 함께 써서 `:root` 에 있다(이름은 처음 쓴 갤러리를 따랐다).
 
@@ -69,17 +72,21 @@
 
 ### 글자 역할 (크기 / 줄 높이 px)
 
-| 역할              | 폰    | 태블릿 | 데스크톱 | 굵기 | 쓰는 곳            |
-| ----------------- | ----- | ------ | -------- | ---- | ------------------ |
-| `text-display`    | 32/39 | 42/50  | 48/57    | 800  | 글 제목            |
-| `text-title`      | 24/30 | 28/34  | 32/38    | 700  | 페이지 섹션 제목   |
-| `text-lead`       | 21/27 | 21/27  | 24/30    | 700  | 글 요약            |
-| `text-heading`    | 24/32 |        |          | 700  | 글 속 h2           |
-| `text-subheading` | 20/28 |        |          | 700  | 글 속 h3           |
-| `text-body`       | 17/29 |        |          | 400  | 본문               |
-| `text-caption`    | 14/20 |        |          | 600  | 그림 · 갤러리 설명 |
-| `text-eyebrow`    | 12/16 |        |          | 700  | 분류               |
-| `text-meta`       | 14/20 |        |          | 600  | 날짜               |
+| 역할                 | 폰    | 태블릿 | 데스크톱 | 굵기 | 쓰는 곳                                  |
+| -------------------- | ----- | ------ | -------- | ---- | ---------------------------------------- |
+| `text-display`       | 32/39 | 42/50  | 48/57    | 800  | 글 제목                                  |
+| `text-title`         | 24/30 | 28/34  | 32/38    | 700  | 페이지 섹션 제목                         |
+| `text-lead`          | 21/27 | 21/27  | 24/30    | 700  | 글 요약                                  |
+| `text-heading`       | 24/32 |        |          | 700  | 글 속 h2                                 |
+| `text-subheading`    | 20/28 |        |          | 700  | 글 속 h3                                 |
+| `text-body`          | 17/29 |        |          | 400  | 본문                                     |
+| `text-caption`       | 14/20 |        |          | 600  | 그림 · 갤러리 설명                       |
+| `text-eyebrow`       | 12/16 |        |          | 700  | 분류                                     |
+| `text-meta`          | 14/20 |        |          | 600  | 날짜                                     |
+| `text-showcase`      | 36/41 | 44/51  | 52/60    | 400  | 사진 쪽 제목 (가운데, -0.01em)           |
+| `text-showcase-lead` | 15/24 |        |          | 400  | 사진 쪽 소개 한 줄                       |
+| `text-showcase-card` | 21/27 |        | 24/31    | 400  | 앨범 · 영상 카드 제목                    |
+| `text-mono`          | 13/16 |        |          | 400  | 날짜 · 장수 · 번호 (`font-mono` 와 함께) |
 
 간격: `my-media` 32 · 36 · 44, `mt-caption` 12 · 12 · 16, `pb-section` 40 · 64 · 80. 모서리: `rounded-media` 0(화면을 꽉 채우는 동안) → 9(뉴스룸 액자), `rounded-card` 16.
 
@@ -236,6 +243,46 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 카드 글자는 그림 아래 — 카드는 `BlogTile` 그대로. 사진 위에 글을 얹지 않는다.
 - 바뀔 때 '글 2 / 3' 을 읽어 준다. 초점 갈 곳이 없는 사진 트랙은 트랙에 초점이 가서 ← → 로 스크롤한다. 스크롤 등장은 트랙 하나에(`data-reveal`).
 
+## 사진 쪽 — /works · /works/<앨범> · 라이트박스
+
+```tsx
+<WorksShell>
+  {" "}
+  // 부품 토큰(--works-*) · pb-section
+  <WorksView>
+    {" "}
+    // All | Albums | Videos — data-view 만 바꾼다
+    <WorksHeader title="Works" description="…">
+      <WorksTabs />
+    </WorksHeader>
+    <WorksCards section="albums" label="앨범">
+      {albums.map((a) => (
+        <AlbumCard album={a} />
+      ))}
+    </WorksCards>
+  </WorksView>
+  <WorksFoot>
+    <TextTabs label="채널" nav>
+      …
+    </TextTabs>
+  </WorksFoot>
+</WorksShell>
+```
+
+- 글 쪽과 다른 결 — 가운데 큰 보통 굵기 제목(`text-showcase`), 아래 글자 탭(`TextTabs`, 사이 1 × 12 `line`, 지금 것은 600 `fg`). 카드 제목은 그림 아래 `text-showcase-card`, 날짜 · 장수는 `font-mono text-mono fg-muted`. 사진 위에 글자를 얹지 않는다.
+- 모서리 0. 표지 · 그리드는 3:4 로 자르고(cover), 영상 썸네일은 16:9, 라이트박스는 원래 비율(contain). 홈 사진 캐러셀(4:5 · `rounded-media`)은 그대로.
+- 폭: 허브 카드 `lane-text tablet:lane-media desktop:lane-wide`(1 · 2 · 3열, 영상은 데스크톱도 2열). 앨범 그리드 `lane-media desktop:lane-wide`(폰은 화면 끝까지 1열, 태블릿부터 2열, 간격 8 · 16 · 24). `lane-wide` 는 사진 쪽 그리드에만 — 글 쪽 시작선(653 · 980)은 그대로.
+- 거르기는 단추(`aria-pressed`) — 주소에 남기지 않는다. 영상이 없으면 탭과 영상 구역을 뺀다.
+- 라이트박스(`Lightbox`)는 native `<dialog>`(showModal) — 바깥이 inert 라 Tab 이 안에서만 돈다. 막은 `color-mix(in srgb, var(--color-canvas) 92%, transparent)`, 닫기 · 이전 · 다음은 가는 선(획 1.5) 아이콘에 바탕 없는 44 누름 영역(이전 · 다음은 태블릿부터, 폰은 밀어서), 아래 mono 번호(`aria-live`). ← → · Esc, 끝에서 이어지지 않는다. 열 때 history 에 한 칸을 쌓아 폰의 뒤로 가기가 라이트박스만 닫는다(주소는 그대로). 닫으면 누른 칸으로 초점.
+
+### 사진 파이프라인
+
+- 마스터는 `photos/<묶음>/<이름>.jpg`(긴 변 2400 · JPEG 85 · 메타데이터 없이, 원본은 저장소 밖). `scripts/build-photos.mjs` 가 `npm run build` · `dev` 앞에(prebuild · predev) 480 · 960 · 1600 · 2400 폭 JPEG(mozjpeg 80)를 `public/photos/` 에 만든다 — 커밋하지 않는다(.gitignore), 있으면 건너뛴다. 폭 · 높이는 `lib/photos.manifest.json`(커밋한다).
+- 폭 목록은 `lib/photo-widths.json` 하나 — 스크립트와 loader 가 같이 읽는다.
+- 사진 쪽 그림은 `PhotoImage`(next/image + `lib/photo-loader.ts`) — 요청 폭 이상인 가장 작은 판을 고르기만 한다. Vercel 이미지 최적화를 쓰지 않는다. src 는 `/photos/<묶음>/<이름>`(확장자 없이).
+- 앨범을 더할 때: 마스터를 `photos/<slug>/` 에 넣고 `lib/works.ts` 의 `albums` 에 적는다. 목록 파일에 없는 사진이나 앨범 사진이 아닌 표지는 빌드를 멈춘다. YouTube 영상 썸네일은 `photos/videos/<id>.jpg`.
+- 링크 미리보기: 앨범 쪽은 표지 사진(1600 판) 그대로, /works 는 사이트 기본.
+
 ## 움직임
 
 ### 스크롤 등장
@@ -252,7 +299,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 한 번만. End 키 · 앵커로 한 번에 건너뛴 블록은 움직임 없이 바로 보인다.
 - 숨은 블록 안 링크에 키보드 초점이 닿으면 즉시 보인다(`:focus-within`). 움직임 줄이기 · 인쇄에서는 언제나 보인다.
 - 목록 안의 목록은 목록 자신 대신 항목이 뜬다(두 번 겹쳐 움직이지 않게).
-- 지금 붙인 곳: 그림 · 갤러리(`Figure` · `Gallery`), `/blog` 카드 두 묶음, 홈 사진, works 그리드. 글 본문의 글자(문단 · 제목 · 목록 · 코드 · 인용)는 움직이지 않는다.
+- 지금 붙인 곳: 그림 · 갤러리(`Figure` · `Gallery`), `/blog` 카드 두 묶음, 홈 사진, works 카드 · 앨범 그리드. 글 본문의 글자(문단 · 제목 · 목록 · 코드 · 인용)는 움직이지 않는다.
 - Spring 으로 읽으면: `data-reveal-*` 는 `@Transactional` 같은 선언이고, 일은 `RevealOnScroll`(루트 레이아웃의 어드바이스 하나)이 한다. 효과를 바꿀 때는 `motion.css` · `RevealOnScroll.tsx` 두 파일만.
 
 ### 움직임 토큰
