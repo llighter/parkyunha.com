@@ -1,8 +1,9 @@
 import PostHeader from "@/app/components/postHeader";
 import HeroImage from "@/app/components/HeroImage";
 import appleRestoreFund from "./Apple-Restore-Fund-hero.jpg";
+import { postMetadata } from "@/lib/post-metadata";
 
-export const metadata = {
+export const metadata = postMetadata({
   title: "Apple, 이산화탄소 제거를 위한 혁신적인 복원 기금 확대",
   publishedAt: "2023-04-11",
   category: "업데이트",
@@ -19,7 +20,7 @@ export const metadata = {
   ],
   hidden: true, // 테스트 글 — 목록 · sitemap · 검색 색인에서 뺀다
   robots: { index: false, follow: false },
-};
+});
 
 <PostHeader metadata={metadata} slug="apple-news-sample" />
 <HeroImage

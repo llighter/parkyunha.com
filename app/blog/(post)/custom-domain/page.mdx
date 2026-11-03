@@ -11,8 +11,9 @@ import domainApply1 from "./domain-apply1.png";
 import domainApply2 from "./domain-apply2.png";
 import domainApply3 from "./domain-apply3.png";
 import domainApply4 from "./domain-apply4.png";
+import { postMetadata } from "@/lib/post-metadata";
 
-export const metadata = {
+export const metadata = postMetadata({
   title: "나만의 도메인 만들기",
   publishedAt: "2023-07-12",
   category: "블로그",
@@ -20,7 +21,7 @@ export const metadata = {
   summary: "나만의 도메인으로 홈페이지 주소 설정하기(feat. Vercel)",
   image: "/images/hero/entrance.jpeg",
   imageDescription: "도메인은 내 홈페이지의 첫인상이다",
-};
+});
 
 <PostHeader metadata={metadata} slug="custom-domain" />
 

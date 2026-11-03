@@ -9,8 +9,9 @@ import merge from "./merge.png";
 import pr from "./pr.png";
 import pullRequest from "./pull-request.jpg";
 import PostHeader from "@/app/components/postHeader";
+import { postMetadata } from "@/lib/post-metadata";
 
-export const metadata = {
+export const metadata = postMetadata({
   title: "Pull Request 요청하기",
   publishedAt: "2023-04-24",
   category: "블로그",
@@ -20,7 +21,7 @@ export const metadata = {
   image: "/images/hero/pull-request.jpg",
   imageDescription:
     "IDE에서 다양한 브랜치로 작성된 git commit 로그를 보여주는 사진",
-};
+});
 
 <PostHeader metadata={metadata} slug="pull-request" />
 <HeroImage
