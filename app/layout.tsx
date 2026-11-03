@@ -23,9 +23,6 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   openGraph: {
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
     siteName: SITE_NAME,
     locale: "ko_KR",
     type: "website",
