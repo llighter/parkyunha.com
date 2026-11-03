@@ -1,0 +1,202 @@
+@reference "../../globals.css";
+
+/* =====================================================================
+   사진 쪽(/works · /works/<앨범>) — 쪽 머리 · 글자 탭 · 카드
+   ---------------------------------------------------------------------
+   글 쪽(왼쪽 선 · 굵은 제목)과 다른 결 — 가운데 큰 보통 굵기 제목, 글자 탭, 모서리 0 · 3:4 표지.
+   글자는 tokens.css 의 text-showcase · text-showcase-lead · text-showcase-card · text-mono.
+   폭은 레인 — 카드 lane-text → tablet:lane-media → desktop:lane-wide (부르는 쪽 className)
+   ===================================================================== */
+
+.root {
+  /* 4층 · 부품 토큰 */
+  --works-header-top: 40px; /* 쪽 머리 위 */
+  --works-header-bottom: 32px; /* 쪽 머리 아래 ~ 카드 */
+  --works-card-gap-row: 40px;
+  --works-card-gap-col: 16px;
+  --works-card-title-gap: 16px; /* 그림 ~ 카드 제목 */
+  --works-section-gap: 64px; /* 앨범 ~ 영상 구역 */
+  --works-tabs-gap: 72px; /* 마지막 구역 ~ 채널 · 다른 앨범 줄 */
+
+  @variant tablet {
+    --works-header-top: 64px;
+    --works-header-bottom: 40px;
+    --works-card-gap-row: 48px;
+    --works-card-gap-col: 24px;
+    --works-section-gap: 80px;
+  }
+
+  @variant desktop {
+    --works-header-top: 80px;
+    --works-header-bottom: 48px;
+    --works-card-gap-row: 64px;
+    --works-card-gap-col: 40px;
+    --works-card-title-gap: 20px;
+    --works-section-gap: 96px;
+  }
+}
+
+/* ── 쪽 머리 — 가운데 ───────────────────────────────────────────────── */
+.header {
+  padding-block: var(--works-header-top) var(--works-header-bottom);
+  text-align: center;
+  word-break: keep-all;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-block-end: 16px;
+  color: var(--color-fg-muted);
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-fg);
+  }
+
+  & svg {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+}
+
+.meta,
+.lead {
+  margin-block-start: 12px;
+}
+
+/* ── 글자 탭 — 'All | Albums | Videos', 채널 줄, 다른 앨범 줄 ─────────── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  & > * {
+    position: relative;
+    padding: 12px 16px;
+    color: var(--color-fg-muted);
+    transition: color var(--duration-fast) var(--ease-standard);
+
+    &:hover {
+      color: var(--color-fg);
+    }
+
+    &[aria-pressed="true"],
+    &[aria-current] {
+      font-weight: 600;
+      color: var(--color-fg);
+    }
+  }
+
+  /* 사이 가는 세로선 1 × 12 */
+  & > * + *::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 50%;
+    inline-size: 1px;
+    block-size: 12px;
+    translate: 0 -50%;
+    background: var(--color-line);
+  }
+}
+
+.headerTabs {
+  margin-block-start: 20px;
+}
+
+.footTabs {
+  margin-block-start: var(--works-tabs-gap);
+}
+
+/* ── 보기 거르기 — WorksView 가 data-view 만 바꾼다 ─────────────────── */
+.view[data-view="albums"] [data-section="videos"],
+.view[data-view="videos"] [data-section="albums"] {
+  display: none;
+}
+
+.view[data-view="videos"] [data-section="videos"] {
+  margin-block-start: 0;
+}
+
+/* ── 카드 그리드 ────────────────────────────────────────────────────── */
+.cards {
+  display: grid;
+  gap: var(--works-card-gap-row) var(--works-card-gap-col);
+
+  @variant tablet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @variant desktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 영상은 데스크톱도 2열 */
+.cards[data-section="videos"] {
+  margin-block-start: var(--works-section-gap);
+
+  @variant desktop {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── 카드 — 그림(모서리 0) 아래 제목 · mono 메타 ────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-fg);
+}
+
+.picture {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.cover {
+  aspect-ratio: 3 / 4;
+}
+
+.thumb {
+  aspect-ratio: 16 / 9;
+}
+
+.cardTitle {
+  margin-block-start: var(--works-card-title-gap);
+  word-break: keep-all;
+}
+
+.card:hover .cardTitle {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.cardMeta {
+  margin-block-start: 8px;
+}
+
+/* 영상 재생 표시 — 사진 위 단추와 같은 막(color-media-control) */
+.play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  inline-size: 64px;
+  block-size: 64px;
+  border-radius: 9999px;
+  background: var(--color-media-control);
+  color: var(--color-media-control-fg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  & svg {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+}
