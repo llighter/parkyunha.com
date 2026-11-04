@@ -180,6 +180,9 @@
   --gallery-dot: 8px;
   --gallery-dot-hit: 24px; /* 점 누름 영역 (WCAG 2.2 최소 24) — 점 간격도 24 */
 
+  /* 사진 틀 — 사진 쪽 표지 · 앨범 그리드와 홈 사진 줄(Carousel photo)이 함께 쓴다. 모서리는 0 */
+  --photo-ratio: 3 / 4;
+
   /* 레인 — 폰 (< 735) */
   --lane-gutter: 6.25%; /* 본문 좌우 여백 → 본문은 화면의 87.5% */
   --lane-text: 366px; /* 본문 */

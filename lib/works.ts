@@ -59,7 +59,7 @@ export const albums: Album[] = [
     cover: "osaka-castle",
     photos: [
       { file: "osaka-castle", alt: "일본 오사카성 앞에서" },
-      { file: "hi-five", alt: "글리코 간판과 하이파이브", position: "top" },
+      { file: "hi-five", alt: "글리코 간판과 하이파이브" },
     ],
   },
 ];
