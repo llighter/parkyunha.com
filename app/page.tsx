@@ -12,16 +12,24 @@ import { photoSource } from "@/lib/works";
 /** 홈 시리즈 줄에 싣는 시리즈 */
 const HOME_SERIES = "dev-tools";
 
-/** 홈 사진 6장 — 사진 파이프라인(photos/<묶음>/<이름>.jpg), 앨범과 같은 사진은 그 마스터를 함께 쓴다 */
-const PHOTOS = [
+/**
+ * 홈 사진 6장 — 사진 파이프라인(photos/<묶음>/<이름>.jpg), 앨범과 같은 사진은 그 마스터를 함께 쓴다.
+ * position 은 3:4 로 자를 때 자리(object-position) — 기본 가운데
+ */
+const PHOTOS: { key: string; alt: string; position?: string }[] = [
   { key: "seoul/han-river", alt: "서울 한강에서 동생과 함께" },
   { key: "osaka/osaka-castle", alt: "일본 오사카성 앞에서" },
   { key: "osaka/hi-five", alt: "글리코 간판과 하이파이브" },
-  { key: "home/eclipse", alt: "Eclipse 와 Java 를 캐릭터로 그린 그림" },
+  {
+    key: "home/eclipse",
+    alt: "Eclipse 와 Java 를 캐릭터로 그린 그림",
+    position: "80%", // 얼굴과 Java 컵이 함께 들어오게
+  },
   { key: "seoul/seoul", alt: "비행기에서 내려다본 서울" },
   {
     key: "home/me-at-home",
     alt: "어두운 방, 책상 앞에서 휴대폰 화면을 들여다보는 모습 (흑백)",
+    position: "65%", // 휴대폰과 사람이 함께 들어오게
   },
 ];
 
@@ -176,7 +184,7 @@ export default async function Home() {
           </h2>
         </div>
         <Carousel label="사진" itemName="사진" variant="photo">
-          {PHOTOS.map(({ key, alt }) => (
+          {PHOTOS.map(({ key, alt, position }) => (
             <PhotoImage
               key={key}
               src={photoSource(key).src}
@@ -184,6 +192,7 @@ export default async function Home() {
               fill
               sizes="(max-width: 734px) 62.5vw, (max-width: 1068px) 215px, 227px"
               className="object-cover"
+              style={{ objectPosition: position }}
             />
           ))}
         </Carousel>
