@@ -27,7 +27,7 @@ export function AlbumCard({
     <Link href={`/works/${album.slug}`} className={s.card}>
       <div className={`${s.picture} ${s.cover}`}>
         <PhotoImage
-          {...albumPhotoSource(album, cover.file)}
+          src={albumPhotoSource(album, cover.file).src}
           alt={cover.alt}
           fill
           sizes="(max-width: 734px) 87.5vw, (max-width: 1068px) 334px, 383px"
