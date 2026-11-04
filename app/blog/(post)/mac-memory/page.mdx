@@ -6,8 +6,9 @@ import internalSSD from "./internalSSD.png";
 import externalSSD from "./externalSSD.png";
 import externalHDD from "./externalHDD.png";
 import AppleGallery from "@/app/components/AppleGallery";
+import { postMetadata } from "@/lib/post-metadata";
 
-export const metadata = {
+export const metadata = postMetadata({
   title: "맥에서 저장공간 선택하기",
   publishedAt: "2025-07-05",
   category: "블로그",
@@ -16,7 +17,7 @@ export const metadata = {
     "디양한 파일을 저장, 활용하기 위해 맥에서 저장공간을 어떻게 선택할지 고민해보자.",
   image: "/images/hero/disk_utility.png",
   imageDescription: "disk utility",
-};
+});
 
 <PostHeader metadata={metadata} slug="mac-memory" />
 <HeroImage

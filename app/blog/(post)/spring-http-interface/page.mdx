@@ -4,8 +4,9 @@ import projectMap from "./project-map.png";
 import articleServiceGetAllArticles from "./article-service-get-all-articles.png";
 import serverToServer from "./server_to_server.jpeg";
 import PostHeader from "@/app/components/postHeader";
+import { postMetadata } from "@/lib/post-metadata";
 
-export const metadata = {
+export const metadata = postMetadata({
   title: "Spring으로 HTTP 클라이언트 만들기",
   publishedAt: "2023-07-01",
   category: "블로그",
@@ -15,7 +16,7 @@ export const metadata = {
   image: "/images/hero/server_to_server.jpeg",
   imageDescription:
     "HTTP 통신을 통해 서버와 서버 간에 데이터를 주고 받을 수 있다.",
-};
+});
 
 <PostHeader metadata={metadata} slug="spring-http-interface" />
 <HeroImage

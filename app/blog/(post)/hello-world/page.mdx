@@ -1,8 +1,9 @@
 import PostHeader from "@/app/components/postHeader";
 import HeroImage from "@/app/components/HeroImage";
 import helloWorld from "./hello-world.jpeg";
+import { postMetadata } from "@/lib/post-metadata";
 
-export const metadata = {
+export const metadata = postMetadata({
   title:
     "Hello, World! 조금 더 긴 제목이면 어떨까? 과연 길이가 길어지면 어떻게 될까 궁금하다",
   publishedAt: "2023-04-15",
@@ -13,7 +14,7 @@ export const metadata = {
   imageDescription: "테스트 용 블로그 글",
   hidden: true, // 테스트 글 — 목록 · sitemap · 검색 색인에서 뺀다
   robots: { index: false, follow: false },
-};
+});
 
 <PostHeader metadata={metadata} slug="hello-world" />
 <HeroImage src={helloWorld} alt="helloWorld" caption="테스트 용 블로그 글" />
