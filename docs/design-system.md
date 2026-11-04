@@ -39,7 +39,7 @@
 | 3 레이아웃 · 움직임 | `--lane-*`, `--reveal-*`                                         | 화면 폭 · 사용자 설정마다 값이 바뀌는 것                | 프로파일별 설정값          |
 | 4 부품              | `--gallery-*` · `--works-*` · `--lightbox-*`                     | 부품 하나의 손잡이. 부품 CSS 모듈 맨 위에만             | `@ConfigurationProperties` |
 
-부품 둘 이상이 같은 값을 쓰면 `tokens.css :root` 로 올린다 — 점 · 화살표 크기(`--gallery-dot` · `--gallery-dot-hit` · `--gallery-paddle`)는 갤러리 · 캐러셀이 함께 써서 `:root` 에 있다(이름은 처음 쓴 갤러리를 따랐다).
+부품 둘 이상이 같은 값을 쓰면 `tokens.css :root` 로 올린다 — 점 · 화살표 크기(`--gallery-dot` · `--gallery-dot-hit` · `--gallery-paddle`)는 갤러리 · 캐러셀이 함께 써서 `:root` 에 있다(이름은 처음 쓴 갤러리를 따랐다). 사진 틀 비율 `--photo-ratio`(3 / 4)도 사진 쪽 표지 · 그리드와 홈 사진 줄이 함께 쓴다.
 
 역할 토큰을 `@theme static` 에 두는 이유
 
@@ -239,6 +239,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 
 - 가로 스크롤 + `scroll-snap`. 폰은 트랙이 화면 끝까지 차고 첫 카드가 본문 레인 왼쪽 선에서 시작한다 — 다음 카드가 화면 끝에 살짝 보인다. 태블릿부터는 트랙을 미디어 레인에서 잘라, 넓은 화면에서도 레인 밖으로 다음 장이 드러나지 않는다.
 - 한 번에 보이는 장수: `card` 폰 1(본문 폭) · 태블릿 2 · 데스크톱 3, `photo` 폰 화면의 62.5% · 3 · 4.
+- `photo` 는 한 장이 곧 틀 — 사진 쪽과 같은 3:4(`--photo-ratio`) · 모서리 0, 로딩 중 `surface` 바탕. 자식은 `PhotoImage` 하나(`fill` · `object-cover`, src 는 `photoSource(key).src`) — 홈 사진 6장도 사진 파이프라인으로 온다.
 - 아래 왼쪽 점(탭 목록 — ← → · Home · End), 오른쪽 이전 · 다음 단추 44px. 갤러리와 같은 토큰이지만 끝에서 처음으로 이어지지 않고(끝 단추는 `aria-disabled`), 폰에서도 단추가 보인다. 한 번에 다 보이는 폭(예: 데스크톱의 시리즈 3장)에서는 넘길 곳이 없어 점 · 단추를 숨긴다 — 장수(`data-count`)로 CSS 가 고른다. `surface` 띠 위에서는 단추 바탕이 `control-hover`.
 - 카드 글자는 그림 아래 — 카드는 `BlogTile` 그대로. 사진 위에 글을 얹지 않는다.
 - 바뀔 때 '글 2 / 3' 을 읽어 준다. 초점 갈 곳이 없는 사진 트랙은 트랙에 초점이 가서 ← → 로 스크롤한다. 스크롤 등장은 트랙 하나에(`data-reveal`).
@@ -270,7 +271,7 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 ```
 
 - 글 쪽과 다른 결 — 가운데 큰 보통 굵기 제목(`text-showcase`), 아래 글자 탭(`TextTabs`, 사이 1 × 12 `line`, 지금 것은 600 `fg`). 카드 제목은 그림 아래 `text-showcase-card`, 날짜 · 장수는 `font-mono text-mono fg-muted`. 사진 위에 글자를 얹지 않는다.
-- 모서리 0. 표지 · 그리드는 3:4 로 자르고(cover), 영상 썸네일은 16:9, 라이트박스는 원래 비율(contain). 홈 사진 캐러셀(4:5 · `rounded-media`)은 그대로.
+- 모서리 0. 표지 · 그리드는 3:4 로 자르고(cover), 영상 썸네일은 16:9, 라이트박스는 원래 비율(contain). 홈 사진 줄(`Carousel` photo)도 같은 3:4 · 모서리 0 — 비율은 부품 토큰 `--photo-ratio` 하나를 함께 쓴다.
 - 폭: 허브 카드 `lane-text tablet:lane-media desktop:lane-wide`(1 · 2 · 3열, 영상은 데스크톱도 2열). 앨범 그리드 `lane-media desktop:lane-wide`(폰은 화면 끝까지 1열, 태블릿부터 2열, 간격 8 · 16 · 24). `lane-wide` 는 사진 쪽 그리드에만 — 글 쪽 시작선(653 · 980)은 그대로.
 - 거르기는 단추(`aria-pressed`) — 주소에 남기지 않는다. 영상이 없으면 탭과 영상 구역을 뺀다.
 - 라이트박스(`Lightbox`)는 native `<dialog>`(showModal) — 바깥이 inert 라 Tab 이 안에서만 돈다. 막은 `color-mix(in srgb, var(--color-canvas) 92%, transparent)`, 닫기 · 이전 · 다음은 가는 선(획 1.5) 아이콘에 바탕 없는 44 누름 영역(이전 · 다음은 태블릿부터, 폰은 밀어서), 아래 mono 번호(`aria-live`). ← → · Esc, 끝에서 이어지지 않는다. 열 때 history 에 한 칸을 쌓아 폰의 뒤로 가기가 라이트박스만 닫는다(주소는 그대로). 닫으면 누른 칸으로 초점.
@@ -280,6 +281,8 @@ CSS 모듈은 `@reference "../../globals.css";` 를 맨 위에 두면 `@variant 
 - 마스터는 `photos/<묶음>/<이름>.jpg`(긴 변 2400 · JPEG 85 · 메타데이터 없이, 원본은 저장소 밖). `scripts/build-photos.mjs` 가 `npm run build` · `dev` 앞에(prebuild · predev) 480 · 960 · 1600 · 2400 폭 JPEG(mozjpeg 80)를 `public/photos/` 에 만든다 — 커밋하지 않는다(.gitignore), 있으면 건너뛴다. 폭 · 높이는 `lib/photos.manifest.json`(커밋한다).
 - 폭 목록은 `lib/photo-widths.json` 하나 — 스크립트와 loader 가 같이 읽는다.
 - 사진 쪽 그림은 `PhotoImage`(next/image + `lib/photo-loader.ts`) — 요청 폭 이상인 가장 작은 판을 고르기만 한다. Vercel 이미지 최적화를 쓰지 않는다. src 는 `/photos/<묶음>/<이름>`(확장자 없이).
+- `fill` 로 채울 때는 `src` 만 넘긴다(`photoSource(key).src`) — 폭 · 높이를 함께 넘기면 next dev 에서 오류다(빌드에서는 드러나지 않는다).
+- 홈 사진 줄은 앨범 마스터(`seoul/*` · `osaka/*`)를 함께 쓰고, 앨범에 없는 사진은 `photos/home/`.
 - 앨범을 더할 때: 마스터를 `photos/<slug>/` 에 넣고 `lib/works.ts` 의 `albums` 에 적는다. 목록 파일에 없는 사진이나 앨범 사진이 아닌 표지는 빌드를 멈춘다. YouTube 영상 썸네일은 `photos/videos/<id>.jpg`.
 - 링크 미리보기: 앨범 쪽은 표지 사진(1600 판) 그대로, /works 는 사이트 기본.
 
