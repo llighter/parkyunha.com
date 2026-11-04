@@ -7,6 +7,7 @@
    - 태블릿부터: 트랙을 미디어 레인(lane-media)에서 자른다 — 넓은 화면에서도 레인 밖으로 다음 장이 드러나지 않는다.
    - 한 번에 다 보이면(넘길 곳이 없으면) 점 · 단추를 숨긴다 — 장수는 서버가 알아 CSS 로 고른다(data-count).
    - 한 번에 보이는 장수: 폰 1장(사진은 화면의 62.5%), 태블릿 2장 · 데스크톱 3장(사진 3 · 4장).
+   - 사진(photo)은 한 장이 곧 틀 — 3:4 · 모서리 0(--photo-ratio, 사진 쪽과 같다).
    - 가로 스크롤 + scroll-snap — 폰은 손가락, 키보드는 카드 Tab · 트랙 ← →, 점과 이전 · 다음 단추.
    - 점 · 화살표는 갤러리와 같은 토큰(--gallery-dot · --gallery-dot-hit · --gallery-paddle · color-control).
      갤러리와 달리 끝에서 처음으로 이어지지 않고, 폰에서도 단추가 보인다.
@@ -71,7 +72,12 @@
   }
 }
 
+/* 사진 한 장이 곧 틀 — 사진 쪽(/works)과 같은 3:4 · 모서리 0. 그림은 fill 로 채운다(object-cover) */
 .carousel[data-variant="photo"] .item {
+  position: relative;
+  aspect-ratio: var(--photo-ratio);
+  overflow: hidden;
+  background: var(--color-surface);
   flex-basis: 62.5cqi;
 
   @variant tablet {

@@ -1,32 +1,26 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { getBlogPosts, getSeriesPosts } from "@/app/db/blog";
 import BlogTile from "@/app/components/BlogTile";
 import Carousel from "@/app/components/Carousel/Carousel";
 import { ProjectCard } from "@/app/components/ProjectCard";
+import PhotoImage from "@/app/components/Works/PhotoImage";
 import { SERIES, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 import { projects } from "@/lib/projects";
+import { photoSource } from "@/lib/works";
 
 /** 홈 시리즈 줄에 싣는 시리즈 */
 const HOME_SERIES = "dev-tools";
 
-/** 지금 홈의 사진 6장 — 원본 그대로, next/image 가 폭에 맞춰 줄인다 */
+/** 홈 사진 6장 — 사진 파이프라인(photos/<묶음>/<이름>.jpg), 앨범과 같은 사진은 그 마스터를 함께 쓴다 */
 const PHOTOS = [
-  { src: "/images/home/han-river.jpeg", alt: "서울 한강에서 동생과 함께" },
-  { src: "/images/home/osaka-castle.jpeg", alt: "일본 오사카성 앞에서" },
+  { key: "seoul/han-river", alt: "서울 한강에서 동생과 함께" },
+  { key: "osaka/osaka-castle", alt: "일본 오사카성 앞에서" },
+  { key: "osaka/hi-five", alt: "글리코 간판과 하이파이브" },
+  { key: "home/eclipse", alt: "Eclipse 와 Java 를 캐릭터로 그린 그림" },
+  { key: "seoul/seoul", alt: "비행기에서 내려다본 서울" },
   {
-    src: "/images/home/hi-five.jpeg",
-    alt: "글리코 간판과 하이파이브",
-    className: "object-top",
-  },
-  {
-    src: "/images/home/eclipse.jpeg",
-    alt: "Eclipse 와 Java 를 캐릭터로 그린 그림",
-  },
-  { src: "/images/home/seoul.jpeg", alt: "비행기에서 내려다본 서울" },
-  {
-    src: "/images/home/me-at-home.jpg",
+    key: "home/me-at-home",
     alt: "어두운 방, 책상 앞에서 휴대폰 화면을 들여다보는 모습 (흑백)",
   },
 ];
@@ -182,19 +176,15 @@ export default async function Home() {
           </h2>
         </div>
         <Carousel label="사진" itemName="사진" variant="photo">
-          {PHOTOS.map(({ src, alt, className }) => (
-            <div
-              key={src}
-              className="relative aspect-[4/5] overflow-hidden rounded-media"
-            >
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                sizes="(max-width: 734px) 62.5vw, (max-width: 1068px) 215px, 227px"
-                className={`object-cover ${className ?? ""}`}
-              />
-            </div>
+          {PHOTOS.map(({ key, alt }) => (
+            <PhotoImage
+              key={key}
+              src={photoSource(key).src}
+              alt={alt}
+              fill
+              sizes="(max-width: 734px) 62.5vw, (max-width: 1068px) 215px, 227px"
+              className="object-cover"
+            />
           ))}
         </Carousel>
         <div className="mt-6 flex justify-center">

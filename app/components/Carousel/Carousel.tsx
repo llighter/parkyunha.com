@@ -17,7 +17,7 @@ type Props = {
   label: string;
   /** 한 장의 이름 — '이전 글', '사진 3 / 6' 처럼 쓴다 */
   itemName: string;
-  /** card: 블로그 타일(폰 1 · 태블릿 2 · 데스크톱 3장) / photo: 사진(폰 62.5% · 3 · 4장) */
+  /** card: 블로그 타일(폰 1 · 태블릿 2 · 데스크톱 3장) / photo: 사진(폰 62.5% · 3 · 4장, 한 장이 3:4 틀 — 자식은 fill 그림) */
   variant?: "card" | "photo";
   /** surface 띠 위에 놓일 때 — 단추 바탕을 한 단계 진하게 */
   surface?: boolean;
